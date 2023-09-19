@@ -1,1 +1,9 @@
 c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\bin\Debug\ex01_bub.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\bin\Debug\ex01_bub.exe
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\bin\Debug\ex01_bub.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.exe
+c:\users\user\documents\visual studio 2013\Projects\ex01_bub\ex01_bub\obj\Debug\ex01_bub.pdb
