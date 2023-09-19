@@ -52,6 +52,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(30, 30);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // checkBox1
             // 
@@ -62,17 +63,19 @@
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "亂數";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBox1_MouseClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 376);
+            this.ClientSize = new System.Drawing.Size(854, 526);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

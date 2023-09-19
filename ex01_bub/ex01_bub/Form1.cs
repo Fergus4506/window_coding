@@ -23,19 +23,62 @@ namespace ex01_bub
         int i = 0;
 
         private void Form1_Load(object sender, EventArgs e) {
-        
+            //因為Form沒有內建的函式來處理滑鼠滾輪的事件，所以需要自己添加
+            this.MouseWheel += Form1_MouseWheel;
+            label1.Text = "size=" + size.ToString();
+            
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            //設定畫布
             g = this.CreateGraphics();
+            
+            //偵測點擊，如果為左鍵則執行在畫布中畫出橢圓
             if (e.Button == MouseButtons.Left) {
+                //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
                 g.FillEllipse(new SolidBrush(set_color),e.X,e.Y,size,size);
             }
+
+            //紀錄現在已經點了幾次了
             i++;
             label1.Text = i.ToString();
         }
-        
-        
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //顯示調色盤
+            colorDialog1.ShowDialog();
+            //將調色盤顏色設定為點擊後的顏色
+            set_color = colorDialog1.Color;
+            //同上，但改變的目標是pictureBox
+            pictureBox1.BackColor = set_color;
+        }
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+
+            if (e.Delta > 0)
+            {
+                size += 5;
+            }
+            else
+            {
+                size -= 5;
+            }
+            label1.Text = "size=" + size.ToString();
+        }
+        Color CR() {
+            Random r = new Random();
+            return Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255));
+        }
+        private void checkBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (checkBox1.Checked) {
+                set_color = CR();
+                pictureBox1.BackColor = set_color;
+            }
+            
+        }
+ 
     }
 }
