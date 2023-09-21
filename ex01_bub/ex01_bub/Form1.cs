@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,7 @@ namespace ex01_bub
         Color set_color = Color.Red;
         Graphics g;
         int i = 0;
+        bool checksqueue = false;
 
         private void Form1_Load(object sender, EventArgs e) {
             //因為Form沒有內建的函式來處理滑鼠滾輪的事件，所以需要自己添加
@@ -33,12 +35,34 @@ namespace ex01_bub
         {
             //設定畫布
             g = this.CreateGraphics();
-            
-            //偵測點擊，如果為左鍵則執行在畫布中畫出橢圓
-            if (e.Button == MouseButtons.Left) {
-                //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
-                g.FillEllipse(new SolidBrush(set_color),e.X,e.Y,size,size);
+
+            if (checksqueue)
+            {
+                //偵測點擊，如果為左鍵則執行在畫布中畫出橢圓
+                if (e.Button == MouseButtons.Left)
+                {
+                    //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
+                    g.FillRectangle(new SolidBrush(set_color), e.X, e.Y, size, size);
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    g.DrawRectangle(new Pen(CR()), e.X, e.Y, size, size);
+                }
             }
+            else {
+                //偵測點擊，如果為左鍵則執行在畫布中畫出橢圓
+                if (e.Button == MouseButtons.Left)
+                {
+                    //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
+                    g.FillEllipse(new SolidBrush(set_color), e.X, e.Y, size, size);
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    g.FillEllipse(new SolidBrush(CR()), e.X, e.Y, size, size);
+                }
+            }
+
+            
 
             //紀錄現在已經點了幾次了
             i++;
@@ -61,7 +85,7 @@ namespace ex01_bub
             {
                 size += 5;
             }
-            else
+            else if(size>0)
             {
                 size -= 5;
             }
@@ -79,6 +103,28 @@ namespace ex01_bub
             }
             
         }
- 
+
+        private void checkBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                checksqueue = true;
+            }
+            else { 
+                checksqueue= false; 
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
     }
 }
