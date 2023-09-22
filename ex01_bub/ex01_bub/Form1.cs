@@ -19,10 +19,10 @@ namespace ex01_bub
         }
 
         int size = 10;
-        Color set_color = Color.Red;
+        Color set_color = Color.Red,df_color=Control.DefaultBackColor;
         Graphics g = null;
         int i = 0;
-        bool checksqueue = false;
+        bool checksqueue = false,changeBack=false;
 
         private void Form1_Load(object sender, EventArgs e) {
             //因為Form沒有內建的函式來處理滑鼠滾輪的事件，所以需要自己添加
@@ -88,7 +88,7 @@ namespace ex01_bub
             {
                 size += 5;
             }
-            else if(size>0)
+            else if(size>5)
             {
                 size -= 5;
             }
@@ -104,7 +104,6 @@ namespace ex01_bub
                 set_color = CR();
                 pictureBox1.BackColor = set_color;
             }
-            
         }
 
         private void checkBox2_MouseClick(object sender, MouseEventArgs e)
@@ -122,7 +121,7 @@ namespace ex01_bub
         {
             try
             {
-                System.Diagnostics.Process.Start("https://www.udebug.com/UVa/10000");
+                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             }
             catch (Exception ex)
             {
@@ -132,22 +131,32 @@ namespace ex01_bub
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Image imageFile = null;
             // Create image.
-            Image imageFile = Image.FromFile("D:\\window_coding\\ex01_bub\\ex01_bub\\img\\zzz.jpg");
-
-            if (g== null )
+            if (changeBack)
             {
-                g =this.CreateGraphics();
+                g.Clear(df_color);
+                changeBack = false;
             }
+            else {
 
-            // Create graphics object for alteration.
-            Graphics newGraphics = Graphics.FromImage(imageFile);
+                imageFile = Image.FromFile("D:\\window_coding\\ex01_bub\\ex01_bub\\img\\zzz.jpg");
+                if (g == null)
+                {
+                    g = this.CreateGraphics();
+                }
 
-            // Draw image to screen.
-            g.DrawImage(imageFile, new PointF(0.0F, 0.0F));
+                // Create graphics object for alteration.
+                //Graphics newGraphics = Graphics.FromImage(imageFile);
 
-            // Dispose of graphics object.
-            newGraphics.Dispose();
+                // Draw image to screen.
+                g.DrawImage(imageFile, new PointF(0.0F, 0.0F));
+
+                // Dispose of graphics object.
+                //newGraphics.Dispose();
+                changeBack = true;
+            }
+            
         }
     }
 }
