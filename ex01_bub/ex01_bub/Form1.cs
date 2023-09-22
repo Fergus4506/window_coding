@@ -20,7 +20,7 @@ namespace ex01_bub
 
         int size = 10;
         Color set_color = Color.Red;
-        Graphics g;
+        Graphics g = null;
         int i = 0;
         bool checksqueue = false;
 
@@ -34,7 +34,10 @@ namespace ex01_bub
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             //設定畫布
-            g = this.CreateGraphics();
+            if (g ==null)
+            {
+                g =this.CreateGraphics();
+            }
 
             if (checksqueue)
             {
@@ -119,12 +122,32 @@ namespace ex01_bub
         {
             try
             {
-                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                System.Diagnostics.Process.Start("https://www.udebug.com/UVa/10000");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Create image.
+            Image imageFile = Image.FromFile("D:\\window_coding\\ex01_bub\\ex01_bub\\img\\zzz.jpg");
+
+            if (g== null )
+            {
+                g =this.CreateGraphics();
+            }
+
+            // Create graphics object for alteration.
+            Graphics newGraphics = Graphics.FromImage(imageFile);
+
+            // Draw image to screen.
+            g.DrawImage(imageFile, new PointF(0.0F, 0.0F));
+
+            // Dispose of graphics object.
+            newGraphics.Dispose();
         }
     }
 }
