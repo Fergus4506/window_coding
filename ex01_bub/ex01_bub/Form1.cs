@@ -45,11 +45,11 @@ namespace ex01_bub
                 if (e.Button == MouseButtons.Left)
                 {
                     //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
-                    g.FillRectangle(new SolidBrush(set_color), e.X, e.Y, size, size);
+                    g.FillRectangle(new SolidBrush(set_color), e.X - size / 2, e.Y - size / 2, size, size);
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    g.DrawRectangle(new Pen(CR()), e.X, e.Y, size, size);
+                    g.DrawRectangle(new Pen(CR()), e.X-size/2, e.Y-size/2, size, size);
                 }
             }
             else {
@@ -57,11 +57,11 @@ namespace ex01_bub
                 if (e.Button == MouseButtons.Left)
                 {
                     //畫出橢圓的函式，前面的參數是畫筆的樣式，後面為橢圓生成的範圍和大小
-                    g.FillEllipse(new SolidBrush(set_color), e.X, e.Y, size, size);
+                    g.FillEllipse(new SolidBrush(set_color), e.X - size / 2, e.Y - size / 2, size, size);
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    g.FillEllipse(new SolidBrush(CR()), e.X, e.Y, size, size);
+                    g.FillEllipse(new SolidBrush(CR()), e.X - size / 2, e.Y - size / 2, size, size);
                 }
             }
 
@@ -69,7 +69,7 @@ namespace ex01_bub
 
             //紀錄現在已經點了幾次了
             i++;
-            label1.Text = i.ToString();
+            label1.Text = "以點擊"+i.ToString()+"次";
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -131,16 +131,13 @@ namespace ex01_bub
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Image imageFile = null;
             // Create image.
             if (changeBack)
             {
-                g.Clear(df_color);
+                this.BackgroundImage = null;
                 changeBack = false;
             }
             else {
-
-                imageFile = Image.FromFile("D:\\window_coding\\ex01_bub\\ex01_bub\\img\\zzz.jpg");
                 if (g == null)
                 {
                     g = this.CreateGraphics();
@@ -150,7 +147,7 @@ namespace ex01_bub
                 //Graphics newGraphics = Graphics.FromImage(imageFile);
 
                 // Draw image to screen.
-                g.DrawImage(imageFile, new PointF(0.0F, 0.0F));
+                this.BackgroundImage = Properties.Resources.zzz;
 
                 // Dispose of graphics object.
                 //newGraphics.Dispose();

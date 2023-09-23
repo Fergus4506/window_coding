@@ -41,16 +41,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Font = new System.Drawing.Font("新細明體", 16F);
+            this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(54, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "計數";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Red;
-            this.pictureBox1.Location = new System.Drawing.Point(86, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(321, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(30, 30);
             this.pictureBox1.TabIndex = 1;
@@ -71,7 +72,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(222, 13);
+            this.checkBox2.Location = new System.Drawing.Point(222, 12);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(84, 16);
             this.checkBox2.TabIndex = 3;
@@ -93,7 +94,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(312, 12);
+            this.button1.Location = new System.Drawing.Point(168, 45);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 23);
             this.button1.TabIndex = 5;
