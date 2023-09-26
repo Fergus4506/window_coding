@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\bin\Debug\mirrurball.exe.config
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\bin\Debug\mirrurball.exe
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\bin\Debug\mirrurball.pdb
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.exe
+c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.pdb
