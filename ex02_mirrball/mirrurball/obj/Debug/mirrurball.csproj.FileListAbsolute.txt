@@ -7,3 +7,13 @@ c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\De
 c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.exe
 c:\users\user\documents\visual studio 2013\Projects\mirrurball\mirrurball\obj\Debug\mirrurball.pdb
+D:\window_coding\ex02_mirrball\mirrurball\bin\Debug\mirrurball.exe.config
+D:\window_coding\ex02_mirrball\mirrurball\bin\Debug\mirrurball.exe
+D:\window_coding\ex02_mirrball\mirrurball\bin\Debug\mirrurball.pdb
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.csproj.AssemblyReference.cache
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.Form1.resources
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.Properties.Resources.resources
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.csproj.GenerateResource.cache
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.csproj.CoreCompileInputs.cache
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.exe
+D:\window_coding\ex02_mirrball\mirrurball\obj\Debug\mirrurball.pdb
