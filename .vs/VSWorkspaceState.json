@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    "\\ex01_bub",
-    "\\ex01_bub\\ex01_bub"
+    "",
+    "\\ex02_mirrball",
+    "\\ex02_mirrball\\mirrurball"
   ],
+  "SelectedNode": "\\ex02_mirrball\\mirrurball\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
