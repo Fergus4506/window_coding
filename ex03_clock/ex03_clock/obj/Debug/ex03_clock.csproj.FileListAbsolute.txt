@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\bin\Debug\ex03_clock.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.exe
+c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.pdb
