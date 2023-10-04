@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ex03_clock
 {
@@ -18,6 +19,31 @@ namespace ex03_clock
         int second = DateTime.Now.Second;
         int minute = DateTime.Now.Minute;
         int hour = DateTime.Now.Hour*5;
+        string back_count;
+        bool back_check=false;
+
+        Boolean textboxHasText = false;//判断输入框是否有文本
+
+        //textbox获得焦点
+        private void Textbox1_Enter(object sender, EventArgs e)
+        {
+            if (textboxHasText == false)
+                textBox1.Text = "";
+
+            textBox1.ForeColor = Color.Black;
+        }
+        //textbox失去焦点
+        private void Textbox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.Text = "倒數器(輸入格式為:hh/mm/ss)";
+                textBox1.ForeColor = Color.DarkGray;
+                textboxHasText = false;
+            }
+            else
+                textboxHasText = true;
+        }
 
         public Form1()
         {
@@ -28,22 +54,76 @@ namespace ex03_clock
         {
             this.ClientSize = new System.Drawing.Size(600, 600);
             doPaint();
+            textBox1.LostFocus += new EventHandler(Textbox1_Leave); //失去焦点后发生事件
+            textBox1.GotFocus += new EventHandler(Textbox1_Enter);  //获取焦点前发生事件
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            back_count = textBox1.Text;
+            String[] split_back =back_count.Split('/');
+            if (split_back.Length != 3 || split_back[0]== "倒數器(輸入格式為:hh")
+            {
+                MessageBox.Show("請輸入正確格式!!");
+                textBox1.Text = "";
+            }
+            else { 
+                back_check= true;
+                hour = int.Parse(split_back[0]);
+                minute = int.Parse(split_back[1]);
+                second = int.Parse(split_back[2]);
+                MessageBox.Show(hour+""+minute+""+second);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            second++;
-            if (second == 60) {
-                minute++;
-                second=0;
+            if (back_check)
+            {
+                second--;
+                
+                if (second == 0)
+                {
+                    if (second == 0 && minute == 0 && hour == 0)
+                    {
+                        MessageBox.Show("倒數結束");
+                        back_check = false;
+                        second = DateTime.Now.Second;
+                        minute = DateTime.Now.Minute;
+                        hour = DateTime.Now.Hour * 5;
+                    }
+                    else {
+                        minute--;
+                        if (minute == 0 && second == 0)
+                        {
+                            hour -= 5;
+                            minute = 60;
+                        }
+                        second = 60;
+                    }
+                    
+                }
+                
+                
             }
-            if (minute == 60) {
-                hour+=5;
-                minute = 0;
+            else {
+                second++;
+                if (second == 60)
+                {
+                    minute++;
+                    second = 0;
+                }
+                if (minute == 60)
+                {
+                    hour += 5;
+                    minute = 0;
+                }
+                if (hour == 24)
+                {
+                    hour = 0;
+                }
             }
-            if (hour == 24) {
-                hour = 0;
-            }
+            
             doPaint();
         }
         void doPaint() {
@@ -55,16 +135,22 @@ namespace ex03_clock
             
             for (int i = 1; i <= 60; i++) {
                 float drRadian = (float)i * pi / 180;
-                int x = (int)(x1 + 63 * (float)Math.Sin(6 * drRadian));
-                int y = (int)(y1 - 63 * (float)(Math.Cos(6 * drRadian)));
+                int x = (int)(x1 + 55 * (float)Math.Sin(6 * drRadian));
+                int y = (int)(y1 - 55 * (float)(Math.Cos(6 * drRadian)));
                 int x_h = (int)(x1 + 70 * (float)Math.Sin(6 * drRadian));
                 int y_h = (int)(y1 - 70 * (float)(Math.Cos(6 * drRadian)));
                 int x_helf = (int)(x1 + 65 * (float)Math.Sin(6 * drRadian));
                 int y_helf = (int)(y1 - 65 * (float)(Math.Cos(6 * drRadian)));
+                int x_helf_L = (int)(x1 + 63 * (float)Math.Sin(6 * drRadian));
+                int y_helf_L = (int)(y1 - 63 * (float)(Math.Cos(6 * drRadian)));
 
                 if (i % 5 == 0)
                 {
-                    g.DrawString((i / 5).ToString(), new Font("Times New Roman", 10, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Green), new Point(x - 5, y - 7));
+                    if (i == 60)
+                        g.DrawString((i / 5).ToString(), new Font("Times New Roman", 10, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Green), new Point(x - 10, y -7));
+                    else
+                        g.DrawString((i / 5).ToString(), new Font("Times New Roman", 10, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Green), new Point(x - 5, y - 7));
+                    g.DrawLine(new Pen(Color.Black, 2), x_h, y_h, x_helf_L, y_helf_L);
                 }
                 else {
                     g.DrawLine(new Pen(Color.Black, 1), x_h, y_h, x_helf, y_helf);

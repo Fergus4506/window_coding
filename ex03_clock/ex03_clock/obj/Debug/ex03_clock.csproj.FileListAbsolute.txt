@@ -7,3 +7,13 @@ c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\De
 c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.exe
 c:\users\user\documents\visual studio 2013\Projects\ex03_clock\ex03_clock\obj\Debug\ex03_clock.pdb
+D:\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe.config
+D:\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe
+D:\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.pdb
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.AssemblyReference.cache
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Form1.resources
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Properties.Resources.resources
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.GenerateResource.cache
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.CoreCompileInputs.cache
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.exe
+D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.pdb
