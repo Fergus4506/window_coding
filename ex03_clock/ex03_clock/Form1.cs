@@ -20,7 +20,7 @@ namespace ex03_clock
         int minute = DateTime.Now.Minute;
         int hour = DateTime.Now.Hour*5;
         string back_count,set_time;
-        bool back_check=false;
+        bool back_check=false,count_clock_enable=true;
         int count_sec = 0,count_min=0,count_hur=0;
         
 
@@ -73,6 +73,7 @@ namespace ex03_clock
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ClientSize = new System.Drawing.Size(600, 600);
+            do_count_paint();
             doPaint();
             textBox1.LostFocus += new EventHandler(Textbox1_Leave); //失去焦点后发生事件
             textBox1.GotFocus += new EventHandler(Textbox1_Enter);  //获取焦点前发生事件
@@ -122,21 +123,48 @@ namespace ex03_clock
         private void timer2_Tick(object sender, EventArgs e)
         {
             count_sec++;
-            if (count_sec == 60)
+            if (count_sec %10==0)
             {
                 count_min++;
-                count_sec = 0;
             }
             if (count_min == 60)
             {
-                count_hur += 5;
+                count_hur ++;
                 count_min = 0;
             }
-            if (count_hur == 24)
+            if (count_hur == 60)
             {
                 count_hur = 0;
             }
-            doPaint();
+            do_count_paint();
+            label1.Text = count_hur.ToString() + "分" + count_min.ToString() + "秒" + (count_sec % 10).ToString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (timer2.Enabled)
+            {
+                timer2.Enabled = false;
+            }
+            else { 
+                timer2.Enabled=true;
+            }
+            
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (timer2.Enabled)
+            {
+                timer2.Enabled = false;
+            }
+            count_sec = 0;
+            count_min = 0;
+            count_hur = 0;
+            do_count_paint();
+            label1.Text = count_hur.ToString() + "分" + count_min.ToString() + "秒" + (count_sec % 10).ToString();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -168,8 +196,16 @@ namespace ex03_clock
                 
             }
         }
+
+        
+
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (count_clock_enable) {
+                do_count_paint();
+                count_clock_enable = false;
+                label1.Text = count_hur.ToString() + "分" + count_min.ToString() + "秒" + (count_sec % 10).ToString();
+            }
             if (back_check)
             {
                 second--;
@@ -223,9 +259,7 @@ namespace ex03_clock
             g.FillEllipse(new SolidBrush(Color.Black),455,115,10,10);
             print_clock_scale(x1,y1,g);
             
-            g.DrawEllipse(new Pen(Color.Black), 390, 200, 140, 140);
-            g.FillEllipse(new SolidBrush(Color.Black), 455, 265, 10, 10);
-            print_clock_scale(460.0F,270.0F,g);
+            
 
             float secRadian = (float)second * pi / 180;
             float midRadian = (float)minute * pi / 180;
@@ -233,11 +267,7 @@ namespace ex03_clock
 
             draw_clock_line(hurRadian,midRadian,secRadian,x1,y1,g);
 
-            secRadian = (float)count_sec * pi / 180;
-            midRadian = (float)count_min * pi / 180;
-            hurRadian = (float)count_hur * pi / 180;
-
-            draw_clock_line(hurRadian, midRadian, secRadian, 460.0F, 270.0F, g);
+            
 
 
 
@@ -247,8 +277,17 @@ namespace ex03_clock
             g.DrawString("9", new Font("Times New Roman", 10, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Green), new Point(390+5, 50+140/2-10));*/
         }
         void do_count_paint() {
-            Graphics g = this.CreateGraphics();
-            g.Clear(Color.White);
+            Graphics s = groupBox1.CreateGraphics();
+            s.Clear(Color.White);
+            s.DrawEllipse(new Pen(Color.Black), 30, 30, 140, 140);
+            s.FillEllipse(new SolidBrush(Color.Black), 95, 95, 10, 10);
+            print_clock_scale(100.0F, 100.0F, s);
+
+            float secRadian = (float)count_sec * pi / 180;
+            float midRadian = (float)count_min * pi / 180;
+            float hurRadian = (float)count_hur * pi / 180;
+
+            draw_clock_line(hurRadian, midRadian, secRadian, 100.0F, 100.0F, s);
 
         }
         void print_clock_scale(float centerX,float centerY,Graphics g) {
