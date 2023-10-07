@@ -17,3 +17,13 @@ D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.GenerateResou
 D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.CoreCompileInputs.cache
 D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.exe
 D:\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.pdb
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe.config
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.exe
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\bin\Debug\ex03_clock.pdb
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.AssemblyReference.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Form1.resources
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.Properties.Resources.resources
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.GenerateResource.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.csproj.CoreCompileInputs.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.exe
+C:\Users\fergu\OneDrive\文件\window_coding\ex03_clock\ex03_clock\obj\Debug\ex03_clock.pdb

@@ -96,7 +96,7 @@ namespace ex03_clock
                 hour = int.Parse(split_back[0])*5;
                 minute = int.Parse(split_back[1]);
                 second = int.Parse(split_back[2]);
-                MessageBox.Show(hour+""+minute+""+second);
+                MessageBox.Show(hour/5+""+minute+""+second);
             }
         }
         private void button2_Click(object sender, EventArgs e)
@@ -265,7 +265,7 @@ namespace ex03_clock
             float midRadian = (float)minute * pi / 180;
             float hurRadian = (float)hour * pi / 180;
 
-            draw_clock_line(hurRadian,midRadian,secRadian,x1,y1,g);
+            draw_clock_line(hurRadian,midRadian,secRadian,x1,y1,g,true);
 
             
 
@@ -287,7 +287,7 @@ namespace ex03_clock
             float midRadian = (float)count_min * pi / 180;
             float hurRadian = (float)count_hur * pi / 180;
 
-            draw_clock_line(hurRadian, midRadian, secRadian, 100.0F, 100.0F, s);
+            draw_clock_line(hurRadian, midRadian, secRadian, 100.0F, 100.0F, s,false);
 
         }
         void print_clock_scale(float centerX,float centerY,Graphics g) {
@@ -318,18 +318,52 @@ namespace ex03_clock
 
             }
         }
-        void draw_clock_line(float hurRadian, float midRadian, float secRadian, float centerX, float centerY, Graphics g) {
+        void draw_clock_line(float hurRadian, float midRadian, float secRadian, float centerX, float centerY, Graphics g,bool check_drow_arr) {
+            float x1Arr, y1Arr, x2Arr, y2Arr;
+            float Arr1Radian = (float)(second+35)* pi / 180, Arr2Radian = (float) (second-35)*pi/180;
             x2 = centerX + 60 * (float)Math.Sin(6 * secRadian);
-            y2 = centerY - 60 * (float)(Math.Cos(6 * secRadian));
+            y2 = centerY - 60 *(float)(Math.Cos(6 * secRadian));
+            x1Arr= x2 + 10 * (float)Math.Sin(6 * Arr1Radian);
+            y1Arr = y2 - 10 * (float)(Math.Cos(6 * Arr1Radian));
+            x2Arr = x2 + 10 * (float)Math.Sin(6 * Arr2Radian);
+            y2Arr = y2 - 10 * (float)(Math.Cos(6 * Arr2Radian));
             g.DrawLine(new Pen(Color.Red), centerX, centerY, x2, y2);
+            if (check_drow_arr) {
+                g.DrawLine(new Pen(Color.Red), x2, y2, x1Arr, y1Arr);
+                g.DrawLine(new Pen(Color.Red), x2, y2, x2Arr, y2Arr);
+            }
+            
 
+            Arr1Radian = (float)(minute + 35) * pi / 180;
+            Arr2Radian = (float)(minute - 35) * pi / 180;
             x2 = centerX + 45 * (float)Math.Sin(6 * midRadian);
             y2 = centerY - 45 * (float)(Math.Cos(6 * midRadian));
+            x1Arr = x2 + 10 * (float)Math.Sin(6 * Arr1Radian);
+            y1Arr = y2 - 10 * (float)(Math.Cos(6 * Arr1Radian));
+            x2Arr = x2 + 10 * (float)Math.Sin(6 * Arr2Radian);
+            y2Arr = y2 - 10 * (float)(Math.Cos(6 * Arr2Radian));
             g.DrawLine(new Pen(Color.Brown, 5), centerX, centerY, x2, y2);
+            if (check_drow_arr) {
+                g.DrawLine(new Pen(Color.Brown, 3), x2, y2, x1Arr, y1Arr);
+                g.DrawLine(new Pen(Color.Brown, 3), x2, y2, x2Arr, y2Arr);
+            }
+            
 
+            Arr1Radian = (float)(hour + 35) * pi / 180;
+            Arr2Radian = (float)(hour - 35) * pi / 180;
             x2 = centerX + 35 * (float)Math.Sin(6 * hurRadian);
             y2 = centerY - 35 * (float)(Math.Cos(6 * hurRadian));
             g.DrawLine(new Pen(Color.Black, 10), centerX, centerY, x2, y2);
+            x2 = centerX +40 * (float)Math.Sin(6 * hurRadian);
+            y2 = centerY -  40* (float)(Math.Cos(6 * hurRadian));
+            x1Arr = x2 + 15 * (float)Math.Sin(6 * Arr1Radian);
+            y1Arr = y2 - 15 * (float)(Math.Cos(6 * Arr1Radian));
+            x2Arr = x2 + 15 * (float)Math.Sin(6 * Arr2Radian);
+            y2Arr = y2 - 15 * (float)(Math.Cos(6 * Arr2Radian));
+            if (check_drow_arr) {
+                g.DrawLine(new Pen(Color.Black, 3), x2, y2, x1Arr, y1Arr);
+                g.DrawLine(new Pen(Color.Black, 3), x2, y2, x2Arr, y2Arr);
+            }
         }
     }
 }
