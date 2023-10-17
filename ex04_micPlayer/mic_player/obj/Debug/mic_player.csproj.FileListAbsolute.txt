@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\bin\Debug\mic_player.exe.config
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\bin\Debug\mic_player.exe
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\bin\Debug\mic_player.pdb
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.exe
+c:\users\user\documents\visual studio 2013\Projects\mic_player\mic_player\obj\Debug\mic_player.pdb
