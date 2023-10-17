@@ -28,7 +28,7 @@ namespace mic_player
         private void Form1_Load(object sender, EventArgs e)
         {
             step = new Button[]{ Do,Re,Mi,Fa,So,La,Si};
-            key = new Label[] { Do_key };
+            key = new Label[] { Do_key,Re_key,Mi_key,Fa_key,So_key,La_key,Si_key };
             //sheet=new Button[]{So,Mi,Mi,Fa,Re,Re};
         }
 
@@ -38,6 +38,7 @@ namespace mic_player
 
             for (int i = 0; i < 7; i++) {
                 step[i].Location = new Point(240+80*i,390);
+                key[i].Location = new Point(270+80*i,420);
             }
             paintTable();
         }
@@ -45,127 +46,85 @@ namespace mic_player
         private void Do_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[0],duration);
-            
-            if (count >= sheet.Length)
+
+            if (sheet[0] - 1 == Array.IndexOf(step, Do))
             {
-                MessageBox.Show("恭喜過關!!");
-            }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, Do))
-                {
-                    count += 1;
-                    paintTable();
-                }
+                count += 1;
+                change_sheet();
+                paintTable();
             }
         }
 
         private void Re_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[1],duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, Re))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, Re))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
 
         private void Mi_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[2], duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, Mi))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, Mi))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
 
         private void Fa_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[3], duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, Fa))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, Fa))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
 
         private void So_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[4], duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, So))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, So))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
 
         private void La_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[5], duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, La))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, La))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
 
         private void Si_Click(object sender, EventArgs e)
         {
             Console.Beep(fg[6], duration);
-            if (count >= sheet.Length)
+            if (sheet[0] - 1 == Array.IndexOf(step, Si))
             {
-                MessageBox.Show("恭喜過關!!");
+                count += 1;
+                change_sheet();
+                paintTable();
             }
-            else
-            {
-                if (sheet[count]-1 == Array.IndexOf(step, Si))
-                {
-                    count += 1;
-                    paintTable();
-                }
-            }
-            
+
         }
         void paintTable() {
             Graphics g = this.CreateGraphics();
@@ -175,15 +134,20 @@ namespace mic_player
                 g.DrawLine(new Pen(Color.Black, 2), minX, minY + 50 * i, maxX, minY+50*i);
                 g.DrawLine(new Pen(Color.Black, 2), minX + 80 * i, minY, minX + 80 * i, maxY);
             }
-            for (int i = count; i < count+7; i++) {
-                if(sheet.Length>i)
-                    g.FillRectangle(new SolidBrush(Color.Black), 240+80*(sheet[i]-1), 30+50*(6-i+count), 80, 50);
+            for (int i = 0; i < 7; i++) {
+                g.FillRectangle(new SolidBrush(Color.Black), 240+80*(sheet[i]-1), 30+50*(6-i), 80, 50);
                 //g.FillRectangle(new SolidBrush(Color.Black), 240+80*(Array.IndexOf(step,sheet[i])), 30+50*(6-i), 80, 50);
             }
                
             
         }
-
+        void change_sheet() {
+            int t = sheet[0];
+            for (int i=0;i<sheet.Length-1;i++) {
+                sheet[i] = sheet[i+1];
+            }
+            sheet[sheet.Length - 1] = t;
+        }
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Char.ToLower((char)Keys.A))
