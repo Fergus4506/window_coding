@@ -17,6 +17,7 @@ namespace mic_player
         int[] fg = { 440,495,550,587,660,733,825,895 };
         Button[] step;
         //Button[] sheet;
+        Label[] key;
         int[] sheet=new int[]{5,3,3,4,2,2,1,2,3,4,5,5,5,5,3,3,4,2,2,1,3,5,5,3,2,2,2,2,2,3,4,3,3,3,3,3,4,5,5,3,3,4,2,2,1,3,5,5,1};
         int duration = 50;
         public Form1()
@@ -27,6 +28,7 @@ namespace mic_player
         private void Form1_Load(object sender, EventArgs e)
         {
             step = new Button[]{ Do,Re,Mi,Fa,So,La,Si};
+            key = new Label[] { Do_key };
             //sheet=new Button[]{So,Mi,Mi,Fa,Re,Re};
         }
 
@@ -192,11 +194,11 @@ namespace mic_player
                 Mi_Click(sender, e);
             else if (e.KeyChar == Char.ToLower((char)Keys.F))
                 Fa_Click(sender, e);
-            else if (e.KeyChar == Char.ToLower((char)Keys.J))
+            else if (e.KeyChar == Char.ToLower((char)Keys.G))
                 So_Click(sender, e);
-            else if (e.KeyChar == Char.ToLower((char)Keys.K))
+            else if (e.KeyChar == Char.ToLower((char)Keys.H))
                 La_Click(sender, e);
-            else if (e.KeyChar == Char.ToLower((char)Keys.S))
+            else if (e.KeyChar == Char.ToLower((char)Keys.J))
                 Si_Click(sender, e);
         }
     }
