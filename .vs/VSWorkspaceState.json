@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ex02_mirrball\\mirrurball",
-    "\\ex03_clock"
+    "\\ex03_clock",
+    "\\ex04_micPlayer"
   ],
-  "SelectedNode": "\\ex03_clock\\ex03_clock.sln",
+  "SelectedNode": "\\ex04_micPlayer\\mic_player.sln",
   "PreviewInSolutionExplorer": false
 }

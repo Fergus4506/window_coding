@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Do = new System.Windows.Forms.Button();
             this.Re = new System.Windows.Forms.Button();
             this.Mi = new System.Windows.Forms.Button();
@@ -42,6 +43,13 @@
             this.So_key = new System.Windows.Forms.Label();
             this.La_key = new System.Windows.Forms.Label();
             this.Si_key = new System.Windows.Forms.Label();
+            this.sheetChoose = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.startAutoPlay = new System.Windows.Forms.Button();
+            this.stopAutoPlay = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.changeBlockColor = new System.Windows.Forms.Button();
+            this.重新開始 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Do
@@ -120,7 +128,7 @@
             this.Do_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.Do_key.Location = new System.Drawing.Point(284, 537);
             this.Do_key.Name = "Do_key";
-            this.Do_key.Size = new System.Drawing.Size(19, 16);
+            this.Do_key.Size = new System.Drawing.Size(18, 16);
             this.Do_key.TabIndex = 7;
             this.Do_key.Text = "A";
             // 
@@ -130,7 +138,7 @@
             this.Re_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.Re_key.Location = new System.Drawing.Point(374, 537);
             this.Re_key.Name = "Re_key";
-            this.Re_key.Size = new System.Drawing.Size(16, 16);
+            this.Re_key.Size = new System.Drawing.Size(15, 16);
             this.Re_key.TabIndex = 8;
             this.Re_key.Text = "S";
             // 
@@ -140,7 +148,7 @@
             this.Mi_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.Mi_key.Location = new System.Drawing.Point(453, 537);
             this.Mi_key.Name = "Mi_key";
-            this.Mi_key.Size = new System.Drawing.Size(19, 16);
+            this.Mi_key.Size = new System.Drawing.Size(18, 16);
             this.Mi_key.TabIndex = 9;
             this.Mi_key.Text = "D";
             // 
@@ -150,7 +158,7 @@
             this.Fa_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.Fa_key.Location = new System.Drawing.Point(537, 537);
             this.Fa_key.Name = "Fa_key";
-            this.Fa_key.Size = new System.Drawing.Size(16, 16);
+            this.Fa_key.Size = new System.Drawing.Size(15, 16);
             this.Fa_key.TabIndex = 10;
             this.Fa_key.Text = "F";
             // 
@@ -160,7 +168,7 @@
             this.So_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.So_key.Location = new System.Drawing.Point(615, 537);
             this.So_key.Name = "So_key";
-            this.So_key.Size = new System.Drawing.Size(19, 16);
+            this.So_key.Size = new System.Drawing.Size(18, 16);
             this.So_key.TabIndex = 11;
             this.So_key.Text = "G";
             // 
@@ -170,7 +178,7 @@
             this.La_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.La_key.Location = new System.Drawing.Point(696, 537);
             this.La_key.Name = "La_key";
-            this.La_key.Size = new System.Drawing.Size(19, 16);
+            this.La_key.Size = new System.Drawing.Size(18, 16);
             this.La_key.TabIndex = 12;
             this.La_key.Text = "H";
             // 
@@ -180,15 +188,78 @@
             this.Si_key.Font = new System.Drawing.Font("新細明體", 12F);
             this.Si_key.Location = new System.Drawing.Point(780, 537);
             this.Si_key.Name = "Si_key";
-            this.Si_key.Size = new System.Drawing.Size(14, 16);
+            this.Si_key.Size = new System.Drawing.Size(13, 16);
             this.Si_key.TabIndex = 13;
             this.Si_key.Text = "J";
+            // 
+            // sheetChoose
+            // 
+            this.sheetChoose.FormattingEnabled = true;
+            this.sheetChoose.Location = new System.Drawing.Point(39, 44);
+            this.sheetChoose.Name = "sheetChoose";
+            this.sheetChoose.Size = new System.Drawing.Size(121, 20);
+            this.sheetChoose.TabIndex = 14;
+            this.sheetChoose.SelectedIndexChanged += new System.EventHandler(this.sheetChoose_SelectedIndexChanged);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // startAutoPlay
+            // 
+            this.startAutoPlay.Location = new System.Drawing.Point(39, 83);
+            this.startAutoPlay.Name = "startAutoPlay";
+            this.startAutoPlay.Size = new System.Drawing.Size(121, 23);
+            this.startAutoPlay.TabIndex = 15;
+            this.startAutoPlay.Text = "開始自動撥放";
+            this.startAutoPlay.UseVisualStyleBackColor = true;
+            this.startAutoPlay.Click += new System.EventHandler(this.startAutoPlay_Click);
+            // 
+            // stopAutoPlay
+            // 
+            this.stopAutoPlay.Location = new System.Drawing.Point(39, 112);
+            this.stopAutoPlay.Name = "stopAutoPlay";
+            this.stopAutoPlay.Size = new System.Drawing.Size(121, 23);
+            this.stopAutoPlay.TabIndex = 16;
+            this.stopAutoPlay.Text = "停止自動撥放";
+            this.stopAutoPlay.UseVisualStyleBackColor = true;
+            this.stopAutoPlay.Click += new System.EventHandler(this.stopAutoPlay_Click);
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.AnyColor = true;
+            // 
+            // changeBlockColor
+            // 
+            this.changeBlockColor.Location = new System.Drawing.Point(39, 170);
+            this.changeBlockColor.Name = "changeBlockColor";
+            this.changeBlockColor.Size = new System.Drawing.Size(121, 23);
+            this.changeBlockColor.TabIndex = 17;
+            this.changeBlockColor.Text = "改變方塊顏色";
+            this.changeBlockColor.UseVisualStyleBackColor = true;
+            this.changeBlockColor.Click += new System.EventHandler(this.changeBlockColor_Click);
+            // 
+            // 重新開始
+            // 
+            this.重新開始.Location = new System.Drawing.Point(39, 141);
+            this.重新開始.Name = "重新開始";
+            this.重新開始.Size = new System.Drawing.Size(121, 23);
+            this.重新開始.TabIndex = 18;
+            this.重新開始.Text = "重新開始";
+            this.重新開始.UseVisualStyleBackColor = true;
+            this.重新開始.Click += new System.EventHandler(this.重新開始_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 621);
+            this.Controls.Add(this.重新開始);
+            this.Controls.Add(this.changeBlockColor);
+            this.Controls.Add(this.stopAutoPlay);
+            this.Controls.Add(this.startAutoPlay);
+            this.Controls.Add(this.sheetChoose);
             this.Controls.Add(this.Si_key);
             this.Controls.Add(this.La_key);
             this.Controls.Add(this.So_key);
@@ -230,6 +301,13 @@
         private System.Windows.Forms.Label So_key;
         private System.Windows.Forms.Label La_key;
         private System.Windows.Forms.Label Si_key;
+        private System.Windows.Forms.ComboBox sheetChoose;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button startAutoPlay;
+        private System.Windows.Forms.Button stopAutoPlay;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button changeBlockColor;
+        private System.Windows.Forms.Button 重新開始;
     }
 }
 
