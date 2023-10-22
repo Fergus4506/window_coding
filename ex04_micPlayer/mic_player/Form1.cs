@@ -21,14 +21,13 @@ namespace mic_player
         Button[] step;
         //Button[] sheet;
         Label[] key;
-        int[] sheet=new int[]{5,3,3,4,2,2,1,2,3,4,5,5,5,5,3,3,4,2,2,1,3,5,5,3,2,2,2,2,2,3,4,3,3,3,3,3,4,5,5,3,3,4,2,2,1,3,5,5,1};
+        int[] sheet=new int[999];
         int[][] sheetList=new int[3][];
         Color set_color= Color.Black;
         Random r=new Random(Guid.NewGuid().GetHashCode());
         int drawStep = 0;
         WindowsMediaPlayer player;
         Graphics g;
-        GraphicsContainer temp;
         public Form1()
         {
             InitializeComponent();
@@ -56,8 +55,7 @@ namespace mic_player
             sheetChoose.Items.Add("小蜜蜂");
             sheetChoose.Items.Add("小星星");
             sheetChoose.SelectedIndex = 0;
-            g = this.CreateGraphics();
-            paintTable();
+            Invalidate();
         }
 
         private void Do_Click(object sender, EventArgs e)
@@ -67,7 +65,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
         }
 
@@ -78,7 +76,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -90,7 +88,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -102,7 +100,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -114,7 +112,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -126,7 +124,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep +=60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -138,7 +136,7 @@ namespace mic_player
                 play_sound_beep();
                 drawStep += 60;
                 change_sheet();
-                paintTable();
+                Invalidate();
             }
 
         }
@@ -152,14 +150,14 @@ namespace mic_player
             else if (sheetChoose.SelectedIndex == 2)
                 sheetList[2].CopyTo(sheet, 0);
             timer1.Enabled= false;
-            paintTable();
+            Invalidate();
                 
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             change_sheet();
-            paintTable();
+            Invalidate();
         }
 
         private void startAutoPlay_Click(object sender, EventArgs e)
@@ -171,9 +169,9 @@ namespace mic_player
         {
             timer1.Enabled = false;
         }
-        void paintTable() {
-            this.g=this.CreateGraphics();
-            this.g.Clear(Color.White);
+        void paintTable(Graphics g) {
+            
+            g.Clear(Color.White);
             for (int i = 0; i < 8; i++)
             {
                 g.DrawLine(new Pen(Color.Black, 2), minX, minY + 60 * i, maxX, minY + 60 * i);
@@ -220,15 +218,26 @@ namespace mic_player
         {
             colorDialog1.ShowDialog();
             set_color = colorDialog1.Color;
-            paintTable();
+            Invalidate();
         }
 
         private void 重新開始_Click(object sender, EventArgs e)
         {
             sheetList[sheetChoose.SelectedIndex].CopyTo(sheet, 0);
             drawStep = 0;
-            paintTable();
+            Invalidate();
             timer1.Enabled = false;
+            
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            g=e.Graphics;
+            paintTable(g);
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
             
         }
 
@@ -251,7 +260,7 @@ namespace mic_player
         }
         void play_sound_beep() {
             string directory = AppDomain.CurrentDomain.BaseDirectory;
-            string path=null;
+            string path = null;
             if (sheet[0]==1)
                 path=Path.GetFullPath(directory + @"\Music_Notes\C.wav");
             else if (sheet[0] == 2)
