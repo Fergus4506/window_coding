@@ -17,3 +17,8 @@ D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.csproj.GenerateR
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.csproj.CoreCompileInputs.cache
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.exe
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.pdb
+D:\window_coding\ex04_micPlayer\mic_player\bin\Debug\Interop.WMPLib.dll
+D:\window_coding\ex04_micPlayer\mic_player\bin\Debug\AxInterop.WMPLib.dll
+D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\Interop.WMPLib.dll
+D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\AxInterop.WMPLib.dll
+D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.csproj.ResolveComReference.cache

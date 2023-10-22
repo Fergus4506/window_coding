@@ -203,7 +203,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 500;
+            this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // startAutoPlay
@@ -254,7 +254,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 621);
+            this.ClientSize = new System.Drawing.Size(844, 577);
             this.Controls.Add(this.重新開始);
             this.Controls.Add(this.changeBlockColor);
             this.Controls.Add(this.stopAutoPlay);
@@ -274,6 +274,7 @@
             this.Controls.Add(this.Mi);
             this.Controls.Add(this.Re);
             this.Controls.Add(this.Do);
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
