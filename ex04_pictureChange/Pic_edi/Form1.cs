@@ -138,15 +138,6 @@ namespace Pic_edi
             }
         }
 
-        private void rotateBtn_Click(object sender, EventArgs e)
-        {
-            if (imagePicturebox.Image != null)
-            {
-                imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                imagePicturebox.Image = imagePicturebox.Image;
-                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
-            }
-        }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
@@ -163,9 +154,11 @@ namespace Pic_edi
         private void clearButton_Click(object sender, EventArgs e)
         {
             if (imagePicturebox.Image != null) {
-                imagePicturebox.Image = originalImageList[currentImageIndex];
+                imageList[currentImageIndex] = originalImageList[currentImageIndex];
                 MessageBox.Show("已還原圖片");
+                ShowCurrentImage();
             }
+
         }
 
         private void previousImageBtn_Click(object sender, EventArgs e)
@@ -222,7 +215,37 @@ namespace Pic_edi
             }
         }
 
-       
+        private void L_rotate_Click(object sender, EventArgs e)
+        {
+            if (imagePicturebox.Image != null)
+            {
+                imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                imagePicturebox.Image = imagePicturebox.Image;
+                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
+            }
+        }
 
+        private void R_rotate_Click(object sender, EventArgs e)
+        {
+            if (imagePicturebox.Image != null)
+            {
+                imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                imagePicturebox.Image = imagePicturebox.Image;
+                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
+            }
+        }
+
+        private void colorPicker_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            currentPen.Color = colorDialog1.Color;
+            colorPicker.BackColor = colorDialog1.Color;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            currentPen.Width = trackBar1.Value;
+            label1.Text="Pen size:"+trackBar1.Value.ToString();
+        }
     }
 }

@@ -8,3 +8,13 @@ C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debu
 C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csproj.GenerateResource.Cache
 C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.exe
 C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.pdb
+D:\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.exe.config
+D:\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.exe
+D:\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.pdb
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csproj.AssemblyReference.cache
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.Form1.resources
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.Properties.Resources.resources
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csproj.GenerateResource.cache
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csproj.CoreCompileInputs.cache
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.exe
+D:\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.pdb
