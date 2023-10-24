@@ -175,11 +175,14 @@
             // 
             // imagePicturebox
             // 
-            this.imagePicturebox.Location = new System.Drawing.Point(64, 46);
+            this.imagePicturebox.Location = new System.Drawing.Point(19, 21);
             this.imagePicturebox.Name = "imagePicturebox";
-            this.imagePicturebox.Size = new System.Drawing.Size(535, 257);
+            this.imagePicturebox.Size = new System.Drawing.Size(598, 282);
             this.imagePicturebox.TabIndex = 5;
             this.imagePicturebox.TabStop = false;
+            this.imagePicturebox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imagePicturebox_MouseDown);
+            this.imagePicturebox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imagePicturebox_MouseMove);
+            this.imagePicturebox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imagePicturebox_MouseUp);
             // 
             // previousImageBtn
             // 

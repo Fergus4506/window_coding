@@ -23,6 +23,8 @@ namespace Pic_edi
 
         private Pen currentPen = new Pen(Color.Black, 2);
 
+        private float minScaleFactor = 0.1f;
+        private float maxScaleFactor = 2.0f;
         Point originalCenter;
         public Form1()
         {
@@ -48,9 +50,37 @@ namespace Pic_edi
             originalCenter = new Point(imageGroupBox.Width / 2, imageGroupBox.Height / 2);
         }
 
+        private Bitmap ResizeImage(Image image, int width, int height) {
+            Bitmap resizedImage = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(resizedImage);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(image, 0, 0, width, height);
 
-        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e) { 
-        
+            return resizedImage;
+        }
+
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e) {
+            float scaleFactor = 1.1f;
+            float newWidth = imagePicturebox.Width;
+            float newHeight = imagePicturebox.Height;
+            if (e.Delta > 0 && newWidth <= originalImageList[currentImageIndex].Width * maxScaleFactor && newHeight <= originalImageList[currentImageIndex].Height * maxScaleFactor)
+            {
+                imagePicturebox.Width = (int)(imagePicturebox.Width * scaleFactor);
+                imagePicturebox.Height = (int)(imagePicturebox.Height * scaleFactor);
+            }
+            else if (e.Delta < 0 && newWidth >= originalImageList[currentImageIndex].Width * minScaleFactor && newHeight >= originalImageList[currentImageIndex].Height * minScaleFactor)
+            {
+                imagePicturebox.Width = (int)(imagePicturebox.Width / scaleFactor);
+                imagePicturebox.Height = (int)(imagePicturebox.Height / scaleFactor);
+            }
+
+            imagePicturebox.Left = originalCenter.X - imagePicturebox.Width / 2;
+            imagePicturebox.Top = originalCenter.Y - imagePicturebox.Height / 2;
+
+
+            imagePicturebox.Image = ResizeImage(imageList[currentImageIndex], imagePicturebox.Width, imagePicturebox.Height);
+
+            imagePicturebox.Invalidate();
         }
 
         private void loadImageBtn_Click(object sender, EventArgs e)
@@ -72,42 +102,124 @@ namespace Pic_edi
         }
 
         private void ShowCurrentImage() {
-            imagePicturebox.Image = imageList[currentImageIndex];
+            float widthRatio = (float)imageList[currentImageIndex].Width / defaultImagePicturebox.Width;
+            float HeightRatio = (float)imageList[currentImageIndex].Height / defaultImagePicturebox.Height;
+            float maxRatio = Math.Max(widthRatio,HeightRatio);
+
+            imagePicturebox.Width = (int)(imageList[currentImageIndex].Width /( maxRatio));
+            imagePicturebox.Height = (int)(imageList[currentImageIndex].Height / (maxRatio));
+
+
+            //Point originalCenter = new Point(imageGroupBox.Width / 2, imageGroupBox.Height / 2);
+            imagePicturebox.Left = originalCenter.X - imagePicturebox.Width / 2;
+            imagePicturebox.Top = originalCenter.Y - imagePicturebox.Height / 2;
+            
+            imagePicturebox.Image = ResizeImage(imageList[currentImageIndex],imagePicturebox.Width,imagePicturebox.Height);
+
+            
         }
 
         private void filpHorizontalBtn_Click(object sender, EventArgs e)
         {
-
+            if (imagePicturebox.Image != null) {
+                imagePicturebox.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                imagePicturebox.Image = imagePicturebox.Image;
+                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
+            }
         }
 
         private void flipVerticalbtn_Click(object sender, EventArgs e)
         {
-
+            if (imagePicturebox.Image != null)
+            {
+                imagePicturebox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                imagePicturebox.Image = imagePicturebox.Image;
+                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
+            }
         }
 
         private void rotateBtn_Click(object sender, EventArgs e)
         {
-
+            if (imagePicturebox.Image != null)
+            {
+                imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                imagePicturebox.Image = imagePicturebox.Image;
+                imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
+            }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-
+            if (imagePicturebox.Image != null) {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
+                    saveFileDialog.Filter = "JPEG圖像|*.jpg";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                        imagePicturebox.Image.Save(saveFileDialog.FileName);
+                    }
+                }
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            if (imagePicturebox.Image != null) {
+                imagePicturebox.Image = originalImageList[currentImageIndex];
+                MessageBox.Show("已還原圖片");
+            }
         }
 
         private void previousImageBtn_Click(object sender, EventArgs e)
         {
-
+            if (currentImageIndex - 1 >= 0)
+            {
+                currentImageIndex -= 1;
+            }
+            else {
+                currentImageIndex = imageList.Count - 1;
+            }
+            ShowCurrentImage();
         }
 
         private void nextImageBtn_Click(object sender, EventArgs e)
         {
+            if (currentImageIndex + 1 < imageList.Count)
+            {
+                currentImageIndex += 1;
+            }
+            else {
+                currentImageIndex = 0;
+            }
+            ShowCurrentImage();
+        }
 
+        private void imagePicturebox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (imagePicturebox.Image != null) {
+                isDrawing = true;
+
+                previousPoint = e.Location;
+            }
+        }
+
+        private void imagePicturebox_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDrawing = false;
+        }
+
+        private void imagePicturebox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDrawing && imagePicturebox.Image != null) {
+                Bitmap bitmap = new Bitmap(imagePicturebox.Image);
+
+                Graphics g = Graphics.FromImage(bitmap);
+                g.DrawLine(currentPen, previousPoint.X, previousPoint.Y, e.X, e.Y);
+
+                imagePicturebox.Image = bitmap;
+                imageList[currentImageIndex] = bitmap;
+
+                imagePicturebox.Invalidate();
+                previousPoint = e.Location;
+            }
         }
 
        
