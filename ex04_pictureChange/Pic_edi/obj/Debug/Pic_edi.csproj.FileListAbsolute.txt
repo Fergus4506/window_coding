@@ -1,0 +1,10 @@
+c:\users\user\documents\visual studio 2013\Projects\Pic_edi\Pic_edi\bin\Debug\Pic_edi.exe.config
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.exe.config
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.exe
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\bin\Debug\Pic_edi.pdb
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.Form1.resources
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.exe
+C:\Users\User\Documents\GitHub\window_coding\ex04_pictureChange\Pic_edi\obj\Debug\Pic_edi.pdb
