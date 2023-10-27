@@ -14,6 +14,7 @@ namespace Pic_edi
     {
         private List<Bitmap> imageList = new List<Bitmap>();
         private List<Bitmap> originalImageList = new List<Bitmap>();
+        private List<List<Bitmap>> lastStepImage= new List<List<Bitmap>>();
         private int currentImageIndex = 0;
 
         private Size defaultImagePicturebox;
@@ -26,6 +27,8 @@ namespace Pic_edi
         private float minScaleFactor = 0.1f;
         private float maxScaleFactor = 2.0f;
         Point originalCenter;
+
+        private int last_step_count = 0;
         public Form1()
         {
             InitializeComponent();
@@ -48,6 +51,9 @@ namespace Pic_edi
 
             //計算 groupBox 中心點
             originalCenter = new Point(imageGroupBox.Width / 2, imageGroupBox.Height / 2);
+
+            previousImageBtn.BringToFront();
+            nextImageBtn.BringToFront();
         }
 
         private Bitmap ResizeImage(Image image, int width, int height) {
@@ -91,9 +97,10 @@ namespace Pic_edi
                 if (openFileDialog.ShowDialog() == DialogResult.OK) { 
                     foreach(string fileName in openFileDialog.FileNames){
                         Bitmap newImage = new Bitmap(fileName);
+                        List<Bitmap> sample = new List<Bitmap>();
                         imageList.Add(newImage);
-
                         originalImageList.Add(newImage);
+                        lastStepImage.Add(sample);
                     }
                     currentImageIndex = 0;
                     ShowCurrentImage();
@@ -122,6 +129,7 @@ namespace Pic_edi
         private void filpHorizontalBtn_Click(object sender, EventArgs e)
         {
             if (imagePicturebox.Image != null) {
+                lastStepImage[currentImageIndex].Add(imageList[currentImageIndex]);
                 imagePicturebox.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
                 imagePicturebox.Image = imagePicturebox.Image;
                 imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
@@ -132,6 +140,7 @@ namespace Pic_edi
         {
             if (imagePicturebox.Image != null)
             {
+                lastStepImage[currentImageIndex].Add(imageList[currentImageIndex]);
                 imagePicturebox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 imagePicturebox.Image = imagePicturebox.Image;
                 imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
@@ -189,8 +198,8 @@ namespace Pic_edi
         {
             if (imagePicturebox.Image != null) {
                 isDrawing = true;
-
                 previousPoint = e.Location;
+                lastStepImage[currentImageIndex].Add(imageList[currentImageIndex]);
             }
         }
 
@@ -219,6 +228,7 @@ namespace Pic_edi
         {
             if (imagePicturebox.Image != null)
             {
+                lastStepImage[currentImageIndex].Add(imageList[currentImageIndex]);
                 imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 imagePicturebox.Image = imagePicturebox.Image;
                 imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
@@ -229,6 +239,7 @@ namespace Pic_edi
         {
             if (imagePicturebox.Image != null)
             {
+                lastStepImage[currentImageIndex].Add(imageList[currentImageIndex]);
                 imagePicturebox.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 imagePicturebox.Image = imagePicturebox.Image;
                 imageList[currentImageIndex] = new Bitmap(imagePicturebox.Image);
@@ -246,6 +257,31 @@ namespace Pic_edi
         {
             currentPen.Width = trackBar1.Value;
             label1.Text="Pen size:"+trackBar1.Value.ToString();
+        }
+
+        private void last_step_Click(object sender, EventArgs e)
+        {
+            if (imagePicturebox.Image != null)
+            {
+                if (lastStepImage[currentImageIndex].Count != 0)
+                {
+                    imageList[currentImageIndex] = lastStepImage[currentImageIndex][lastStepImage[currentImageIndex].Count - 1];
+                    lastStepImage[currentImageIndex].RemoveAt(lastStepImage[currentImageIndex].Count-1);
+                    MessageBox.Show("已回到上一步");
+                    ShowCurrentImage();
+                }
+                else {
+                    MessageBox.Show("這是最老的版本了");
+                }
+                
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Z) {
+                last_step_Click(sender, e);
+            }
         }
     }
 }

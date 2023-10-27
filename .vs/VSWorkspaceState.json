@@ -2,15 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\ex03_clock",
-    "\\ex04_micPlayer\\mic_player",
-    "\\ex04_micPlayer\\mic_player\\bin",
-    "\\ex04_micPlayer\\mic_player\\bin\\Debug",
-    "\\ex04_micPlayer\\mic_player\\bin\\Debug\\Music_Notes",
-    "\\ex04_micPlayer\\mic_player\\obj",
-    "\\ex04_micPlayer\\mic_player\\obj\\Debug",
-    "\\ex04_micPlayer\\mic_player\\obj\\Release",
     "\\ex04_pictureChange"
   ],
-  "SelectedNode": "\\ex04_pictureChange\\Pic_edi.sln",
   "PreviewInSolutionExplorer": false
 }
