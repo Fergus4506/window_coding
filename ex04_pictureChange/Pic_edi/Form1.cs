@@ -172,26 +172,33 @@ namespace Pic_edi
 
         private void previousImageBtn_Click(object sender, EventArgs e)
         {
-            if (currentImageIndex - 1 >= 0)
-            {
-                currentImageIndex -= 1;
+            if (imagePicturebox.Image != null) {
+                if (currentImageIndex - 1 >= 0)
+                {
+                    currentImageIndex -= 1;
+                }
+                else
+                {
+                    currentImageIndex = imageList.Count - 1;
+                }
+                ShowCurrentImage();
             }
-            else {
-                currentImageIndex = imageList.Count - 1;
-            }
-            ShowCurrentImage();
+            
         }
 
         private void nextImageBtn_Click(object sender, EventArgs e)
         {
-            if (currentImageIndex + 1 < imageList.Count)
-            {
-                currentImageIndex += 1;
+            if (imagePicturebox.Image != null) {
+                if (currentImageIndex + 1 < imageList.Count)
+                {
+                    currentImageIndex += 1;
+                }
+                else
+                {
+                    currentImageIndex = 0;
+                }
+                ShowCurrentImage();
             }
-            else {
-                currentImageIndex = 0;
-            }
-            ShowCurrentImage();
         }
 
         private void imagePicturebox_MouseDown(object sender, MouseEventArgs e)

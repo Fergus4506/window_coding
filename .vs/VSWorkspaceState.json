@@ -2,7 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\ex03_clock",
-    "\\ex04_pictureChange"
+    "\\ex04_pictureChange",
+    "\\ex04_pictureChange\\Pic_edi"
   ],
+  "SelectedNode": "\\ex04_pictureChange\\Pic_edi\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
