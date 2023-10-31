@@ -1,0 +1,9 @@
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\bin\Debug\ex06_pickColor.exe.config
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\bin\Debug\ex06_pickColor.exe
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\bin\Debug\ex06_pickColor.pdb
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.Form1.resources
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.exe
+C:\Users\User\Documents\GitHub\window_coding\.vs\ex06_pickColor\ex06_pickColor\obj\Debug\ex06_pickColor.pdb
