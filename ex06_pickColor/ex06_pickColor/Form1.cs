@@ -22,7 +22,7 @@ namespace ex06_pickColor
         int c = 50;
 
         
-        int m = 0, n = 2, limit=32,sorce=0,time=0;
+        int m = 0, n = 2, limit=32,sorce=0,time=500,maxS=0;
         Button[] buttons = new Button[4];
         Button[] buttons3 = new Button[9];
 
@@ -96,11 +96,16 @@ namespace ex06_pickColor
         }
         private void start_Click(object sender, EventArgs e)
         {
-            if (time != 500) {
+            if (time != 500)
+            {
                 timer1.Enabled = true;
-            } 
+            }
+            else {
+                label6.Text = "不計時";
+            }
             m = ans.Next(0, n*n);
             start.Enabled = false;
+            reset.Enabled = true;
             if ((b + c) > 255)
             {
                 if(n%3==0)
@@ -140,8 +145,14 @@ namespace ex06_pickColor
                 label6.Text = "剩餘時間為" + time / 60 + "分" + time % 60 + "秒";
             }
             else {
-                MessageBox.Show("計時結束囉，得分為" + sorce);
                 timer1.Enabled = false;
+                MessageBox.Show("計時結束囉，得分為" + sorce);
+                if (sorce > maxS) {
+                    maxS = sorce;
+                    label7.Text = "最佳分數為" + maxS;
+                }
+                    
+                sorce = 0;
                 reset_Click(sender,e);
             }
         }
@@ -180,7 +191,27 @@ namespace ex06_pickColor
 
         private void reset_Click(object sender, EventArgs e)
         {
+            start.Enabled = true;
+            reset.Enabled = false;
+            timer1.Enabled = false;
+            removeButton();
+            n = 2;
+            sorce =0;
+            
+            buttons = new Button[n * n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    buttons[i * n + j] = creatButton(i, j);
+                    if (checkBox1.Checked)
+                    {
+                        buttons[i * n + j].Text = i + "-" + j;
+                    }
+                }
 
+            }
+            this.Controls.AddRange(buttons);
         }
     }
 }
