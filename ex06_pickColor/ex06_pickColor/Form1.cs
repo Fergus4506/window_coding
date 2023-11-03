@@ -15,11 +15,12 @@ namespace ex06_pickColor
         static Random R = new Random();
         static Random G = new Random();
         static Random B = new Random();
+        static Random C = new Random(); 
         Random ans = new Random();
         int r = R.Next(0, 255);
         int g = G.Next(0, 255);
         int b = B.Next(0, 255);
-        int c = 50;
+        int c = 0,cMax=30,cMin=0;
 
         
         int m = 0, n = 2, limit=32,sorce=0,time=500,maxS=0;
@@ -107,6 +108,7 @@ namespace ex06_pickColor
             m = ans.Next(0, n*n);
             start.Enabled = false;
             reset.Enabled = true;
+            c=C.Next(cMin, cMax);
             if ((b + c) > 255)
             {
                 if(n%3==0)
@@ -134,10 +136,40 @@ namespace ex06_pickColor
             limit = Int32.Parse(textBox1.Text);
         }
 
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            cMin = trackBar3.Value;
+            if (cMin == 50)
+            {
+                MessageBox.Show("不可以這樣設喔o(≧口≦)o");
+            }
+            else {
+                if (cMin >= cMax) { 
+                    cMax = cMin+1;
+                    trackBar1.Value= cMax;
+                    label2.Text = "目前最大色差" + cMax.ToString();
+                }
+                label8.Text = "目前最小色差" + cMin.ToString();
+            }
+        }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            c = trackBar1.Value;
-            label2.Text = "目前色差" + c.ToString();
+            cMax = trackBar1.Value;
+            if (cMax == 0)
+            {
+                MessageBox.Show("不可以這樣設喔o(≧口≦)o");
+            }
+            else
+            {
+                if (cMax <= cMin)
+                {
+                    cMin = cMax - 1;
+                    trackBar3.Value = cMin;
+                    label8.Text = "目前最小色差" + cMin.ToString();
+                }
+                label2.Text = "目前最大色差" + cMax.ToString();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
