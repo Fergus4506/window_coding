@@ -96,8 +96,9 @@ namespace ex06_pickColor
         }
         private void start_Click(object sender, EventArgs e)
         {
-            if (time != 500)
+            if (time < 500 && time>0)
             {
+                //MessageBox.Show(time.ToString());
                 timer1.Enabled = true;
             }
             else {
@@ -129,6 +130,7 @@ namespace ex06_pickColor
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if(textBox1.Text.Length!=0)
             limit = Int32.Parse(textBox1.Text);
         }
 
@@ -140,7 +142,7 @@ namespace ex06_pickColor
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (time > 0){
+            if (time > 0 && time<500){
                 time -= 1;
                 label6.Text = "剩餘時間為" + time / 60 + "分" + time % 60 + "秒";
             }
@@ -151,8 +153,6 @@ namespace ex06_pickColor
                     maxS = sorce;
                     label7.Text = "最佳分數為" + maxS;
                 }
-                    
-                sorce = 0;
                 reset_Click(sender,e);
             }
         }
@@ -179,7 +179,7 @@ namespace ex06_pickColor
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             time=trackBar2.Value*5;
-            if(time==100){
+            if(time==100 || time==0){
                 label5.Text="不計時";
             }
             else{
@@ -197,7 +197,16 @@ namespace ex06_pickColor
             removeButton();
             n = 2;
             sorce =0;
-            
+            time = trackBar2.Value * 5;
+            if (time == 500 || time==0)
+            {
+                label5.Text = "不計時";
+            }
+            else
+            {
+                label5.Text = "倒數計時設定為" + time / 60 + "分" + time % 60 + "秒";
+                label6.Text = "剩餘時間為" + time / 60 + "分" + time % 60 + "秒";
+            }
             buttons = new Button[n * n];
             for (int i = 0; i < n; i++)
             {
