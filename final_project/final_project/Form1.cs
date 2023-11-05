@@ -15,6 +15,7 @@ namespace final_project
         Graphics g;
         main_character main_player = null;
         int[] keyPressStore = new int[] { 0, 0, 0, 0 };
+        int shootDelay = 500;
 
         public Form1()
         {
@@ -30,6 +31,8 @@ namespace final_project
         {
             g = e.Graphics;
             repaint_image(g);
+            if(shootDelay==500)
+                main_player.shoot(g);
         }
         void repaint_image(Graphics g)
         {
@@ -41,13 +44,13 @@ namespace final_project
         private void main_move()
         {
             if (keyPressStore[0] == 1)
-                main_player.yAdd -= 5;
+                main_player.playerY -= 7;
             if (keyPressStore[1] == 1)
-                main_player.yAdd += 5;
+                main_player.playerY += 7;
             if (keyPressStore[2] == 1)
-                main_player.xAdd -= 5;
+                main_player.playerX -= 7;
             if (keyPressStore[3] == 1)
-                main_player.xAdd += 5;
+                main_player.playerX += 7;
             //else if(e.)
             Invalidate();
         }
@@ -80,22 +83,36 @@ namespace final_project
         {
             main_move();
         }
+
+        private void player_shooting_timer_Tick(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
     }
     public class main_character
     {
         float shootSpeed = 5;
-        public float xAdd = 0, yAdd = 0;
+        public int playerX = 0, playerY = 0;
+        Point bulletPlace;
         public main_character(Graphics g)
         {
             g.FillRectangle(new SolidBrush(Color.Black), 200, 375, 50, 50);
         }
         public void repaint_place(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Black), 200 + xAdd, 375 + yAdd, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Black), playerX, 375 + playerY, 50, 50);
         }
-        private void shoot()
+        public void shoot(Graphics g)
         {
-
+            //MessageBox.Show("射擊");
+            if (bulletPlace.IsEmpty)
+                bulletPlace = new Point(playerX, playerY - 50);
+            else {
+                bulletPlace.Y -= 1;
+                if(bulletPlace.Y==0)
+                    bulletPlace= Point.Empty;
+            }
+            g.FillRectangle(new SolidBrush(Color.Black),bulletPlace.X,bulletPlace.Y,50,50);
         }
     }
 
