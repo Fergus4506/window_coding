@@ -14,8 +14,10 @@ namespace final_project
     {
         Graphics g;
         main_character main_player = null;
+        std_opt std_Opt = null;
         int[] keyPressStore = new int[] { 0, 0, 0, 0 };
         int shootDelay = 500;
+        int rebirth = 50;
 
         public Form1()
         {
@@ -30,16 +32,27 @@ namespace final_project
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            repaint_image(g);
-            if(shootDelay==500)
+            repaint_image_player(g);
+            if(rebirth==50)
+                repaint_image_std_opt(g);
+            if (shootDelay == 500)
                 main_player.shoot(g);
+            if(shootDelay==500 && std_Opt!=null)
+                std_Opt.shoot(g);
         }
-        void repaint_image(Graphics g)
+        void repaint_image_player(Graphics g)
         {
             if (main_player == null)
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
+        }
+        void repaint_image_std_opt(Graphics g)
+        {
+            if (std_Opt == null)
+                std_Opt = new std_opt(g);
+            else
+                std_Opt.repaint_place(g);
         }
         private void main_move()
         {
@@ -84,37 +97,86 @@ namespace final_project
             main_move();
         }
 
-        private void player_shooting_timer_Tick(object sender, EventArgs e)
+        private void opt_timer_Tick(object sender, EventArgs e)
         {
-            //Invalidate();
+            if (rebirth < 50)
+                rebirth += 5;
+            if (std_Opt != null) {
+                if (std_Opt.being_attacked(main_player))
+                {
+                    rebirth = 0;
+                    std_Opt = null;
+                }
+            }
+            
+                
         }
     }
     public class main_character
     {
-        float shootSpeed = 5;
+        int shootSpeed = 5;
         public int playerX = 200, playerY = 375;
-        Point bulletPlace;
+        public Point bulletPlace;
         public main_character(Graphics g)
         {
             g.FillRectangle(new SolidBrush(Color.Black), 200, 375, 50, 50);
         }
         public void repaint_place(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Black), playerX,playerY, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Black), playerX, playerY, 50, 50);
         }
         public void shoot(Graphics g)
         {
             //MessageBox.Show("射擊");
             if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX, playerY - 50);
+                bulletPlace = new Point(playerX, playerY - 10);
             else {
-                bulletPlace.Y -= 10;
-                if(bulletPlace.Y<=0)
-                    bulletPlace= Point.Empty;
+                bulletPlace.Y -= 5*shootSpeed;
+                if (bulletPlace.Y <= 0)
+                    bulletPlace = Point.Empty;
                 else
-                    g.FillRectangle(new SolidBrush(Color.Black), bulletPlace.X+15, bulletPlace.Y, 20, 30);
+                    g.FillRectangle(new SolidBrush(Color.Black), bulletPlace.X + 15, bulletPlace.Y, 20, 30);
             }
-            
+
+        }
+    }
+    public class std_opt{
+        float shootSpeed = 5;
+        public int playerX = 200, playerY = 0;
+        Point bulletPlace;
+        public std_opt(Graphics g)
+        {
+            g.FillRectangle(new SolidBrush(Color.Black), 200, 0, 50, 50);
+        }
+        public void repaint_place(Graphics g)
+        {
+            g.FillRectangle(new SolidBrush(Color.Black), playerX, playerY, 50, 50);
+        }
+        public void shoot(Graphics g)
+        {
+            //MessageBox.Show("射擊");
+            if (bulletPlace.IsEmpty)
+                bulletPlace = new Point(playerX, playerY + 30);
+            else
+            {
+                bulletPlace.Y += 10;
+                if (bulletPlace.Y >= 600)
+                    bulletPlace = Point.Empty;
+                else
+                    g.FillRectangle(new SolidBrush(Color.Black), bulletPlace.X + 15, bulletPlace.Y, 20, 30);
+            }
+
+        }
+        public bool being_attacked(main_character player) {
+            if (player.bulletPlace.X <= playerX + 50 && player.bulletPlace.X >= playerX && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
+            {
+                //MessageBox.Show("重");
+                return true;
+            }
+            else {
+                return false;
+            }
+                
         }
     }
 

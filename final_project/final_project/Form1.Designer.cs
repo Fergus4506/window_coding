@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.player_timer = new System.Windows.Forms.Timer(this.components);
-            this.player_shooting_timer = new System.Windows.Forms.Timer(this.components);
+            this.opt_timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // player_timer
@@ -38,10 +38,10 @@
             this.player_timer.Enabled = true;
             this.player_timer.Tick += new System.EventHandler(this.player_timer_Tick);
             // 
-            // player_shooting_timer
+            // opt_timer
             // 
-            this.player_shooting_timer.Enabled = true;
-            this.player_shooting_timer.Tick += new System.EventHandler(this.player_shooting_timer_Tick);
+            this.opt_timer.Enabled = true;
+            this.opt_timer.Tick += new System.EventHandler(this.opt_timer_Tick);
             // 
             // Form1
             // 
@@ -61,7 +61,7 @@
         #endregion
 
         private System.Windows.Forms.Timer player_timer;
-        private System.Windows.Forms.Timer player_shooting_timer;
+        private System.Windows.Forms.Timer opt_timer;
     }
 }
 
