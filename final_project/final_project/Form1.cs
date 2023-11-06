@@ -44,13 +44,13 @@ namespace final_project
         private void main_move()
         {
             if (keyPressStore[0] == 1)
-                main_player.playerY -= 7;
+                main_player.playerY -= 10;
             if (keyPressStore[1] == 1)
-                main_player.playerY += 7;
+                main_player.playerY += 10;
             if (keyPressStore[2] == 1)
-                main_player.playerX -= 7;
+                main_player.playerX -= 10;
             if (keyPressStore[3] == 1)
-                main_player.playerX += 7;
+                main_player.playerX += 10;
             //else if(e.)
             Invalidate();
         }
@@ -86,13 +86,13 @@ namespace final_project
 
         private void player_shooting_timer_Tick(object sender, EventArgs e)
         {
-            Invalidate();
+            //Invalidate();
         }
     }
     public class main_character
     {
         float shootSpeed = 5;
-        public int playerX = 0, playerY = 0;
+        public int playerX = 200, playerY = 375;
         Point bulletPlace;
         public main_character(Graphics g)
         {
@@ -100,7 +100,7 @@ namespace final_project
         }
         public void repaint_place(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Black), playerX, 375 + playerY, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Black), playerX,playerY, 50, 50);
         }
         public void shoot(Graphics g)
         {
@@ -108,11 +108,13 @@ namespace final_project
             if (bulletPlace.IsEmpty)
                 bulletPlace = new Point(playerX, playerY - 50);
             else {
-                bulletPlace.Y -= 1;
-                if(bulletPlace.Y==0)
+                bulletPlace.Y -= 10;
+                if(bulletPlace.Y<=0)
                     bulletPlace= Point.Empty;
+                else
+                    g.FillRectangle(new SolidBrush(Color.Black), bulletPlace.X+15, bulletPlace.Y, 20, 30);
             }
-            g.FillRectangle(new SolidBrush(Color.Black),bulletPlace.X,bulletPlace.Y,50,50);
+            
         }
     }
 
