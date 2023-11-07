@@ -96,13 +96,16 @@
             this.check3D.TabIndex = 5;
             this.check3D.Text = "是否畫成3D";
             this.check3D.UseVisualStyleBackColor = true;
+            this.check3D.CheckedChanged += new System.EventHandler(this.check3D_CheckedChanged);
             // 
             // trackBar1
             // 
+            this.trackBar1.LargeChange = 1;
             this.trackBar1.Location = new System.Drawing.Point(12, 116);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.Size = new System.Drawing.Size(191, 45);
             this.trackBar1.TabIndex = 6;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // Form1
             // 
