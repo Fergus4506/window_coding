@@ -1,0 +1,9 @@
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.exe.config
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.exe
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.pdb
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.Form1.resources
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.exe
+C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.pdb
