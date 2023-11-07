@@ -43,7 +43,7 @@ namespace ex07_tar
                     draw_black_tar(g, arr, cnt);
                 if (check3D.Checked)
                 {
-                    PointF mid = new PointF(400, 600);
+                    PointF mid = new PointF(500, 750);
                     draw_3d_left_part(g, new PointF[3] { new PointF(400, 100), new PointF(0, 900), mid }, cnt, Color.Green);
                     draw_3d_left_part(g, new PointF[3] { mid, new PointF(0, 900), new PointF(800, 900) }, cnt, Color.Blue);
                     draw_3d_left_part(g, new PointF[3] { new PointF(400, 100), mid, new PointF(800, 900) }, cnt, Color.Red);

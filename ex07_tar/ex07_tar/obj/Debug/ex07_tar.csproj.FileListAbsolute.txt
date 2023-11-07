@@ -7,3 +7,13 @@ C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_ta
 C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csproj.GenerateResource.Cache
 C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.exe
 C:\Users\User\Documents\GitHub\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.pdb
+D:\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.exe.config
+D:\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.exe
+D:\window_coding\ex07_tar\ex07_tar\bin\Debug\ex07_tar.pdb
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csproj.AssemblyReference.cache
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.Form1.resources
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.Properties.Resources.resources
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csproj.GenerateResource.cache
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.csproj.CoreCompileInputs.cache
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.exe
+D:\window_coding\ex07_tar\ex07_tar\obj\Debug\ex07_tar.pdb
