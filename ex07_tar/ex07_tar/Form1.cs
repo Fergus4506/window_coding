@@ -36,13 +36,13 @@ namespace ex07_tar
 
             Point[] arr = new Point[3] { new Point(400, 100), new Point(0, 900), new Point(800, 900) };
             g.DrawPolygon(pen,arr);
-            g.FillPolygon(brush,arr);
+            //g.FillPolygon(brush,arr);
             if (cnt > 0)
-                draw_wit_tar(g,arr,cnt);
+                draw_black_tar(g,arr,cnt);
         }
-        void draw_wit_tar(Graphics g,Point[] arr,int stop) {
+        /*void draw_wit_tar(Graphics g,Point[] arr,int stop) {
             Point[] temp = new Point[3] { new Point((arr[0].X + arr[1].X) / 2, (arr[0].Y + arr[1].Y) / 2), new Point((arr[1].X + arr[2].X) / 2, (arr[1].Y + arr[2].Y) / 2), new Point((arr[2].X + arr[0].X) / 2, (arr[2].Y + arr[0].Y) / 2) };
-            g.DrawPolygon(new Pen(Color.White), temp);
+            //g.DrawPolygon(new Pen(Color.White), temp);
             g.FillPolygon(new SolidBrush(Color.White), temp);
             if (stop - 1 != 0) {
                 for (int i = 0; i < 3; i++) {
@@ -53,8 +53,28 @@ namespace ex07_tar
                     else if(i==2)
                         draw_wit_tar(g, new Point[3] { temp[2], temp[1], arr[2] }, stop - 1);
                 }
+            }      
+        }*/
+        void draw_black_tar(Graphics g, Point[] arr, int stop) {
+            Point[] temp = new Point[3] { new Point((arr[0].X + arr[1].X) / 2, (arr[0].Y + arr[1].Y) / 2), new Point((arr[1].X + arr[2].X) / 2, (arr[1].Y + arr[2].Y) / 2), new Point((arr[2].X + arr[0].X) / 2, (arr[2].Y + arr[0].Y) / 2) };
+            //g.DrawPolygon(new Pen(Color.White), temp);
+            //g.FillPolygon(new SolidBrush(Color.White), temp);
+            if (stop - 1 > 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (i == 0)
+                        draw_black_tar(g, new Point[3] { arr[0], temp[0], temp[2] }, stop - 1);
+                    else if (i == 1)
+                        draw_black_tar(g, new Point[3] { temp[0], arr[1], temp[1] }, stop - 1);
+                    else if (i == 2)
+                        draw_black_tar(g, new Point[3] { temp[2], temp[1], arr[2] }, stop - 1);
+                }
             }
-                
+            else {
+                g.DrawPolygon(new Pen(Color.Black), arr);
+                g.FillPolygon(new SolidBrush(Color.Black), arr);
+            }
         }
     }
 }

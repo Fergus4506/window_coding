@@ -144,9 +144,11 @@ namespace final_project
         float shootSpeed = 5;
         public int playerX = 200, playerY = 0;
         Point bulletPlace;
+        Random R = new Random();
         public std_opt(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Black), 200, 0, 50, 50);
+            playerX = R.Next(0, 400);
+            g.FillRectangle(new SolidBrush(Color.Black),playerX, 0, 50, 50);
         }
         public void repaint_place(Graphics g)
         {
@@ -168,7 +170,7 @@ namespace final_project
 
         }
         public bool being_attacked(main_character player) {
-            if (player.bulletPlace.X <= playerX + 50 && player.bulletPlace.X >= playerX && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
+            if (player.bulletPlace.X <= playerX+30 && player.bulletPlace.X >= playerX-30 && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
             {
                 //MessageBox.Show("重");
                 return true;

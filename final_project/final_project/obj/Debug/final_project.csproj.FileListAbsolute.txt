@@ -8,3 +8,12 @@ D:\window_coding\final_project\final_project\obj\Debug\final_project.csproj.Gene
 D:\window_coding\final_project\final_project\obj\Debug\final_project.csproj.CoreCompileInputs.cache
 D:\window_coding\final_project\final_project\obj\Debug\final_project.exe
 D:\window_coding\final_project\final_project\obj\Debug\final_project.pdb
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\bin\Debug\final_project.exe.config
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.exe
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.pdb
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\bin\Debug\final_project.exe
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\bin\Debug\final_project.pdb
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.Form1.resources
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.csproj.GenerateResource.Cache
