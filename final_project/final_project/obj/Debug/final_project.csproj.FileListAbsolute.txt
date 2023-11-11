@@ -17,3 +17,4 @@ C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Deb
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.Form1.resources
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.csproj.GenerateResource.Cache
+D:\window_coding\final_project\final_project\obj\Debug\final_project.Resource1.resources
