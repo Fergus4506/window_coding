@@ -22,3 +22,9 @@ D:\window_coding\ex04_micPlayer\mic_player\bin\Debug\AxInterop.WMPLib.dll
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\Interop.WMPLib.dll
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\AxInterop.WMPLib.dll
 D:\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.csproj.ResolveComReference.cache
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\bin\Debug\mic_player.exe.config
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\obj\Debug\Interop.WMPLib.dll
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.csproj.ResolveComReference.cache
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.exe
+C:\Users\User\Documents\GitHub\window_coding\ex04_micPlayer\mic_player\obj\Debug\mic_player.pdb
