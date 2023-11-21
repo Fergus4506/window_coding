@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\bin\Debug\ex08_ran.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\bin\Debug\ex08_ran.exe
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\bin\Debug\ex08_ran.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.exe
+c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.pdb
