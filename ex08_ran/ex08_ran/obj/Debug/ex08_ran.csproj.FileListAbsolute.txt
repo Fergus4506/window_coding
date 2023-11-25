@@ -7,3 +7,13 @@ c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\
 c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.exe
 c:\users\user\documents\visual studio 2013\Projects\ex08_ran\ex08_ran\obj\Debug\ex08_ran.pdb
+D:\window_coding\ex08_ran\ex08_ran\bin\Debug\ex08_ran.exe.config
+D:\window_coding\ex08_ran\ex08_ran\bin\Debug\ex08_ran.exe
+D:\window_coding\ex08_ran\ex08_ran\bin\Debug\ex08_ran.pdb
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csproj.AssemblyReference.cache
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.Form1.resources
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.Properties.Resources.resources
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csproj.GenerateResource.cache
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.csproj.CoreCompileInputs.cache
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.exe
+D:\window_coding\ex08_ran\ex08_ran\obj\Debug\ex08_ran.pdb

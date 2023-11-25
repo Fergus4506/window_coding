@@ -24,6 +24,8 @@ namespace ex08_ran
         {
             textBox1.Text = "2";
             trackBar1.Maximum = (int)(Math.Pow(9, 2));
+            this.Width = 900;
+            this.Height = 900;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -85,7 +87,7 @@ namespace ex08_ran
 
         private void trange_from_CheckedChanged(object sender, EventArgs e)
         {
-
+            Invalidate();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -94,6 +96,11 @@ namespace ex08_ran
             trackBar1.Maximum = (int)(Math.Pow(9,n));
             checknow = trackBar1.Value;
             Invalidate();
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            n = 2;
         }
 
         private void ranColor_CheckedChanged(object sender, EventArgs e)
@@ -105,7 +112,8 @@ namespace ex08_ran
             else {
                 trackBar1.Enabled = true;
             }
-                
+            Invalidate();
+
         }
 
     }
