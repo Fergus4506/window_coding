@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\bin\Debug\ex09_star.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\bin\Debug\ex09_star.exe
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\bin\Debug\ex09_star.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.exe
+c:\users\user\documents\visual studio 2013\Projects\ex09_star\ex09_star\obj\Debug\ex09_star.pdb
