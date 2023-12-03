@@ -24,6 +24,7 @@ namespace final_project
         Random howManyOpt = new Random();
         Random Opt_place=new Random();
         bool check_game_start=false;
+        //WindowsMediaPlayer player;
 
         public Form1()
         {
@@ -34,8 +35,6 @@ namespace final_project
         {
             opt_timer.Enabled = false;
             player_timer.Enabled = false;
-
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -59,7 +58,7 @@ namespace final_project
                         if (std_Opt[i] != null)
                             std_Opt[i].shoot(g);
                     }
-            }         
+            }              
         }
 
         //畫玩家位置的函式(如果沒有玩家物件的畫則新增)
@@ -204,7 +203,18 @@ namespace final_project
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void start_button_Click(object sender, EventArgs e)
+        {
+            start_button.Visible=false;
+            start_button.Enabled=false;
+            game_title.Visible=false;
+            player_timer.Enabled=true;
+            opt_timer.Enabled=true;
+            check_game_start=true;
+
+        }
+
+        private void setting_button_Click(object sender, EventArgs e)
         {
 
         }
