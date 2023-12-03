@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace final_project
 {
@@ -14,9 +15,11 @@ namespace final_project
     {
         public bool check_sound = true;
         public int sound_value = 70;
-        public Form2()
+        WindowsMediaPlayer player;
+        public Form2(WindowsMediaPlayer player)
         {
             InitializeComponent();
+            this.player = player;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,22 +32,23 @@ namespace final_project
 
             if (check_sound)
             {
-                check_sound = false;
+                player.settings.volume = 0;
                 sound.Image = Resource1.sound_limit;
                 trackBar1.Enabled = false;
+                check_sound = false;
             }
             else {
-                check_sound = true;
+                check_sound=true;
                 sound.Image = Resource1.sound_free;
                 trackBar1.Enabled = true;
+                player.settings.volume = trackBar1.Value;
             }
                 
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            
-            sound_value = trackBar1.Value;
+            player.settings.volume = trackBar1.Value;
         }
     }
 }

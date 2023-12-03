@@ -24,7 +24,7 @@ namespace final_project
         Random howManyOpt = new Random();
         Random Opt_place=new Random();
         bool check_game_start=false;
-        public WindowsMediaPlayer player;
+        WindowsMediaPlayer player;
         public Form1()
         {
             InitializeComponent();
@@ -36,9 +36,10 @@ namespace final_project
             player_timer.Enabled = false;
             player = new WindowsMediaPlayer();
             string directory = AppDomain.CurrentDomain.BaseDirectory;
-            MessageBox.Show(directory);
+            //MessageBox.Show(directory);
             string path = Path.GetFullPath(directory + @"defult_backmicus.mp3");
             player.settings.volume = 70;
+            player.settings.setMode("shuffle", true);
             player.URL = path;
             player.controls.play();
         }
@@ -222,7 +223,7 @@ namespace final_project
 
         private void setting_button_Click(object sender, EventArgs e)
         {
-            Form2 f = new Form2();
+            Form2 f = new Form2(player);
             f.Show();
         }
     }
