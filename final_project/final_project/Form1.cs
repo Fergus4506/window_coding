@@ -23,8 +23,8 @@ namespace final_project
         int delifeDelay = 20;//玩家受傷時的無敵時間
         Random howManyOpt = new Random();
         Random Opt_place=new Random();
-        bool check_game_start=false;
-        WindowsMediaPlayer player;
+        bool check_game_start=false;//確定有沒有開始遊戲(沒有不做timer)
+        WindowsMediaPlayer player;//背景音樂播放器
         public Form1()
         {
             InitializeComponent();
@@ -34,12 +34,14 @@ namespace final_project
         {
             opt_timer.Enabled = false;
             player_timer.Enabled = false;
+
+            //建立背景音樂的程式
             player = new WindowsMediaPlayer();
             string directory = AppDomain.CurrentDomain.BaseDirectory;
             //MessageBox.Show(directory);
             string path = Path.GetFullPath(directory + @"defult_backmicus.mp3");
             player.settings.volume = 70;
-            player.settings.setMode("shuffle", true);
+            player.settings.setMode("shuffle", true);//特別注意(循環播放)
             player.URL = path;
             player.controls.play();
         }
@@ -212,6 +214,7 @@ namespace final_project
 
         private void start_button_Click(object sender, EventArgs e)
         {
+            //開始遊戲的設定
             start_button.Visible=false;
             start_button.Enabled=false;
             game_title.Visible=false;
@@ -223,6 +226,7 @@ namespace final_project
 
         private void setting_button_Click(object sender, EventArgs e)
         {
+            //呼叫Form2去改變聲音大小
             Form2 f = new Form2(player);
             f.Show();
         }
@@ -313,18 +317,19 @@ namespace final_project
         //敵人的子彈射擊函式
         public void shoot(Graphics g)
         {
-            //MessageBox.Show("射擊");
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX, playerY + 30);
-            else
-            {
-                bulletPlace.Y += 10;
-                if (bulletPlace.Y >= 600)
-                    bulletPlace = Point.Empty;
+            if (playerY >= 0) {
+                //MessageBox.Show("射擊");
+                if (bulletPlace.IsEmpty)
+                    bulletPlace = new Point(playerX, playerY + 30);
                 else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace.X + 10, bulletPlace.Y, 10, 20);
+                {
+                    bulletPlace.Y += 10;
+                    if (bulletPlace.Y >= 600)
+                        bulletPlace = Point.Empty;
+                    else
+                        g.DrawImage(Resource1.bullet_temp, bulletPlace.X + 10, bulletPlace.Y, 10, 20);
+                }
             }
-
         }
 
         //敵人判定是否被擊中的函式
