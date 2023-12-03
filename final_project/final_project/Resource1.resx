@@ -121,6 +121,9 @@
   <data name="bullet_temp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\bullet_temp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="spaceship" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\spaceship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,5 +132,8 @@
   </data>
   <data name="ufo_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\ufo_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\8bitspacebackgroundbirds-eye-viewdont-have-anything-in-upper-middle-area.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

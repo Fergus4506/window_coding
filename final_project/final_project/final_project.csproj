@@ -102,5 +102,17 @@
   <ItemGroup>
     <None Include="obj\spaceship_beack.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8bitspacebackgroundbirds-eye-viewdont-have-anything-in-upper-middle-area.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\8bitspacebackgroundbirds-eye-viewdont-have-anything-in-upper-middle-area.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\setting.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace final_project
 {
@@ -21,6 +23,8 @@ namespace final_project
         int delifeDelay = 20;//玩家受傷時的無敵時間
         Random howManyOpt = new Random();
         Random Opt_place=new Random();
+        bool check_game_start=false;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,29 +32,34 @@ namespace final_project
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            opt_timer.Enabled = false;
+            player_timer.Enabled = false;
+
 
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            g = e.Graphics;
-            repaint_image_player(g);//重畫玩家
+            if (check_game_start) {
+                g = e.Graphics;
+                repaint_image_player(g);//重畫玩家
 
-            //如果敵人未處於死亡cd的話重畫敵人
-            if(rebirth==50)
-                repaint_image_std_opt(g);
+                //如果敵人未處於死亡cd的話重畫敵人
+                if (rebirth == 50)
+                    repaint_image_std_opt(g);
 
-            //如果玩家射擊cd轉好後執行畫子彈的位置(包括重劃子彈)
-            if (shootDelay == 500)
-                main_player.shoot(g);
+                //如果玩家射擊cd轉好後執行畫子彈的位置(包括重劃子彈)
+                if (shootDelay == 500)
+                    main_player.shoot(g);
 
-            //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
-            if (shootDelay == 500 && std_Opt != null)
-                for (int i = 0; i < std_Opt.Length; i++) {
-                    if(std_Opt[i]!=null)
-                        std_Opt[i].shoot(g);
-                }
-                    
+                //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
+                if (shootDelay == 500 && std_Opt != null)
+                    for (int i = 0; i < std_Opt.Length; i++)
+                    {
+                        if (std_Opt[i] != null)
+                            std_Opt[i].shoot(g);
+                    }
+            }         
         }
 
         //畫玩家位置的函式(如果沒有玩家物件的畫則新增)
@@ -193,6 +202,11 @@ namespace final_project
                     }
                 }
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
