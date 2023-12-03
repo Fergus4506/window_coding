@@ -38,10 +38,16 @@
             // 
             // trackBar1
             // 
+            this.trackBar1.LargeChange = 10;
             this.trackBar1.Location = new System.Drawing.Point(54, 123);
+            this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(181, 45);
+            this.trackBar1.SmallChange = 10;
             this.trackBar1.TabIndex = 0;
+            this.trackBar1.TickFrequency = 10;
+            this.trackBar1.Value = 70;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // sound_control
             // 
@@ -65,6 +71,7 @@
             this.sound.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.sound.TabIndex = 2;
             this.sound.TabStop = false;
+            this.sound.Click += new System.EventHandler(this.sound_Click);
             // 
             // label1
             // 

@@ -154,5 +154,11 @@
   <ItemGroup>
     <None Include="obj\sound_limit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\defult_backmicus.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\micus_place\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
