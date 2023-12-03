@@ -24,8 +24,7 @@ namespace final_project
         Random howManyOpt = new Random();
         Random Opt_place=new Random();
         bool check_game_start=false;
-        //WindowsMediaPlayer player;
-
+        WindowsMediaPlayer player;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +34,7 @@ namespace final_project
         {
             opt_timer.Enabled = false;
             player_timer.Enabled = false;
+            player = new WindowsMediaPlayer();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -216,7 +216,8 @@ namespace final_project
 
         private void setting_button_Click(object sender, EventArgs e)
         {
-
+            Form2 f = new Form2();
+            f.Show();
         }
     }
 
@@ -291,7 +292,7 @@ namespace final_project
         public std_opt(Graphics g,Random R)
         {
             playerX = R.Next(0, 400);
-            playerY = R.Next(0, 100);
+            playerY = R.Next(-400,0);
             g.DrawImage(opt_image, playerX, 0, 30, 30);
             
         }

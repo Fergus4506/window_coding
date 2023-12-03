@@ -42,13 +42,13 @@
             // player_timer
             // 
             this.player_timer.Enabled = true;
-            this.player_timer.Interval = 250;
+            this.player_timer.Interval = 50;
             this.player_timer.Tick += new System.EventHandler(this.player_timer_Tick);
             // 
             // opt_timer
             // 
             this.opt_timer.Enabled = true;
-            this.opt_timer.Interval = 500;
+            this.opt_timer.Interval = 50;
             this.opt_timer.Tick += new System.EventHandler(this.opt_timer_Tick);
             // 
             // show_life

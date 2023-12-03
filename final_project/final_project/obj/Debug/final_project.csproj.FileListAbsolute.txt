@@ -24,3 +24,4 @@ D:\window_coding\final_project\final_project\bin\Debug\AxInterop.WMPLib.dll
 D:\window_coding\final_project\final_project\obj\Debug\Interop.WMPLib.dll
 D:\window_coding\final_project\final_project\obj\Debug\AxInterop.WMPLib.dll
 D:\window_coding\final_project\final_project\obj\Debug\final_project.csproj.ResolveComReference.cache
+D:\window_coding\final_project\final_project\obj\Debug\final_project.Form2.resources
