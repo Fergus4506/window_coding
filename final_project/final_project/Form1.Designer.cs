@@ -42,7 +42,6 @@
             // opt_timer
             // 
             this.opt_timer.Enabled = true;
-            this.opt_timer.Interval = 250;
             this.opt_timer.Tick += new System.EventHandler(this.opt_timer_Tick);
             // 
             // show_life

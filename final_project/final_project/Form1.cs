@@ -20,6 +20,7 @@ namespace final_project
         int rebirth = 50;//敵人復活的CD
         int delifeDelay = 20;//玩家受傷時的無敵時間
         Random howManyOpt = new Random();
+        Random Opt_place=new Random();
         public Form1()
         {
             InitializeComponent();
@@ -67,11 +68,13 @@ namespace final_project
             //如果敵人全部陣亡(std_Opt的陣列為null)則重新新增敵人的數量和實作敵人物件
             if (std_Opt == null)
             {
-                std_Opt = new std_opt[howManyOpt.Next(1, 5)];
+                std_Opt = new std_opt[howManyOpt.Next(2,5)];
+                
                 for (int i = 0; i < std_Opt.Length; i++)
                 {
-                    std_Opt[i] = new std_opt(g);
+                    std_Opt[i] = new std_opt(g,Opt_place);
                 }
+                
             }
             else {
                 //如果敵人還有沒陣亡的就重畫他的位置，並且計算有幾個敵人陣亡了
@@ -86,7 +89,7 @@ namespace final_project
                         std_Opt[i].repaint_place(g);
                     }
                 }
-
+                //show_life.Text=checkHowManyOptExist.ToString();
                 //如果判定到所有敵人都陣亡了則把std_Opt陣列改為null
                 if (checkHowManyOptExist == std_Opt.Length) {
                     std_Opt = null;
@@ -94,7 +97,8 @@ namespace final_project
                 }
                     
             }
-               
+            
+
         }
 
         //根據陣列去判斷按下按下的按鍵再去做位移的動作(為了讓他可以斜對角移動所以才這樣寫)
@@ -254,17 +258,18 @@ namespace final_project
     //一般敵人的物件
     public class std_opt{
         float shootSpeed = 5;
-        public int playerX = 200, playerY = 0;
+        public int playerX, playerY = 0;
         public Point bulletPlace;
-        Random R = new Random();//敵人生成位置的隨機變數
         Image opt_image= Resource1.ufo_1;
         Image bullet = Resource1.bullet_temp;
 
         //新建敵人時的建構子(在敵人被全部擊敗時會被呼叫)
-        public std_opt(Graphics g)
+        public std_opt(Graphics g,Random R)
         {
             playerX = R.Next(0, 400);
+            playerY = R.Next(0, 100);
             g.DrawImage(opt_image, playerX, 0, 30, 30);
+            
         }
 
         //重畫敵人的位置(敵人行為模式的函示)
