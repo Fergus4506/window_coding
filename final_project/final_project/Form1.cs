@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
+using System.Drawing.Text;
+
 
 namespace final_project
 {
@@ -25,6 +27,7 @@ namespace final_project
         Random Opt_place=new Random();
         bool check_game_start=false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
+        Font pixelStyle;
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +47,15 @@ namespace final_project
             player.settings.setMode("shuffle", true);//特別注意(循環播放)
             player.URL = path;
             player.controls.play();
+
+            //Font pixfont = new Font();
+
+            /*PrivateFontCollection collection = new PrivateFontCollection();
+            collection.AddFontFile(directory + @"Cubic_11_1.010_R.ttf");
+            FontFamily[] fontFamily = collection.Families;
+            pixelStyle = new Font(fontFamily[0].Name, 27, FontStyle.Regular);
+            game_title.Font = pixelStyle;*/
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

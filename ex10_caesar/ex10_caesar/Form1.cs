@@ -27,11 +27,11 @@ namespace ex10_caesar
         private void EnButton_CheckedChanged(object sender, EventArgs e)
         {
             if (EnButton.Checked) {
-                En();
+                En_P();
             }
         }
 
-        void En() {
+        void En_P() {
             string temp = "";
             int shift = Int32.Parse(textBox3.Text);
             for (int i = 0; i < oldText.Text.Length; i++) {
@@ -40,6 +40,9 @@ namespace ex10_caesar
                     if (now + shift > (int)('Z'))
                     {
                         now = (now + shift) - 26;
+                    }
+                    else if (now + shift < (int)('A')) {
+                        now = (now + shift) + 26;
                     }
                     else
                         now = now + shift;
@@ -50,6 +53,10 @@ namespace ex10_caesar
                     if (now + shift > (int)('z'))
                     {
                         now = (now + shift) - 26;
+                    }
+                    else if (now + shift < (int)('a'))
+                    {
+                        now = (now + shift) + 26;
                     }
                     else
                         now = now + shift;
@@ -70,11 +77,11 @@ namespace ex10_caesar
         private void oldText_TextChanged(object sender, EventArgs e)
         {
             if (EnButton.Checked) {
-                En();
+                En_P();
             }
         }
 
-        void De()
+        void De_P()
         {
             string temp = "";
             int shift = Int32.Parse(textBox3.Text);
@@ -87,6 +94,10 @@ namespace ex10_caesar
                     {
                         now = (now - shift) + 26;
                     }
+                    else if (now - shift > (int)('Z'))
+                    {
+                        now = (now - shift) - 26;
+                    }
                     else
                         now = now - shift;
                     temp += ((char)(now)).ToString();
@@ -96,6 +107,10 @@ namespace ex10_caesar
                     if (now - shift < (int)('a'))
                     {
                         now = (now - shift) + 26;
+                    }
+                    else if (now - shift > (int)('z'))
+                    {
+                        now = (now - shift) - 26;
                     }
                     else
                         now = now - shift;
@@ -117,7 +132,7 @@ namespace ex10_caesar
         private void deButton_CheckedChanged(object sender, EventArgs e)
         {
             if(deButton.Checked){
-                De();
+                De_P();
             }
         }
 
@@ -125,6 +140,13 @@ namespace ex10_caesar
         {
             oldText.Text = "";
             newText.Text = "";
+        }
+
+        private void newText_TextChanged(object sender, EventArgs e)
+        {
+            if (deButton.Checked) {
+                De_P();
+            }
         }
     }
 }
