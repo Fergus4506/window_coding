@@ -1,0 +1,9 @@
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\bin\Debug\ex10_caesar.exe.config
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\bin\Debug\ex10_caesar.exe
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\bin\Debug\ex10_caesar.pdb
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.Form1.resources
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.exe
+C:\Users\User\Documents\GitHub\window_coding\ex10_caesar\ex10_caesar\obj\Debug\ex10_caesar.pdb
