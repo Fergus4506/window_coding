@@ -65,13 +65,14 @@
             // 
             this.game_title.AutoSize = true;
             this.game_title.BackColor = System.Drawing.Color.Transparent;
-            this.game_title.Font = new System.Drawing.Font("俐方体11号", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.game_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.game_title.ForeColor = System.Drawing.Color.Transparent;
             this.game_title.Location = new System.Drawing.Point(137, 121);
             this.game_title.Name = "game_title";
-            this.game_title.Size = new System.Drawing.Size(183, 43);
+            this.game_title.Size = new System.Drawing.Size(182, 50);
             this.game_title.TabIndex = 1;
             this.game_title.Text = "太空大戰";
+            this.game_title.UseCompatibleTextRendering = true;
             // 
             // setting_button
             // 

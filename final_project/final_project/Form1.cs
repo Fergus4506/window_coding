@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 
 namespace final_project
@@ -48,14 +49,28 @@ namespace final_project
             player.URL = path;
             player.controls.play();
 
-            //Font pixfont = new Font();
+            //Create your private font collection object.
+            PrivateFontCollection pfc = new PrivateFontCollection();
 
-            /*PrivateFontCollection collection = new PrivateFontCollection();
-            collection.AddFontFile(directory + @"Cubic_11_1.010_R.ttf");
-            FontFamily[] fontFamily = collection.Families;
-            pixelStyle = new Font(fontFamily[0].Name, 27, FontStyle.Regular);
-            game_title.Font = pixelStyle;*/
+            //Select your font from the resources.
+            //My font here is "Digireu.ttf"
+            int fontLength = Resource1.Cubic_11_1_010_R.Length;
 
+            // create a buffer to read in to
+            byte[] fontdata = Resource1.Cubic_11_1_010_R;
+
+            // create an unsafe memory block for the font data(need to using System.Runtime.InteropServices)
+            System.IntPtr data = Marshal.AllocCoTaskMem(fontLength);
+
+            // copy the bytes to the unsafe memory block
+            Marshal.Copy(fontdata, 0, data, fontLength);
+
+            // pass the font to the font collection
+            pfc.AddMemoryFont(data, fontLength);
+
+            //抓取原本文字的樣式並添加進新建的文字中以規範新建的文字樣式
+            FontStyle fs = game_title.Font.Style;
+            game_title.Font = new Font(pfc.Families[0], 28.0F,fs);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -278,7 +293,7 @@ namespace final_project
                 bulletPlace = new Point(playerX, playerY - 10);
             else {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
-                bulletPlace.Y -= 5*shootSpeed;
+                bulletPlace.Y -= 1*shootSpeed;
                 if (bulletPlace.Y <= 0)
                     bulletPlace = Point.Empty;
                 else
@@ -305,7 +320,7 @@ namespace final_project
 
     //一般敵人的物件
     public class std_opt{
-        float shootSpeed = 5;
+        int shootSpeed = 1;
         public int playerX, playerY = 0;
         public Point bulletPlace;
         Image opt_image= Resource1.ufo_1;
@@ -315,7 +330,7 @@ namespace final_project
         public std_opt(Graphics g,Random R)
         {
             playerX = R.Next(0, 400);
-            playerY = R.Next(-400,0);
+            playerY = R.Next(-100,0);
             g.DrawImage(opt_image, playerX, 0, 30, 30);
             
         }
@@ -331,16 +346,7 @@ namespace final_project
         {
             if (playerY >= 0) {
                 //MessageBox.Show("射擊");
-                if (bulletPlace.IsEmpty)
-                    bulletPlace = new Point(playerX, playerY + 30);
-                else
-                {
-                    bulletPlace.Y += 10;
-                    if (bulletPlace.Y >= 600)
-                        bulletPlace = Point.Empty;
-                    else
-                        g.DrawImage(Resource1.bullet_temp, bulletPlace.X + 10, bulletPlace.Y, 10, 20);
-                }
+                shoot_mode_1(g);
             }
         }
 
@@ -355,8 +361,20 @@ namespace final_project
             else {
                 return false;
             }
-                
         }
+        public void shoot_mode_1(Graphics g) {
+            if (bulletPlace.IsEmpty)
+                bulletPlace = new Point(playerX, playerY + 30);
+            else
+            {
+                bulletPlace.Y = bulletPlace.Y + 10 * shootSpeed;
+                if (bulletPlace.Y >= 600)
+                    bulletPlace = Point.Empty;
+                else
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace.X + 10, bulletPlace.Y, 10, 20);
+            }
+        }
+        
     }
 
 }

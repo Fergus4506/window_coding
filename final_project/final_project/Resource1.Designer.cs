@@ -81,6 +81,16 @@ namespace final_project {
         }
         
         /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
+        internal static byte[] Cubic_11_1_010_R {
+            get {
+                object obj = ResourceManager.GetObject("Cubic_11_1_010_R", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
         internal static System.Drawing.Bitmap setting {
