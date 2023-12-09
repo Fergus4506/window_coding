@@ -106,7 +106,7 @@ namespace final_project
                         std_Opt[i].repaint_place(g);
                     }
                 }
-                //show_life.Text=checkHowManyOptExist.ToString();
+                //show_life.Text=std_Opt.Length.ToString();
                 //如果判定到所有敵人都陣亡了則把std_Opt陣列改為null
                 if (checkHowManyOptExist == std_Opt.Length) {
                     std_Opt = null;
@@ -221,7 +221,7 @@ namespace final_project
             player_timer.Enabled=true;
             opt_timer.Enabled=true;
             check_game_start=true;
-
+            show_life.Visible=true;
         }
 
         private void setting_button_Click(object sender, EventArgs e)

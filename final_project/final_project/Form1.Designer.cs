@@ -54,9 +54,12 @@
             // show_life
             // 
             this.show_life.AutoSize = true;
+            this.show_life.BackColor = System.Drawing.Color.Transparent;
+            this.show_life.Font = new System.Drawing.Font("俐方体11号", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.show_life.ForeColor = System.Drawing.Color.White;
             this.show_life.Location = new System.Drawing.Point(13, 13);
             this.show_life.Name = "show_life";
-            this.show_life.Size = new System.Drawing.Size(62, 12);
+            this.show_life.Size = new System.Drawing.Size(70, 14);
             this.show_life.TabIndex = 0;
             this.show_life.Text = "剩餘血量:3";
             this.show_life.Visible = false;
