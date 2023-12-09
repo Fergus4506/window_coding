@@ -148,4 +148,7 @@
   <data name="_8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\8bitspacebackgroundbirds-eye-viewdont-have-anything-in-upper-middle-area.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Cubic_11_1_010_R" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bin\debug\cubic_11_1.010_r.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
