@@ -28,8 +28,7 @@ namespace final_project
         Random Opt_place=new Random();
         bool check_game_start=false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
-        Font pixelStyle;
-        int level;
+        public int level;
         public Form1()
         {
             InitializeComponent();
@@ -72,6 +71,7 @@ namespace final_project
             //抓取原本文字的樣式並添加進新建的文字中以規範新建的文字樣式
             FontStyle fs = game_title.Font.Style;
             game_title.Font = new Font(pfc.Families[0], 28.0F,fs);
+            show_life.Font = new Font(pfc.Families[0],12.0F,show_life.Font.Style);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -93,7 +93,7 @@ namespace final_project
                     for (int i = 0; i < std_Opt.Length; i++)
                     {
                         if (std_Opt[i] != null)
-                            std_Opt[i].shoot(g);
+                            std_Opt[i].shoot(g,level,i);
                     }
             }              
         }
@@ -114,13 +114,13 @@ namespace final_project
             if (std_Opt == null)
             {
                 level++;
-                std_Opt = new std_opt[howManyOpt.Next(2,5)];
+                std_Opt = new std_opt[howManyOpt.Next(2+Math.Min(level%10,3),Math.Max(5,Math.Min(level,10)))];
                 
                 for (int i = 0; i < std_Opt.Length; i++)
                 {
                     std_Opt[i] = new std_opt(g,Opt_place);
                 }
-                show_life.Text=level.ToString();
+                //show_life.Text=level.ToString();
             }
             else {
                 //如果敵人還有沒陣亡的就重畫他的位置，並且計算有幾個敵人陣亡了
@@ -140,13 +140,9 @@ namespace final_project
                 if (checkHowManyOptExist == std_Opt.Length) {
                     std_Opt = null;
                     rebirth = 0;
-                }
-                    
+                }    
             }
-            
-
         }
-
         //根據陣列去判斷按下按下的按鍵再去做位移的動作(為了讓他可以斜對角移動所以才這樣寫)
         //簡單來說就是玩家的操作控制器
         private void main_move()
@@ -234,7 +230,7 @@ namespace final_project
                         {
                             delifeDelay = 0;
                             main_player.life -= 1;
-                            show_life.Text = "剩餘血量:" + main_player.life;
+                            show_life.Text = main_player.life.ToString();
                         }
                     }
                 }
@@ -251,6 +247,7 @@ namespace final_project
             opt_timer.Enabled=true;
             check_game_start=true;
             show_life.Visible=true;
+            heart_picture.Visible=true;
         }
 
         private void setting_button_Click(object sender, EventArgs e)
@@ -352,11 +349,18 @@ namespace final_project
         }
 
         //敵人的子彈射擊函式
-        public void shoot(Graphics g)
+        public void shoot(Graphics g,int level,int id_opt)
         {
             if (playerY >= 0) {
                 //MessageBox.Show("射擊");
-                shoot_mode_1(g);
+                if (level > 5 && id_opt % 2 == 0)
+                {
+                    shoot_mode_2(g);
+                }
+                else {
+                    shoot_mode_1(g);
+                }
+                
             }
         }
 
@@ -365,7 +369,7 @@ namespace final_project
             if (player.bulletPlace.X <= playerX+30 && player.bulletPlace.X >= playerX-30 && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
             {
                 //MessageBox.Show("重");
-
+                
                 return true;
             }
             else {
@@ -402,7 +406,7 @@ namespace final_project
             {
                 //這裡是三個不同方向的子彈所需要做的位移(分別是中、左、右)
                 int count_how_bullet_out = 0;
-                bulletPlace[0].Y = bulletPlace[0].Y + 1 * shootSpeed;
+                bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
 
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
                 if (bulletPlace[0].Y >= 600 || bulletPlace[0] == Point.Empty) {
@@ -410,7 +414,7 @@ namespace final_project
                     count_how_bullet_out++;
                 }
                 else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X, bulletPlace[0].Y, 10, 20);
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + 10, bulletPlace[0].Y, 10, 20);
 
                 bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
                 bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
@@ -419,7 +423,7 @@ namespace final_project
                     count_how_bullet_out++;
                 }
                 else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X, bulletPlace[1].Y, 10, 20);
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X+10, bulletPlace[1].Y, 10, 20);
 
                 bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
                 bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
@@ -428,7 +432,7 @@ namespace final_project
                     count_how_bullet_out++;
                 }
                 else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X, bulletPlace[2].Y, 10, 20);
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X+10, bulletPlace[2].Y, 10, 20);
 
                 //如果三點都超界了就去重劃射擊
                 if (count_how_bullet_out == 3) {

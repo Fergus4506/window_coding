@@ -35,8 +35,10 @@
             this.game_title = new System.Windows.Forms.Label();
             this.setting_button = new System.Windows.Forms.PictureBox();
             this.start_button = new System.Windows.Forms.PictureBox();
+            this.heart_picture = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
             this.SuspendLayout();
             // 
             // player_timer
@@ -55,13 +57,13 @@
             // 
             this.show_life.AutoSize = true;
             this.show_life.BackColor = System.Drawing.Color.Transparent;
-            this.show_life.Font = new System.Drawing.Font("俐方体11号", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.show_life.Font = new System.Drawing.Font("俐方体11号", 12F);
             this.show_life.ForeColor = System.Drawing.Color.White;
-            this.show_life.Location = new System.Drawing.Point(13, 13);
+            this.show_life.Location = new System.Drawing.Point(46, 19);
             this.show_life.Name = "show_life";
-            this.show_life.Size = new System.Drawing.Size(70, 14);
+            this.show_life.Size = new System.Drawing.Size(17, 18);
             this.show_life.TabIndex = 0;
-            this.show_life.Text = "剩餘血量:3";
+            this.show_life.Text = "3";
             this.show_life.Visible = false;
             // 
             // game_title
@@ -72,7 +74,7 @@
             this.game_title.ForeColor = System.Drawing.Color.Transparent;
             this.game_title.Location = new System.Drawing.Point(137, 121);
             this.game_title.Name = "game_title";
-            this.game_title.Size = new System.Drawing.Size(182, 50);
+            this.game_title.Size = new System.Drawing.Size(181, 50);
             this.game_title.TabIndex = 1;
             this.game_title.Text = "太空大戰";
             this.game_title.UseCompatibleTextRendering = true;
@@ -103,6 +105,18 @@
             this.start_button.TabStop = false;
             this.start_button.Click += new System.EventHandler(this.start_button_Click);
             // 
+            // heart_picture
+            // 
+            this.heart_picture.BackColor = System.Drawing.Color.Transparent;
+            this.heart_picture.Image = global::final_project.Resource1.pixel_heart;
+            this.heart_picture.Location = new System.Drawing.Point(9, 12);
+            this.heart_picture.Name = "heart_picture";
+            this.heart_picture.Size = new System.Drawing.Size(30, 30);
+            this.heart_picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.heart_picture.TabIndex = 4;
+            this.heart_picture.TabStop = false;
+            this.heart_picture.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -111,6 +125,7 @@
             this.BackgroundImage = global::final_project.Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(434, 561);
+            this.Controls.Add(this.heart_picture);
             this.Controls.Add(this.start_button);
             this.Controls.Add(this.setting_button);
             this.Controls.Add(this.game_title);
@@ -124,6 +139,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +153,7 @@
         private System.Windows.Forms.Label game_title;
         private System.Windows.Forms.PictureBox setting_button;
         private System.Windows.Forms.PictureBox start_button;
+        private System.Windows.Forms.PictureBox heart_picture;
     }
 }
 

@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\pixel_heart.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\micus_place\" />
