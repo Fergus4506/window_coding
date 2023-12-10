@@ -36,9 +36,13 @@
             this.setting_button = new System.Windows.Forms.PictureBox();
             this.start_button = new System.Windows.Forms.PictureBox();
             this.heart_picture = new System.Windows.Forms.PictureBox();
+            this.dob_mode_button = new System.Windows.Forms.PictureBox();
+            this.chl_mode_button = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dob_mode_button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chl_mode_button)).BeginInit();
             this.SuspendLayout();
             // 
             // player_timer
@@ -97,9 +101,9 @@
             this.start_button.BackColor = System.Drawing.Color.Transparent;
             this.start_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.start_button.Image = global::final_project.Resource1.start_button;
-            this.start_button.Location = new System.Drawing.Point(166, 221);
+            this.start_button.Location = new System.Drawing.Point(166, 214);
             this.start_button.Name = "start_button";
-            this.start_button.Size = new System.Drawing.Size(126, 50);
+            this.start_button.Size = new System.Drawing.Size(125, 50);
             this.start_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.start_button.TabIndex = 3;
             this.start_button.TabStop = false;
@@ -117,6 +121,28 @@
             this.heart_picture.TabStop = false;
             this.heart_picture.Visible = false;
             // 
+            // dob_mode_button
+            // 
+            this.dob_mode_button.BackColor = System.Drawing.Color.Transparent;
+            this.dob_mode_button.Image = global::final_project.Resource1.dub_mode_button;
+            this.dob_mode_button.Location = new System.Drawing.Point(166, 311);
+            this.dob_mode_button.Name = "dob_mode_button";
+            this.dob_mode_button.Size = new System.Drawing.Size(125, 50);
+            this.dob_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dob_mode_button.TabIndex = 5;
+            this.dob_mode_button.TabStop = false;
+            // 
+            // chl_mode_button
+            // 
+            this.chl_mode_button.BackColor = System.Drawing.Color.Transparent;
+            this.chl_mode_button.Image = global::final_project.Resource1.challenge_mode_button;
+            this.chl_mode_button.Location = new System.Drawing.Point(166, 404);
+            this.chl_mode_button.Name = "chl_mode_button";
+            this.chl_mode_button.Size = new System.Drawing.Size(125, 50);
+            this.chl_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.chl_mode_button.TabIndex = 6;
+            this.chl_mode_button.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -125,6 +151,8 @@
             this.BackgroundImage = global::final_project.Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(434, 561);
+            this.Controls.Add(this.chl_mode_button);
+            this.Controls.Add(this.dob_mode_button);
             this.Controls.Add(this.heart_picture);
             this.Controls.Add(this.start_button);
             this.Controls.Add(this.setting_button);
@@ -140,6 +168,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dob_mode_button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chl_mode_button)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,6 +184,8 @@
         private System.Windows.Forms.PictureBox setting_button;
         private System.Windows.Forms.PictureBox start_button;
         private System.Windows.Forms.PictureBox heart_picture;
+        private System.Windows.Forms.PictureBox dob_mode_button;
+        private System.Windows.Forms.PictureBox chl_mode_button;
     }
 }
 

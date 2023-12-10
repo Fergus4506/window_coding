@@ -81,12 +81,32 @@ namespace final_project {
         }
         
         /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap challenge_mode_button {
+            get {
+                object obj = ResourceManager.GetObject("challenge_mode_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
         internal static byte[] Cubic_11_1_010_R {
             get {
                 object obj = ResourceManager.GetObject("Cubic_11_1_010_R", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap dub_mode_button {
+            get {
+                object obj = ResourceManager.GetObject("dub_mode_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -156,6 +176,26 @@ namespace final_project {
         internal static System.Drawing.Bitmap spaceship_beack {
             get {
                 object obj = ResourceManager.GetObject("spaceship_beack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap spaceship_mode1_full_h {
+            get {
+                object obj = ResourceManager.GetObject("spaceship_mode1_full_h", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap spaceship_mode1_full_hat {
+            get {
+                object obj = ResourceManager.GetObject("spaceship_mode1_full_hat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

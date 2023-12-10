@@ -154,4 +154,16 @@
   <data name="pixel_heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\pixel_heart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="challenge_mode_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\challenge_mode_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dub_mode_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\dub_mode_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spaceship_mode1_full_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\Main Ship - Base - Full health.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spaceship_mode1_full_hat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\Main Ship - Base - Full health-hat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

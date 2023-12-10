@@ -203,11 +203,11 @@ namespace final_project
                 rebirth += 5;
 
             //玩家被敵人擊中時的動畫
-            if (delifeDelay < 20) {
+            if (delifeDelay < 30) {
                 if (main_player.change_state == 0)
-                    main_player.plane = Resource1.spaceship_beack;
+                    main_player.plane = Resource1.spaceship_mode1_full_hat;
                 else
-                    main_player.plane = Resource1.spaceship;
+                    main_player.plane = Resource1.spaceship_mode1_full_h;
                 main_player.change_state = (main_player.change_state + 1) % 2;
                 delifeDelay += 5;
             }
@@ -231,7 +231,7 @@ namespace final_project
             if (main_player != null && std_Opt!=null) {
                 for (int i = 0; i < std_Opt.Length; i++) {
                     if (std_Opt[i] != null) {
-                        if (main_player.being_attacked(std_Opt[i]) && delifeDelay == 20)
+                        if (main_player.being_attacked(std_Opt[i]) && delifeDelay == 30)
                         {
                             delifeDelay = 0;
                             main_player.life -= 1;
@@ -246,13 +246,14 @@ namespace final_project
         {
             //開始遊戲的設定
             start_button.Visible=false;
-            start_button.Enabled=false;
             game_title.Visible=false;
             player_timer.Enabled=true;
             opt_timer.Enabled=true;
             check_game_start=true;
             show_life.Visible=true;
             heart_picture.Visible=true;
+            dob_mode_button.Visible=false;
+            chl_mode_button.Visible =false;
         }
 
         private void setting_button_Click(object sender, EventArgs e)
@@ -275,19 +276,20 @@ namespace final_project
         public int playerX = 200, playerY = 375,life=3,change_state=0;
 
         public Point bulletPlace;//子彈位置
-        public Image plane = Resource1.spaceship;//玩家的飛船圖式
+        public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
         Image bullet = Resource1.bullet_temp;//子彈的樣式
 
         //開始時重畫玩家的建構子
         public main_character(Graphics g)
         {
-            g.DrawImage(plane, 200, 375, 50, 50);
+            g.DrawImage(plane, 200, 375, 60, 60);
         }
 
         //重畫玩家的位置(因為會有移動的需求)
         public void repaint_place(Graphics g)
         {
-            g.DrawImage(plane, playerX,playerY, 50, 50);
+            g.DrawImage(plane, playerX,playerY, 60, 60);
+            g.FillEllipse(new SolidBrush(Color.Black), playerX, playerY,10,10);
         }
 
         //玩家子彈射擊的函式
@@ -365,7 +367,7 @@ namespace final_project
                     shoot_mode_2(g);
                 }
                 else {
-                    shoot_mode_1(g);
+                    shoot_mode_2(g);
                 }
                 
             }
@@ -413,36 +415,46 @@ namespace final_project
             {
                 //這裡是三個不同方向的子彈所需要做的位移(分別是中、左、右)
                 int count_how_bullet_out = 0;
-                
+
 
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
-                if (bulletPlace[0].Y >= 600 || bulletPlace[0] == Point.Empty) {
-                    bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
+                if (bulletPlace[0].Y > 600 || bulletPlace[0] == Point.Empty)
+                {
                     bulletPlace[0] = Point.Empty;
                     count_how_bullet_out++;
                 }
-                else
+                else {
+                    bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + 10, bulletPlace[0].Y, 10, 20);
+                }
 
-                
-                if (bulletPlace[1].Y >= 600 || bulletPlace[1].X >= 450 || bulletPlace[0] == Point.Empty) {
-                    bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
-                    bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
+
+
+                if (bulletPlace[1].Y > 600 || bulletPlace[1].X > 450 || bulletPlace[0] == Point.Empty)
+                {
                     bulletPlace[1] = Point.Empty;
                     count_how_bullet_out++;
                 }
-                else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X+10, bulletPlace[1].Y, 10, 20);
+                else {
+                    bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
+                    bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X + 10, bulletPlace[1].Y, 10, 20);
+                }
 
-                
-                if (bulletPlace[2].Y >= 600 || bulletPlace[2].X <= 0 || bulletPlace[2] == Point.Empty) {
-                    bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
-                    bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
+
+
+                if (bulletPlace[2].Y >600 || bulletPlace[2].X <0 || bulletPlace[2] == Point.Empty)
+                {
+
                     bulletPlace[2] = Point.Empty;
                     count_how_bullet_out++;
                 }
-                else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X+10, bulletPlace[2].Y, 10, 20);
+                else {
+                    bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
+                    bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X + 10, bulletPlace[2].Y, 10, 20);
+                }
+                    
 
                 //如果三點都超界了就去重劃射擊
                 if (count_how_bullet_out == 3) {

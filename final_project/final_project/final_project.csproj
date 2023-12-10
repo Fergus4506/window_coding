@@ -159,6 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\Main Ship - Base - Full health-hat.png" />
+    <None Include="obj\Main Ship - Base - Full health.png" />
+    <None Include="obj\challenge_mode_button.png" />
+    <None Include="obj\dub_mode_button.png" />
     <None Include="obj\pixel_heart.png" />
   </ItemGroup>
   <ItemGroup>
