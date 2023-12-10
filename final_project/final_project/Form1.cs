@@ -29,6 +29,7 @@ namespace final_project
         bool check_game_start=false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
         Font pixelStyle;
+        int level;
         public Form1()
         {
             InitializeComponent();
@@ -112,13 +113,14 @@ namespace final_project
             //如果敵人全部陣亡(std_Opt的陣列為null)則重新新增敵人的數量和實作敵人物件
             if (std_Opt == null)
             {
+                level++;
                 std_Opt = new std_opt[howManyOpt.Next(2,5)];
                 
                 for (int i = 0; i < std_Opt.Length; i++)
                 {
                     std_Opt[i] = new std_opt(g,Opt_place);
                 }
-                
+                show_life.Text=level.ToString();
             }
             else {
                 //如果敵人還有沒陣亡的就重畫他的位置，並且計算有幾個敵人陣亡了
@@ -338,8 +340,8 @@ namespace final_project
         public std_opt(Graphics g,Random R)
         {
             playerX = R.Next(0, 400);
-            playerY = R.Next(-100,0);
-            g.DrawImage(opt_image, playerX, 0, 30, 30);
+            playerY = R.Next(-100,-1);
+            g.DrawImage(opt_image, playerX, playerY, 30, 30);
             
         }
 
@@ -354,7 +356,7 @@ namespace final_project
         {
             if (playerY >= 0) {
                 //MessageBox.Show("射擊");
-                shoot_mode_2(g);
+                shoot_mode_1(g);
             }
         }
 
@@ -370,6 +372,7 @@ namespace final_project
                 return false;
             }
         }
+        //只會射擊一發子彈的基本射擊模式
         public void shoot_mode_1(Graphics g) {
             if (bulletPlace == null)
             {
@@ -378,13 +381,14 @@ namespace final_project
             } 
             else
             {
-                bulletPlace[0].Y = bulletPlace[0].Y + 10 * shootSpeed;
+                bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
                 if (bulletPlace[0].Y >= 600)
                     bulletPlace = null;
                 else
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + 10, bulletPlace[0].Y, 10, 20);
             }
         }
+        //散射的射擊模式(會射擊三發子彈)
         public void shoot_mode_2(Graphics g)
         {
             if (bulletPlace == null)
@@ -396,8 +400,11 @@ namespace final_project
             }
             else
             {
+                //這裡是三個不同方向的子彈所需要做的位移(分別是中、左、右)
                 int count_how_bullet_out = 0;
                 bulletPlace[0].Y = bulletPlace[0].Y + 1 * shootSpeed;
+
+                //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
                 if (bulletPlace[0].Y >= 600 || bulletPlace[0] == Point.Empty) {
                     bulletPlace[0] = Point.Empty;
                     count_how_bullet_out++;
@@ -422,6 +429,8 @@ namespace final_project
                 }
                 else
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X, bulletPlace[2].Y, 10, 20);
+
+                //如果三點都超界了就去重劃射擊
                 if (count_how_bullet_out == 3) {
                     bulletPlace = null;
                 }
