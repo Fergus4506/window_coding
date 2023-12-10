@@ -305,16 +305,24 @@ namespace final_project
         //去判斷玩家是否被敵人的子彈打中(用數學的方式去算實際有沒有重疊)
         public bool being_attacked(std_opt Opt)
         {
-            if (Opt.bulletPlace.X <= playerX + 30 && Opt.bulletPlace.X >= playerX - 30 && Opt.bulletPlace.Y <= playerY + 50 && Opt.bulletPlace.Y >= playerY)
-            {
-                //MessageBox.Show("重");
-                return true;
-            }
-            else
-            {
+            if (Opt.bulletPlace != null) {
+                for (int i = 0; i < Opt.bulletPlace.Length; i++)
+                {
+                    if (Opt.bulletPlace[i] != Point.Empty) {
+                        if (Opt.bulletPlace[i].X <= playerX + 30 && Opt.bulletPlace[i].X >= playerX - 30 && Opt.bulletPlace[i].Y <= playerY + 50 && Opt.bulletPlace[i].Y >= playerY)
+                        {
+                            //MessageBox.Show("重");
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
                 return false;
             }
-
+            return false;
         }
     }
 
@@ -322,7 +330,7 @@ namespace final_project
     public class std_opt{
         int shootSpeed = 1;
         public int playerX, playerY = 0;
-        public Point bulletPlace;
+        public Point[] bulletPlace;
         Image opt_image= Resource1.ufo_1;
         Image bullet = Resource1.bullet_temp;
 
@@ -346,7 +354,7 @@ namespace final_project
         {
             if (playerY >= 0) {
                 //MessageBox.Show("射擊");
-                shoot_mode_1(g);
+                shoot_mode_2(g);
             }
         }
 
@@ -363,18 +371,63 @@ namespace final_project
             }
         }
         public void shoot_mode_1(Graphics g) {
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX, playerY + 30);
+            if (bulletPlace == null)
+            {
+                bulletPlace = new Point[1];
+                bulletPlace[0] = new Point(playerX, playerY + 30);
+            } 
             else
             {
-                bulletPlace.Y = bulletPlace.Y + 10 * shootSpeed;
-                if (bulletPlace.Y >= 600)
-                    bulletPlace = Point.Empty;
+                bulletPlace[0].Y = bulletPlace[0].Y + 10 * shootSpeed;
+                if (bulletPlace[0].Y >= 600)
+                    bulletPlace = null;
                 else
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace.X + 10, bulletPlace.Y, 10, 20);
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + 10, bulletPlace[0].Y, 10, 20);
             }
         }
-        
+        public void shoot_mode_2(Graphics g)
+        {
+            if (bulletPlace == null)
+            {
+                bulletPlace = new Point[3];
+                for (int i = 0; i < 3; i++) {
+                    bulletPlace[i] = new Point(playerX, playerY + 30);
+                }
+            }
+            else
+            {
+                int count_how_bullet_out = 0;
+                bulletPlace[0].Y = bulletPlace[0].Y + 1 * shootSpeed;
+                if (bulletPlace[0].Y >= 600 || bulletPlace[0] == Point.Empty) {
+                    bulletPlace[0] = Point.Empty;
+                    count_how_bullet_out++;
+                }
+                else
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X, bulletPlace[0].Y, 10, 20);
+
+                bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
+                bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
+                if (bulletPlace[1].Y >= 600 || bulletPlace[1].X >= 450 || bulletPlace[0] == Point.Empty) {
+                    bulletPlace[1] = Point.Empty;
+                    count_how_bullet_out++;
+                }
+                else
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X, bulletPlace[1].Y, 10, 20);
+
+                bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
+                bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
+                if (bulletPlace[1].Y >= 600 || bulletPlace[1].X <= 0 || bulletPlace[0] == Point.Empty) {
+                    bulletPlace[2] = Point.Empty;
+                    count_how_bullet_out++;
+                }
+                else
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X, bulletPlace[2].Y, 10, 20);
+                if (count_how_bullet_out == 3) {
+                    bulletPlace = null;
+                }
+            }
+        }
+
     }
 
 }
