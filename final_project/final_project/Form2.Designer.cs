@@ -99,6 +99,7 @@
             this.Controls.Add(this.trackBar1);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sound)).EndInit();
             this.ResumeLayout(false);

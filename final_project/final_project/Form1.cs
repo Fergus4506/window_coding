@@ -131,7 +131,12 @@ namespace final_project
                     {
                         checkHowManyOptExist += 1;
                     }
-                    else {
+                    else if (std_Opt[i].playerY >= 600) {
+                        std_Opt[i] = null;
+                        checkHowManyOptExist += 1;
+                    }
+                    else
+                    {
                         std_Opt[i].repaint_place(g);
                     }
                 }
@@ -207,7 +212,7 @@ namespace final_project
                 delifeDelay += 5;
             }
                 
-            //判斷玩家是否擊中敵人和擊中哪一個敵人
+            //判斷玩家是否擊中敵人和擊中哪一個敵人和敵人移動的方式
             if (std_Opt != null) {
                 for (int i = 0; i < std_Opt.Length; i++) {
                     if (std_Opt[i] != null) {
@@ -253,8 +258,10 @@ namespace final_project
         private void setting_button_Click(object sender, EventArgs e)
         {
             //呼叫Form2去改變聲音大小
-            Form2 f = new Form2(player);
+            Form2 f = new Form2(player,player_timer,opt_timer);
             f.Show();
+            player_timer.Enabled=false;
+            opt_timer.Enabled=false;
         }
     }
 
@@ -366,7 +373,7 @@ namespace final_project
 
         //敵人判定是否被擊中的函式
         public bool being_attacked(main_character player) {
-            if (player.bulletPlace.X <= playerX+30 && player.bulletPlace.X >= playerX-30 && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
+            if (player.bulletPlace.X <= playerX+10 && player.bulletPlace.X >= playerX-30 && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
             {
                 //MessageBox.Show("重");
                 
@@ -406,28 +413,31 @@ namespace final_project
             {
                 //這裡是三個不同方向的子彈所需要做的位移(分別是中、左、右)
                 int count_how_bullet_out = 0;
-                bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
+                
 
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
                 if (bulletPlace[0].Y >= 600 || bulletPlace[0] == Point.Empty) {
+                    bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
                     bulletPlace[0] = Point.Empty;
                     count_how_bullet_out++;
                 }
                 else
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + 10, bulletPlace[0].Y, 10, 20);
 
-                bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
-                bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
+                
                 if (bulletPlace[1].Y >= 600 || bulletPlace[1].X >= 450 || bulletPlace[0] == Point.Empty) {
+                    bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
+                    bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
                     bulletPlace[1] = Point.Empty;
                     count_how_bullet_out++;
                 }
                 else
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X+10, bulletPlace[1].Y, 10, 20);
 
-                bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
-                bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
-                if (bulletPlace[1].Y >= 600 || bulletPlace[1].X <= 0 || bulletPlace[0] == Point.Empty) {
+                
+                if (bulletPlace[2].Y >= 600 || bulletPlace[2].X <= 0 || bulletPlace[2] == Point.Empty) {
+                    bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
+                    bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
                     bulletPlace[2] = Point.Empty;
                     count_how_bullet_out++;
                 }

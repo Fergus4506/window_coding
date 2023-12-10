@@ -16,10 +16,13 @@ namespace final_project
         public bool check_sound = true;
         public int sound_value = 70;
         WindowsMediaPlayer player;
-        public Form2(WindowsMediaPlayer player)
+        Timer t1,t2;
+        public Form2(WindowsMediaPlayer player,Timer t1,Timer t2)
         {
             InitializeComponent();
             this.player = player;
+            this.t1 = t1;
+            this.t2 = t2;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -49,6 +52,12 @@ namespace final_project
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             player.settings.volume = trackBar1.Value;
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t1.Enabled = true;
+            t2.Enabled = true;
         }
     }
 }
