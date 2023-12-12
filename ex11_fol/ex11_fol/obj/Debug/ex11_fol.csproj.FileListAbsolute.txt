@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\bin\Debug\ex11_fol.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.exe
+c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.pdb
