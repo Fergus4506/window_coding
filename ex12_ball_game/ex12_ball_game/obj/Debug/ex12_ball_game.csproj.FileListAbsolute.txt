@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.exe
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.exe
+c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.pdb
