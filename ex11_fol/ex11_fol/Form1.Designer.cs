@@ -30,13 +30,15 @@
         {
             this.creat_fol = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // creat_fol
             // 
-            this.creat_fol.Location = new System.Drawing.Point(13, 13);
+            this.creat_fol.Location = new System.Drawing.Point(17, 16);
+            this.creat_fol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.creat_fol.Name = "creat_fol";
-            this.creat_fol.Size = new System.Drawing.Size(75, 23);
+            this.creat_fol.Size = new System.Drawing.Size(100, 29);
             this.creat_fol.TabIndex = 0;
             this.creat_fol.Text = "生成";
             this.creat_fol.UseVisualStyleBackColor = true;
@@ -44,23 +46,38 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(94, 13);
+            this.button1.Location = new System.Drawing.Point(125, 16);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 29);
             this.button1.TabIndex = 1;
             this.button1.Text = "彩色版";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(233, 16);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 29);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "生成愛心";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(379, 326);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.creat_fol);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -69,6 +86,7 @@
 
         private System.Windows.Forms.Button creat_fol;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
