@@ -166,4 +166,16 @@
   <data name="spaceship_mode1_full_hat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\Main Ship - Base - Full health-hat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bulletSize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\bulletSize.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="life_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\life_up.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shootspeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\shootspeed.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="upload_backimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\upload_backimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

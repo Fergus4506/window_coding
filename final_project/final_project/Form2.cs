@@ -17,12 +17,16 @@ namespace final_project
         public int sound_value = 70;
         WindowsMediaPlayer player;
         Timer t1,t2;
+        bool lastck=false;
         public Form2(WindowsMediaPlayer player,Timer t1,Timer t2)
         {
             InitializeComponent();
             this.player = player;
             this.t1 = t1;
             this.t2 = t2;
+            lastck = t1.Enabled;
+            t1.Enabled = false;
+            t2.Enabled = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -56,8 +60,8 @@ namespace final_project
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            t1.Enabled = true;
-            t2.Enabled = true;
+            t1.Enabled = lastck;
+            t2.Enabled = lastck;
         }
     }
 }

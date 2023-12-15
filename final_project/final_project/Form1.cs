@@ -240,6 +240,11 @@ namespace final_project
                     }
                 }
             }
+            if (level % 15 == 0) { 
+                opt_timer.Stop();
+                player_timer.Stop();
+                main_player.playerUp();
+            }
         }
 
         private void start_button_Click(object sender, EventArgs e)
@@ -261,8 +266,6 @@ namespace final_project
             //呼叫Form2去改變聲音大小
             Form2 f = new Form2(player,player_timer,opt_timer);
             f.Show();
-            player_timer.Enabled=false;
-            opt_timer.Enabled=false;
         }
     }
 
@@ -289,7 +292,6 @@ namespace final_project
         public void repaint_place(Graphics g)
         {
             g.DrawImage(plane, playerX,playerY, 60, 60);
-            g.FillEllipse(new SolidBrush(Color.Black), playerX, playerY,10,10);
         }
 
         //玩家子彈射擊的函式
@@ -332,6 +334,9 @@ namespace final_project
             }
             return false;
         }
+        public void playerUp() { 
+            
+        }
     }
 
     //一般敵人的物件
@@ -339,6 +344,7 @@ namespace final_project
         int shootSpeed = 1;
         public int playerX, playerY = 0;
         public Point[] bulletPlace;
+        bool[] bulletshootck;
         Image opt_image= Resource1.ufo_1;
         Image bullet = Resource1.bullet_temp;
 
@@ -367,7 +373,7 @@ namespace final_project
                     shoot_mode_2(g);
                 }
                 else {
-                    shoot_mode_2(g);
+                    shoot_mode_1(g);
                 }
                 
             }
@@ -407,8 +413,10 @@ namespace final_project
             if (bulletPlace == null)
             {
                 bulletPlace = new Point[3];
+                bulletshootck = new bool[3];
                 for (int i = 0; i < 3; i++) {
                     bulletPlace[i] = new Point(playerX, playerY + 30);
+                    bulletshootck[i] = false;
                 }
             }
             else
@@ -418,9 +426,9 @@ namespace final_project
 
 
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
-                if (bulletPlace[0].Y > 600 || bulletPlace[0] == Point.Empty)
+                if (bulletPlace[0].Y > 600 || bulletshootck[0])
                 {
-                    bulletPlace[0] = Point.Empty;
+                    bulletshootck[0]=true;
                     count_how_bullet_out++;
                 }
                 else {
@@ -430,9 +438,9 @@ namespace final_project
 
 
 
-                if (bulletPlace[1].Y > 600 || bulletPlace[1].X > 450 || bulletPlace[0] == Point.Empty)
+                if (bulletPlace[1].Y > 600 || bulletPlace[1].X > 450 || bulletshootck[1])
                 {
-                    bulletPlace[1] = Point.Empty;
+                    bulletshootck[1] = true;
                     count_how_bullet_out++;
                 }
                 else {
@@ -443,10 +451,10 @@ namespace final_project
 
 
 
-                if (bulletPlace[2].Y >600 || bulletPlace[2].X <0 || bulletPlace[2] == Point.Empty)
+                if (bulletPlace[2].Y >600 || bulletPlace[2].X <0 || bulletshootck[2])
                 {
 
-                    bulletPlace[2] = Point.Empty;
+                    bulletshootck[2] = true;
                     count_how_bullet_out++;
                 }
                 else {
@@ -459,6 +467,7 @@ namespace final_project
                 //如果三點都超界了就去重劃射擊
                 if (count_how_bullet_out == 3) {
                     bulletPlace = null;
+                    bulletshootck = null;
                 }
             }
         }

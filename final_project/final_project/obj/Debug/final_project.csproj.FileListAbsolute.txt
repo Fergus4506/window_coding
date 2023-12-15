@@ -31,3 +31,4 @@ C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Deb
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\bin\Debug\Interop.WMPLib.dll
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\User\Documents\GitHub\window_coding\final_project\final_project\obj\Debug\final_project.Form2.resources
+D:\window_coding\Final_project\final_project\obj\Debug\final_project.Form3.resources

@@ -83,6 +83,16 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap bulletSize {
+            get {
+                object obj = ResourceManager.GetObject("bulletSize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap challenge_mode_button {
             get {
                 object obj = ResourceManager.GetObject("challenge_mode_button", resourceCulture);
@@ -113,6 +123,16 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap life_up {
+            get {
+                object obj = ResourceManager.GetObject("life_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap pixel_heart {
             get {
                 object obj = ResourceManager.GetObject("pixel_heart", resourceCulture);
@@ -126,6 +146,16 @@ namespace final_project {
         internal static System.Drawing.Bitmap setting {
             get {
                 object obj = ResourceManager.GetObject("setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap shootspeed {
+            get {
+                object obj = ResourceManager.GetObject("shootspeed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +246,16 @@ namespace final_project {
         internal static System.Drawing.Bitmap ufo_1 {
             get {
                 object obj = ResourceManager.GetObject("ufo_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap upload_backimage {
+            get {
+                object obj = ResourceManager.GetObject("upload_backimage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
