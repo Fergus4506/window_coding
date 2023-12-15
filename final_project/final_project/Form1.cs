@@ -29,6 +29,8 @@ namespace final_project
         bool check_game_start=false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
         public int level;
+        PrivateFontCollection pfc;
+        bool upCk=true;
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +52,7 @@ namespace final_project
             player.controls.play();
 
             //Create your private font collection object.
-            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc = new PrivateFontCollection();
 
             //Select your font from the resources.
             //My font here is "Digireu.ttf"
@@ -114,6 +116,7 @@ namespace final_project
             if (std_Opt == null)
             {
                 level++;
+                upCk = true;
                 std_Opt = new std_opt[howManyOpt.Next(2+Math.Min(level%10,3),Math.Max(5,Math.Min(level,10)))];
                 
                 for (int i = 0; i < std_Opt.Length; i++)
@@ -227,7 +230,7 @@ namespace final_project
                     
             }
 
-            //判斷敵人是否被敵人擊中
+            //判斷玩家是否被敵人擊中
             if (main_player != null && std_Opt!=null) {
                 for (int i = 0; i < std_Opt.Length; i++) {
                     if (std_Opt[i] != null) {
@@ -240,10 +243,9 @@ namespace final_project
                     }
                 }
             }
-            if (level % 15 == 0) { 
-                opt_timer.Stop();
-                player_timer.Stop();
-                main_player.playerUp();
+            if (level % 5 == 0 && upCk) { 
+                main_player.playerUp(pfc,main_player,player_timer,opt_timer,show_life);
+                upCk = false;
             }
         }
 
@@ -272,8 +274,8 @@ namespace final_project
     //玩家物件
     public class main_character
     {
-        int shootSpeed = 5;//玩家的射擊速度
-
+        public int shootSpeed = 5;//玩家的射擊速度
+        public int bulletSize = 5;//玩家子彈大小
         //playerX、Y為玩家操縱的腳色所在的位置
         //change_state為玩家目前的狀態(被擊中的狀態、死亡的狀態等等)
         public int playerX = 200, playerY = 375,life=3,change_state=0;
@@ -307,7 +309,7 @@ namespace final_project
                 if (bulletPlace.Y <= 0)
                     bulletPlace = Point.Empty;
                 else
-                    g.DrawImage(bullet, bulletPlace.X + 20, bulletPlace.Y, 10, 20);
+                    g.DrawImage(bullet, bulletPlace.X +(30-bulletSize/2), bulletPlace.Y, bulletSize, 20);
             }
 
         }
@@ -334,8 +336,9 @@ namespace final_project
             }
             return false;
         }
-        public void playerUp() { 
-            
+        public void playerUp(PrivateFontCollection pfc,main_character player,Timer t1,Timer t2,Label life) {
+            Form temp = new Form3(pfc,player,t1,t2,life);
+            temp.Show();
         }
     }
 
