@@ -38,6 +38,9 @@
             this.heart_picture = new System.Windows.Forms.PictureBox();
             this.dob_mode_button = new System.Windows.Forms.PictureBox();
             this.chl_mode_button = new System.Windows.Forms.PictureBox();
+            this.boss1_life = new System.Windows.Forms.ProgressBar();
+            this.boss_timer = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
@@ -91,7 +94,7 @@
             this.setting_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.setting_button.Image = global::final_project.Resource1.setting;
             this.setting_button.Location = new System.Drawing.Point(523, 16);
-            this.setting_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.setting_button.Margin = new System.Windows.Forms.Padding(4);
             this.setting_button.Name = "setting_button";
             this.setting_button.Size = new System.Drawing.Size(40, 38);
             this.setting_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -105,7 +108,7 @@
             this.start_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.start_button.Image = global::final_project.Resource1.start_button;
             this.start_button.Location = new System.Drawing.Point(221, 268);
-            this.start_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.start_button.Margin = new System.Windows.Forms.Padding(4);
             this.start_button.Name = "start_button";
             this.start_button.Size = new System.Drawing.Size(167, 62);
             this.start_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -118,7 +121,7 @@
             this.heart_picture.BackColor = System.Drawing.Color.Transparent;
             this.heart_picture.Image = global::final_project.Resource1.pixel_heart;
             this.heart_picture.Location = new System.Drawing.Point(12, 15);
-            this.heart_picture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.heart_picture.Margin = new System.Windows.Forms.Padding(4);
             this.heart_picture.Name = "heart_picture";
             this.heart_picture.Size = new System.Drawing.Size(40, 38);
             this.heart_picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -131,7 +134,7 @@
             this.dob_mode_button.BackColor = System.Drawing.Color.Transparent;
             this.dob_mode_button.Image = global::final_project.Resource1.dub_mode_button;
             this.dob_mode_button.Location = new System.Drawing.Point(221, 389);
-            this.dob_mode_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dob_mode_button.Margin = new System.Windows.Forms.Padding(4);
             this.dob_mode_button.Name = "dob_mode_button";
             this.dob_mode_button.Size = new System.Drawing.Size(167, 62);
             this.dob_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -143,12 +146,25 @@
             this.chl_mode_button.BackColor = System.Drawing.Color.Transparent;
             this.chl_mode_button.Image = global::final_project.Resource1.challenge_mode_button;
             this.chl_mode_button.Location = new System.Drawing.Point(221, 505);
-            this.chl_mode_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chl_mode_button.Margin = new System.Windows.Forms.Padding(4);
             this.chl_mode_button.Name = "chl_mode_button";
             this.chl_mode_button.Size = new System.Drawing.Size(167, 62);
             this.chl_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.chl_mode_button.TabIndex = 6;
             this.chl_mode_button.TabStop = false;
+            // 
+            // boss1_life
+            // 
+            this.boss1_life.Location = new System.Drawing.Point(91, 12);
+            this.boss1_life.Name = "boss1_life";
+            this.boss1_life.Size = new System.Drawing.Size(425, 14);
+            this.boss1_life.TabIndex = 7;
+            this.boss1_life.Visible = false;
+            // 
+            // boss_timer
+            // 
+            this.boss_timer.Interval = 1;
+            this.boss_timer.Tick += new System.EventHandler(this.boss_timer_Tick);
             // 
             // Form1
             // 
@@ -157,7 +173,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::final_project.Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(579, 701);
+            this.ClientSize = new System.Drawing.Size(582, 703);
+            this.Controls.Add(this.boss1_life);
             this.Controls.Add(this.chl_mode_button);
             this.Controls.Add(this.dob_mode_button);
             this.Controls.Add(this.heart_picture);
@@ -166,7 +183,7 @@
             this.Controls.Add(this.game_title);
             this.Controls.Add(this.show_life);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -194,6 +211,9 @@
         private System.Windows.Forms.PictureBox heart_picture;
         private System.Windows.Forms.PictureBox dob_mode_button;
         private System.Windows.Forms.PictureBox chl_mode_button;
+        private System.Windows.Forms.ProgressBar boss1_life;
+        private System.Windows.Forms.Timer boss_timer;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
