@@ -244,7 +244,7 @@ namespace final_project
                 }
             }
             if (level % 5 == 0 && upCk) { 
-                main_player.playerUp(pfc,main_player,player_timer,opt_timer,show_life);
+                main_player.playerUp(pfc,main_player,player_timer,opt_timer,show_life,this);
                 upCk = false;
             }
         }
@@ -302,14 +302,14 @@ namespace final_project
             
             //如果目前沒有子彈存在的畫則重畫
             if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX, playerY - 10);
+                bulletPlace = new Point(playerX+30-bulletSize/2, playerY - 10);
             else {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
                 bulletPlace.Y -= 1*shootSpeed;
                 if (bulletPlace.Y <= 0)
                     bulletPlace = Point.Empty;
                 else
-                    g.DrawImage(bullet, bulletPlace.X +(30-bulletSize/2), bulletPlace.Y, bulletSize, 20);
+                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
             }
 
         }
@@ -321,7 +321,7 @@ namespace final_project
                 for (int i = 0; i < Opt.bulletPlace.Length; i++)
                 {
                     if (Opt.bulletPlace[i] != Point.Empty) {
-                        if (Opt.bulletPlace[i].X <= playerX + 30 && Opt.bulletPlace[i].X >= playerX - 30 && Opt.bulletPlace[i].Y <= playerY + 50 && Opt.bulletPlace[i].Y >= playerY)
+                        if (Opt.bulletPlace[i].X < playerX+50 && Opt.bulletPlace[i].X+8 > playerX && Opt.bulletPlace[i].Y <= playerY + 50 && Opt.bulletPlace[i].Y >= playerY)
                         {
                             //MessageBox.Show("重");
                             return true;
@@ -336,8 +336,8 @@ namespace final_project
             }
             return false;
         }
-        public void playerUp(PrivateFontCollection pfc,main_character player,Timer t1,Timer t2,Label life) {
-            Form temp = new Form3(pfc,player,t1,t2,life);
+        public void playerUp(PrivateFontCollection pfc,main_character player,Timer t1,Timer t2,Label life,Form1 f1) {
+            Form temp = new Form3(pfc,player,t1,t2,life,f1);
             temp.Show();
         }
     }
@@ -364,6 +364,7 @@ namespace final_project
         public void repaint_place(Graphics g)
         {
             g.DrawImage(opt_image, playerX, playerY, 30, 30);
+            //g.FillEllipse(new SolidBrush(Color.Black), playerX , playerY,5,5);
         }
 
         //敵人的子彈射擊函式
@@ -384,7 +385,7 @@ namespace final_project
 
         //敵人判定是否被擊中的函式
         public bool being_attacked(main_character player) {
-            if (player.bulletPlace.X <= playerX+10 && player.bulletPlace.X >= playerX-30 && player.bulletPlace.Y <= playerY + 50 && player.bulletPlace.Y >= playerY)
+            if (player.bulletPlace.X>playerX-player.bulletSize&& player.bulletPlace.X<playerX+30 && player.bulletPlace.Y < playerY + 30 && player.bulletPlace.Y > playerY+10)
             {
                 //MessageBox.Show("重");
                 
