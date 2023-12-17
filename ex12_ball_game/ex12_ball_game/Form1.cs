@@ -20,6 +20,7 @@ namespace ex12_ball_game
         int count = 0;
         int rk_count = 0;
         int racker_le = 500;
+        bool checkhk = false;
         public Form1()
         {
             InitializeComponent();
@@ -92,11 +93,20 @@ namespace ex12_ball_game
                     label1.Text = "pass S to stop";
                 }
             }
+            if (e.KeyCode.Equals(Keys.F3)) {
+                if (checkhk)
+                    checkhk = false;
+                else checkhk = true;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            racket.Left = Cursor.Position.X - (racket.Width / 2);
+            if (checkhk) {
+                racket.Left = ball_list[0].Left-racker_le/2+15;
+            }
+            else
+                racket.Left = Cursor.Position.X - (racket.Width / 2);
             int ct=ball_list.Count();
             for (int i = 0; i < ct; i++) {
                 ball_list[i].Left += ball_list_speed[i][0];

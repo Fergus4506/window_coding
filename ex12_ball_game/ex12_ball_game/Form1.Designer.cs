@@ -33,21 +33,23 @@
             this.lbl_gameover = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.playground = new System.Windows.Forms.Panel();
-            this.racket = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.racket = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.playground.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.racket)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.racket)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_point
             // 
             this.lbl_point.AutoSize = true;
-            this.lbl_point.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbl_point.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_point.Font = new System.Drawing.Font("新細明體", 14F);
             this.lbl_point.Location = new System.Drawing.Point(13, 13);
             this.lbl_point.Name = "lbl_point";
-            this.lbl_point.Size = new System.Drawing.Size(51, 16);
+            this.lbl_point.Size = new System.Drawing.Size(61, 19);
             this.lbl_point.TabIndex = 0;
             this.lbl_point.Text = "分數:0";
             // 
@@ -67,6 +69,7 @@
             // 
             // playground
             // 
+            this.playground.Controls.Add(this.label2);
             this.playground.Controls.Add(this.label1);
             this.playground.Controls.Add(this.pictureBox1);
             this.playground.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -75,14 +78,15 @@
             this.playground.Size = new System.Drawing.Size(784, 761);
             this.playground.TabIndex = 0;
             // 
-            // racket
+            // label1
             // 
-            this.racket.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.racket.Location = new System.Drawing.Point(196, 308);
-            this.racket.Name = "racket";
-            this.racket.Size = new System.Drawing.Size(100, 50);
-            this.racket.TabIndex = 2;
-            this.racket.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(689, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 16);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "pass S to stop";
             // 
             // pictureBox1
             // 
@@ -94,15 +98,24 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // racket
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(689, 85);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "pass S to stop";
+            this.racket.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.racket.Location = new System.Drawing.Point(196, 308);
+            this.racket.Name = "racket";
+            this.racket.Size = new System.Drawing.Size(100, 50);
+            this.racket.TabIndex = 2;
+            this.racket.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 15F);
+            this.label2.Location = new System.Drawing.Point(80, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "作弊模式請按F3";
             // 
             // Form1
             // 
@@ -119,8 +132,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.playground.ResumeLayout(false);
             this.playground.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.racket)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.racket)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +149,7 @@
         private System.Windows.Forms.Panel playground;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
