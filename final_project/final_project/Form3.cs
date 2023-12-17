@@ -65,6 +65,11 @@ namespace final_project
             this.Close();
         }
 
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mainPlayground.keyPressStore= new int[] { 0, 0, 0, 0 };
+        }
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             player.life += 1;

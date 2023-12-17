@@ -21,7 +21,7 @@ namespace final_project
         Graphics g;
         main_character main_player = null;//目前玩家的物件
         std_opt[] std_Opt = null;//敵人的陣列(儲存敵人實作物件的陣列)
-        int[] keyPressStore = new int[] { 0, 0, 0, 0 };//判斷目前有哪些按鈕被按下的陣列
+        public int[] keyPressStore = new int[] { 0, 0, 0, 0 };//判斷目前有哪些按鈕被按下的陣列
         int shootDelay = 500;
         int rebirth = 50;//敵人復活的CD
         int delifeDelay = 40;//玩家受傷時的無敵時間
@@ -33,6 +33,7 @@ namespace final_project
         PrivateFontCollection pfc;
         bool upCk = true;
         public boss_1[] boss_1s = null;
+        int boosStep = 2;
         public Form1()
         {
             InitializeComponent();
@@ -85,7 +86,7 @@ namespace final_project
                 repaint_image_player(g);//重畫玩家
 
                 //如果敵人未處於死亡cd的話重畫敵人
-                if (rebirth == 50 && level!=2)
+                if (rebirth == 50 && level!=boosStep)
                     repaint_image_std_opt(g);
 
                 //如果玩家射擊cd轉好後執行畫子彈的位置(包括重劃子彈)
@@ -93,13 +94,13 @@ namespace final_project
                     main_player.shoot(g);
 
                 //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
-                if (shootDelay == 500 && std_Opt != null && level!=2)
+                if (shootDelay == 500 && std_Opt != null && level!=boosStep)
                     for (int i = 0; i < std_Opt.Length; i++)
                     {
                         if (std_Opt[i] != null)
                             std_Opt[i].shoot(g, level, i);
                     }
-                if (level == 2) { 
+                if (level == boosStep) { 
                     repaint_image_boss(g);
                     boss_1s[0].shoot(g,level,0);
                 }
@@ -266,7 +267,7 @@ namespace final_project
                 main_player.playerUp(pfc, main_player, player_timer, opt_timer, show_life, this);
                 upCk = false;
             }
-            if (level == 2) { 
+            if (level == boosStep) { 
                 opt_timer.Stop();
                 boss_timer.Start();
                 boss1_life.Visible = true;
