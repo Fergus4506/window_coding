@@ -56,5 +56,23 @@ namespace ex11_fol
             }
             
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            g = this.CreateGraphics();
+            g.Clear(Color.White);
+            for (float t = -10; t < 10; t += 0.1f)
+            {
+                float x = (float)(16*(Math.Pow(Math.Sin(t),3))+25)*15;
+                float y = (float)(13*Math.Cos(t)-5*Math.Cos(2*t)-2*Math.Cos(3*t)-Math.Cos(4*t)+20)*15;
+                g.FillEllipse(new SolidBrush(r_color()), -x + 650, -y + 600, 10, 10);
+                //g.FillEllipse(new SolidBrush(r_color()), -x + 300, -y + 300, 10, 10);
+            }
+        }
     }
 }

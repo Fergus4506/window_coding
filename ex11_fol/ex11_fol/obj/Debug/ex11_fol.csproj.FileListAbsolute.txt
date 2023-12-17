@@ -7,3 +7,13 @@ c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\
 c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.exe
 c:\users\user\documents\visual studio 2013\Projects\ex11_fol\ex11_fol\obj\Debug\ex11_fol.pdb
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe.config
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.pdb
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.AssemblyReference.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Form1.resources
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Properties.Resources.resources
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.GenerateResource.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.CoreCompileInputs.cache
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.exe
+C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.pdb

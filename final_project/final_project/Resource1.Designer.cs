@@ -73,6 +73,26 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap boss_kind1_stage1 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind1_stage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap bullet_temp {
             get {
                 object obj = ResourceManager.GetObject("bullet_temp", resourceCulture);
@@ -126,6 +146,26 @@ namespace final_project {
         internal static System.Drawing.Bitmap life_up {
             get {
                 object obj = ResourceManager.GetObject("life_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap opt_kind1_stage1 {
+            get {
+                object obj = ResourceManager.GetObject("opt_kind1_stage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap opt_kind2_stage1 {
+            get {
+                object obj = ResourceManager.GetObject("opt_kind2_stage1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

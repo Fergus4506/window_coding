@@ -19,7 +19,8 @@ namespace final_project
         main_character player;
         Timer t1,t2;
         Label life;
-        public Form3(PrivateFontCollection pixelFontcl,main_character player,Timer t1,Timer t2,Label life)
+        Form1 mainPlayground;
+        public Form3(PrivateFontCollection pixelFontcl,main_character player,Timer t1,Timer t2,Label life,Form1 f)
         {
             InitializeComponent();
             if (pixelFontcl == null)
@@ -32,6 +33,7 @@ namespace final_project
             this.t1 = t1;
             this.t2 = t2;
             this.life = life;
+            this.mainPlayground = f;
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -48,6 +50,7 @@ namespace final_project
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             player.shootSpeed += 2;
+            mainPlayground.Show();
             t1.Start();
             t2.Start();
             this.Close();
@@ -56,6 +59,7 @@ namespace final_project
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             player.bulletSize+=2;
+            mainPlayground.Show();
             t1.Start();
             t2.Start();
             this.Close();
@@ -65,6 +69,7 @@ namespace final_project
         {
             player.life += 1;
             life.Text= player.life.ToString();
+            mainPlayground.Show();
             t1.Start();
             t2.Start();
             this.Close();
