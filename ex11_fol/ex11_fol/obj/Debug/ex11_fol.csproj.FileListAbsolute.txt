@@ -17,3 +17,13 @@ C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fo
 C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.CoreCompileInputs.cache
 C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.exe
 C:\Users\fergu\OneDrive\文件\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.pdb
+D:\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe.config
+D:\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.exe
+D:\window_coding\ex11_fol\ex11_fol\bin\Debug\ex11_fol.pdb
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.AssemblyReference.cache
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Form1.resources
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.Properties.Resources.resources
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.GenerateResource.cache
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.csproj.CoreCompileInputs.cache
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.exe
+D:\window_coding\ex11_fol\ex11_fol\obj\Debug\ex11_fol.pdb
