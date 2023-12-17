@@ -30,11 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lbl_point = new System.Windows.Forms.Label();
-            this.racket = new System.Windows.Forms.PictureBox();
             this.lbl_gameover = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.playground = new System.Windows.Forms.Panel();
+            this.racket = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.playground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.racket)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_point
@@ -43,18 +47,9 @@
             this.lbl_point.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lbl_point.Location = new System.Drawing.Point(13, 13);
             this.lbl_point.Name = "lbl_point";
-            this.lbl_point.Size = new System.Drawing.Size(52, 16);
+            this.lbl_point.Size = new System.Drawing.Size(51, 16);
             this.lbl_point.TabIndex = 0;
             this.lbl_point.Text = "分數:0";
-            // 
-            // racket
-            // 
-            this.racket.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.racket.Location = new System.Drawing.Point(196, 308);
-            this.racket.Name = "racket";
-            this.racket.Size = new System.Drawing.Size(100, 50);
-            this.racket.TabIndex = 2;
-            this.racket.TabStop = false;
             // 
             // lbl_gameover
             // 
@@ -72,11 +67,42 @@
             // 
             // playground
             // 
+            this.playground.Controls.Add(this.label1);
+            this.playground.Controls.Add(this.pictureBox1);
             this.playground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playground.Location = new System.Drawing.Point(0, 0);
             this.playground.Name = "playground";
             this.playground.Size = new System.Drawing.Size(784, 761);
             this.playground.TabIndex = 0;
+            // 
+            // racket
+            // 
+            this.racket.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.racket.Location = new System.Drawing.Point(196, 308);
+            this.racket.Name = "racket";
+            this.racket.Size = new System.Drawing.Size(100, 50);
+            this.racket.TabIndex = 2;
+            this.racket.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ex12_ball_game.Resource1.play_button;
+            this.pictureBox1.Location = new System.Drawing.Point(702, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(689, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 16);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "pass S to stop";
             // 
             // Form1
             // 
@@ -91,7 +117,10 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.playground.ResumeLayout(false);
+            this.playground.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.racket)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,6 +134,8 @@
         private System.Windows.Forms.Label lbl_gameover;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel playground;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

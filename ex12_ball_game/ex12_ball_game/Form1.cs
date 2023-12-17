@@ -17,6 +17,9 @@ namespace ex12_ball_game
         public int point = 0;
         List<PictureBox> ball_list;
         List<List<int>> ball_list_speed;
+        int count = 0;
+        int rk_count = 0;
+        int racker_le = 500;
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +29,7 @@ namespace ex12_ball_game
         {
             ball_list = new List<PictureBox>();
             ball_list_speed = new List<List<int>>();
-            racket.Size = new Size(200, 20);
+            racket.Size = new Size(racker_le, 20);
             racket.BackColor = Color.Black;
             /*ball.Size = new Size(30, 30);
             ball.BackColor = Color.Red;*/
@@ -35,6 +38,9 @@ namespace ex12_ball_game
             this.TopMost = true;
             this.Bounds = Screen.PrimaryScreen.Bounds;
 
+            pictureBox1.Left = this.Bounds.Right-100;
+            label1.Left = this.Bounds.Right-120;
+            label1.Visible = true;
             racket.Top = playground.Bottom - (playground.Bottom / 10);
             //MessageBox.Show(lbl_gameover.Width.ToString());
             lbl_gameover.Location = new Point((playground.Width/2)-(lbl_gameover.Width*3),(playground.Height/2)-(lbl_gameover.Height*3));
@@ -50,7 +56,11 @@ namespace ex12_ball_game
                 this.Close();
             }
             if (e.KeyCode.Equals(Keys.F1)) {
-                delet_ball();
+                count = 1;
+                rk_count = 1;
+                racker_le = 500;
+                racket.Size = new Size(racker_le,20);
+                delet_ball_all(ball_list);
                 ball_list = new List<PictureBox>();
                 ball_list_speed = new List<List<int>>();
                 creat_ball();
@@ -67,6 +77,21 @@ namespace ex12_ball_game
                 lbl_point.Text = "分數:" + point.ToString();
                 //MessageBox.Show(ball_list.Count().ToString());
             }
+            if(e.KeyCode.Equals(Keys.S)) {
+                if(timer1.Enabled)
+                { 
+                    timer1.Stop();
+                    Image image = Resource1.stop_button;
+                    pictureBox1.Image = image;
+                    label1.Text = "pass S to start";
+                }
+                else { 
+                    timer1.Start();
+                    Image image = Resource1.play_button;
+                    pictureBox1.Image = image;
+                    label1.Text = "pass S to stop";
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -78,7 +103,8 @@ namespace ex12_ball_game
                 ball_list[i].Top += ball_list_speed[i][1];
                 if (ball_list[i].Bottom >= racket.Top && ball_list[i].Bottom <= racket.Bottom && ball_list[i].Left > (racket.Left - ball_list[i].Width) && ball_list[i].Right <= (racket.Right + ball_list[i].Width))
                 {
-                    creat_ball();
+                    count += 1;
+                    rk_count += 1;
                     ball_list_speed[i][0] += 2;
                     ball_list_speed[i][1] += 2;
                     ball_list_speed[i][1] = -ball_list_speed[i][1];
@@ -99,10 +125,25 @@ namespace ex12_ball_game
                     ball_list_speed[i][1] = -ball_list_speed[i][1];
                 if (ball_list[i].Bottom >= playground.Bottom)
                 {
-                    timer1.Enabled = false;
-                    lbl_gameover.Visible = true;
+                    delet_ball(i);
+                    if (ball_list.Count() == 0) { 
+                        timer1.Stop();
+                        lbl_gameover.Show();
+                    }
+                    break;
                 } 
             }
+            if (count % 5 == 0) {
+                creat_ball();
+                count += 1;
+            }
+            if (rk_count % 4 == 0) {
+                if(racker_le>100)
+                    racker_le -= 25;
+                racket.Size=new Size(racker_le,20);
+                rk_count += 1;
+            }
+                
                
         }
         void creat_ball() {
@@ -114,7 +155,9 @@ namespace ex12_ball_game
                 temp.Name = "ball" + (1).ToString();
             
             temp.Size = new Size(30, 30);
-            temp.BackColor = Color.Red;
+            Image image = Resource1.beach_ball;
+            temp.Image = image;
+            temp.SizeMode=PictureBoxSizeMode.StretchImage;
             temp.Location = new Point(30,30);
             playground.Controls.Add(temp);
             ball_list.Add(temp);
@@ -122,8 +165,14 @@ namespace ex12_ball_game
             temp_speed.Add(4);
             ball_list_speed.Add(temp_speed);
         }
-        void delet_ball() {
-            for (int i = 0; i < ball_list.Count(); i++) {
+        void delet_ball(int i) {
+            playground.Controls.Remove(ball_list[i]);
+            ball_list.Remove(ball_list[i]);
+            ball_list_speed.Remove(ball_list_speed[i]);
+        }
+        void delet_ball_all(List<PictureBox> ball_list)
+        {
+            for (int i = 0; i < ball_list.Count; i++) {
                 playground.Controls.Remove(ball_list[i]);
             }
         }

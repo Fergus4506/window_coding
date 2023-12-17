@@ -7,3 +7,14 @@ c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_gam
 c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.exe
 c:\users\user\documents\visual studio 2013\Projects\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.pdb
+D:\window_coding\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.exe.config
+D:\window_coding\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.exe
+D:\window_coding\ex12_ball_game\ex12_ball_game\bin\Debug\ex12_ball_game.pdb
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csproj.AssemblyReference.cache
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.Form1.resources
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.Properties.Resources.resources
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csproj.GenerateResource.cache
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.csproj.CoreCompileInputs.cache
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.exe
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.pdb
+D:\window_coding\ex12_ball_game\ex12_ball_game\obj\Debug\ex12_ball_game.Resource1.resources
