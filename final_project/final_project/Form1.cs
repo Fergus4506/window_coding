@@ -332,8 +332,18 @@ namespace final_project
                 {
                     if (boss_1s[i] != null)
                     {
-                        if (boss_1s[i].being_attacked(main_player)) { 
+                        if (boss_1s[i].being_attacked(main_player) && boss_1s[i].life>-1) { 
                             boss1_life.Value = boss_1s[i].life;
+                        }
+                        
+                        if (boss_1s[i].life == 0) {
+                            if (boss_1s[i].die(this, boss1_life)) {
+                                boss_1s[i] = null;
+                                level = 0;
+                                rebirth = -10;
+                                boss_timer.Stop();
+                                opt_timer.Start();
+                            }
                         }
                     }
 
@@ -583,10 +593,20 @@ namespace final_project
         Image opt_image = Resource1.boss_kind1_stage1;
         Image bullet = Resource1.bullet_temp;
         public int bulletsize = 10;
+        public int die_step = 0;
+        public Image[] die_list;
+        public int die_delay = 0;
         public boss_1(Graphics g) {
             playerX = 200;
             playerY = 0;
             g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            die_list = new Image[6];
+            die_list[0] = Resource1.boss_kind1_stage1_die1;
+            die_list[1] = Resource1.boss_kind1_stage1_die2;
+            die_list[2] = Resource1.boss_kind1_stage1_die3;
+            die_list[3] = Resource1.boss_kind1_stage1_die4;
+            die_list[4] = Resource1.boss_kind1_stage1_die5;
+            die_list[5] = Resource1.boss_kind1_stage1_die6;
         }
         public void repaint_place(Graphics g)
         {
@@ -708,6 +728,26 @@ namespace final_project
                         way_for_bullet[5]++;
                     }                    
                 }
+            }
+        }
+        public bool die(Form1 f,ProgressBar life_show) {
+            
+            if (die_step == 6)
+            {
+                life_show.Visible = false;
+                return true;
+            }
+            else {
+                if (die_delay != 5)
+                {
+                    die_delay += 1;
+                }
+                else {
+                    opt_image = die_list[die_step];
+                    die_step += 1;
+                    die_delay = 0;
+                }
+                return false;
             }
         }
     }

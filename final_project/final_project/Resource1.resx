@@ -190,4 +190,22 @@
   <data name="opt_kind2_stage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\opt_kind2_stage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="boss_kind1_stage1_die1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind1_stage1_die2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind1_stage1_die3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind1_stage1_die4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind1_stage1_die5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind1_stage1_die6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind1_stage1_die6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
