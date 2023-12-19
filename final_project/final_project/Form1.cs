@@ -100,7 +100,7 @@ namespace final_project
                         if (std_Opt[i] != null)
                             std_Opt[i].shoot(g, level, i);
                     }
-                if (level == boosStep) { 
+                if (level == boosStep ) { 
                     repaint_image_boss(g);
                     boss_1s[0].shoot(g,level,0);
                 }
