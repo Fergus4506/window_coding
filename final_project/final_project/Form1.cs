@@ -34,6 +34,7 @@ namespace final_project
         bool upCk = true;
         public boss_1[] boss_1s = null;
         int boosStep = 2;
+        public bool check_two_boss = false;
         public Form1()
         {
             InitializeComponent();
@@ -104,6 +105,9 @@ namespace final_project
                     repaint_image_boss(g);
                     boss_1s[0].shoot(g,level,0);
                 }
+                if (check_two_boss) {
+                    repaint_image_boss(g);
+                }
             }
         }
 
@@ -162,12 +166,24 @@ namespace final_project
         void repaint_image_boss(Graphics g) {
             if (boss_1s== null)
             {
-                boss_1s = new boss_1[1];
+                boss_1s = new boss_1[2];
                 boss_1s[0] = new boss_1(g);
-                
+                boss_1s[1] = null;
             }
             else {
-                boss_1s[0].repaint_place(g);
+                if (check_two_boss && boss_1s[1] == null)
+                {
+                    boss_1s[1]= new boss_1(g,1);
+                }
+                for (int i = 0; i < 2; i++) {
+                    if (boss_1s[i] != null) {
+                        if (i == 0)
+                            boss_1s[i].repaint_place(g);
+                        else
+                            boss_1s[i].repaint_place(g,1);
+                    }
+                }
+                
             }
         }
 
@@ -326,18 +342,25 @@ namespace final_project
                     }
                 }
             }
+            int count_all_boss_die = 0;
             if (boss_1s != null)
             {
                 for (int i = 0; i < boss_1s.Length; i++)
                 {
                     if (boss_1s[i] != null)
                     {
-                        if (boss_1s[i].being_attacked(main_player) && boss_1s[i].life>-1) { 
+                        if (boss_1s[i].being_attacked(main_player) && boss_1s[i].life > -1)
+                        {
                             boss1_life.Value = boss_1s[i].life;
                         }
-                        
-                        if (boss_1s[i].life == 0) {
-                            if (boss_1s[i].die(this, boss1_life)) {
+                        if (i == 0 && boss_1s[i].life == 10 && boss_1s.Length == 1)
+                        {
+                            check_two_boss = true;
+                        }
+                        if (boss_1s[i].life == 0)
+                        {
+                            if (boss_1s[i].die(this, boss1_life))
+                            {
                                 boss_1s[i] = null;
                                 level = 0;
                                 rebirth = -10;
@@ -345,6 +368,9 @@ namespace final_project
                                 opt_timer.Start();
                             }
                         }
+                    }
+                    else { 
+                        count_all_boss_die++;
                     }
 
                 }
@@ -596,9 +622,24 @@ namespace final_project
         public int die_step = 0;
         public Image[] die_list;
         public int die_delay = 0;
+        public bool check_in_battle=false;
         public boss_1(Graphics g) {
             playerX = 200;
-            playerY = 0;
+            playerY = -100;
+            g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            die_list = new Image[6];
+            die_list[0] = Resource1.boss_kind1_stage1_die1;
+            die_list[1] = Resource1.boss_kind1_stage1_die2;
+            die_list[2] = Resource1.boss_kind1_stage1_die3;
+            die_list[3] = Resource1.boss_kind1_stage1_die4;
+            die_list[4] = Resource1.boss_kind1_stage1_die5;
+            die_list[5] = Resource1.boss_kind1_stage1_die6;
+        }
+        public boss_1(Graphics g,int n)
+        {
+            playerX = 200;
+            playerY = -100;
+            opt_image = Resource1.boss_kind2_stage1;
             g.DrawImage(opt_image, playerX, playerY, 72, 89);
             die_list = new Image[6];
             die_list[0] = Resource1.boss_kind1_stage1_die1;
@@ -610,16 +651,37 @@ namespace final_project
         }
         public void repaint_place(Graphics g)
         {
-            if (playerX+72 >= 450 || playerX <= 0) {
+            if (check_in_battle)
+            {
+                if (playerX + 72 >= 450 || playerX <= 0)
+                {
+                    nextX = -nextX;
+                }
+                if (playerY >= 200 || playerY < 0)
+                {
+                    nextY = -nextY;
+                }
+                playerX = playerX + nextX;
+                playerY = playerY + nextY;
+                g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            }
+            else {
+                if (playerY > 50) {
+                    check_in_battle = true;   
+                }
+                playerY = playerY + nextY;
+                g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            }
+            
+            //g.FillEllipse(new SolidBrush(Color.Black), playerX , playerY,5,5);
+        }
+        public void repaint_place(Graphics g,int n) {
+            if (playerX + 72 >= 450 || playerX <= 0)
+            {
                 nextX = -nextX;
             }
-            if (playerY >= 200 || playerY < 0) { 
-                nextY = -nextY;
-            }
             playerX = playerX + nextX;
-            playerY = playerY + nextY;
             g.DrawImage(opt_image, playerX, playerY, 72, 89);
-            //g.FillEllipse(new SolidBrush(Color.Black), playerX , playerY,5,5);
         }
         
         public bool being_attacked(main_character player)
@@ -638,7 +700,13 @@ namespace final_project
         }
         public void shoot(Graphics g, int level, int id_opt)
         {
-            shoot_mode_1(g);
+            if (id_opt == 0)
+            {
+                shoot_mode_1(g);
+            }
+            else {
+                shoot_mode_1(g);
+            }
         }
         public void shoot_mode_1(Graphics g)
         {
