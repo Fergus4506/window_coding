@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\final_project",
+    "\\final_project\\final_project"
   ],
-  "SelectedNode": "\\ex12_ball_game.sln",
+  "SelectedNode": "\\final_project\\final_project\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
