@@ -1,0 +1,14 @@
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\bin\Debug\ex13_airplan.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\bin\Debug\ex13_airplan.exe
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\bin\Debug\ex13_airplan.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.Form1.resources
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.exe
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.pdb
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\bin\Debug\Interop.WMPLib.dll
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\bin\Debug\AxInterop.WMPLib.dll
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\Interop.WMPLib.dll
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\AxInterop.WMPLib.dll
+c:\users\user\documents\visual studio 2013\Projects\ex13_airplan\ex13_airplan\obj\Debug\ex13_airplan.csproj.ResolveComReference.cache

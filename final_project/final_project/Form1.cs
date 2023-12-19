@@ -100,7 +100,7 @@ namespace final_project
                         if (std_Opt[i] != null)
                             std_Opt[i].shoot(g, level, i);
                     }
-                if (level == boosStep) { 
+                if (level == boosStep ) { 
                     repaint_image_boss(g);
                     boss_1s[0].shoot(g,level,0);
                 }
@@ -624,7 +624,7 @@ namespace final_project
         
         public bool being_attacked(main_character player)
         {
-            if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY +89 && player.bulletPlace.Y > playerY)
+            if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY +89 && player.bulletPlace.Y > playerY && life!=0)
             {
                 //MessageBox.Show("重");
                 player.bulletPlace = Point.Empty;
@@ -738,7 +738,8 @@ namespace final_project
                 return true;
             }
             else {
-                if (die_delay != 5)
+                //dwMessageBox.Show("??");
+                if (die_delay <10)
                 {
                     die_delay += 1;
                 }
