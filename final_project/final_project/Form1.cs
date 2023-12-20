@@ -101,12 +101,15 @@ namespace final_project
                         if (std_Opt[i] != null)
                             std_Opt[i].shoot(g, level, i);
                     }
-                if (level == boosStep ) { 
+
+
+                if (level == boosStep ) {
                     repaint_image_boss(g);
-                    boss_1s[0].shoot(g,level,0);
-                }
-                if (check_two_boss) {
-                    repaint_image_boss(g);
+                    for (int i = 0; i< boss_1s.Length; i++) {
+                        if (boss_1s[i] != null) {
+                            boss_1s[i].shoot(g, level, i);
+                        }
+                    }
                 }
             }
         }
@@ -175,7 +178,7 @@ namespace final_project
                 {
                     boss_1s[1]= new boss_1(g,1);
                 }
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < boss_1s.Length; i++) { 
                     if (boss_1s[i] != null) {
                         if (i == 0)
                             boss_1s[i].repaint_place(g);
@@ -283,13 +286,13 @@ namespace final_project
                 main_player.playerUp(pfc, main_player, player_timer, opt_timer, show_life, this);
                 upCk = false;
             }
-            if (level == boosStep) { 
+            if (level == boosStep) {
                 opt_timer.Stop();
                 boss_timer.Start();
-                boss1_life.Visible = true;
-                boss1_life.Maximum = 20;
-                boss1_life.Minimum = 0;
-                boss1_life.Value = 20;
+                boss_life.Visible = true;
+                boss_life.Maximum = 20;
+                boss_life.Minimum = 0;
+                boss_life.Value = 20;
             }
         }
 
@@ -351,28 +354,53 @@ namespace final_project
                     {
                         if (boss_1s[i].being_attacked(main_player) && boss_1s[i].life > -1)
                         {
-                            boss1_life.Value = boss_1s[i].life;
+                            if (i == 0)
+                            {
+                                boss_life.Value = boss_1s[i].life;
+                            }
+                            else {
+                                boss_two_life.Value = boss_1s[i].life;
+                            }
+                            
                         }
-                        if (i == 0 && boss_1s[i].life == 10 && boss_1s.Length == 1)
+                        if (i == 0 && boss_1s[i].life == 10 && boss_1s[1] == null & boss_1s[0] != null)
                         {
                             check_two_boss = true;
+                            boss_two_life.Visible = true;
+                            
                         }
                         if (boss_1s[i].life == 0)
                         {
-                            if (boss_1s[i].die(this, boss1_life))
+                            if (i == 0)
                             {
-                                boss_1s[i] = null;
-                                level = 0;
-                                rebirth = -10;
-                                boss_timer.Stop();
-                                opt_timer.Start();
+                                if (boss_1s[i].die(this, boss_life))
+                                {
+                                    boss_1s[i] = null;
+                                }
                             }
+                            else {
+                                if (boss_1s[i].die(this, boss_two_life))
+                                {
+                                    boss_1s[i] = null;
+                                    check_two_boss = false;
+                                }
+                            }
+                            
                         }
+                        
                     }
                     else { 
                         count_all_boss_die++;
                     }
-
+                }
+                if (count_all_boss_die == boss_1s.Length) {
+                    //MessageBox.Show("boss end");
+                    level = 0;
+                    rebirth = -10;
+                    boss_1s = null;
+                    boss_timer.Stop();
+                    opt_timer.Start();
+                    check_two_boss = false;
                 }
 
             }
@@ -676,12 +704,24 @@ namespace final_project
             //g.FillEllipse(new SolidBrush(Color.Black), playerX , playerY,5,5);
         }
         public void repaint_place(Graphics g,int n) {
-            if (playerX + 72 >= 450 || playerX <= 0)
+            if (check_in_battle)
             {
-                nextX = -nextX;
+                if (playerX + 72 >= 450 || playerX <= 0)
+                {
+                    nextX = -nextX;
+                }
+                playerX = playerX + nextX;
+                g.DrawImage(opt_image, playerX, playerY, 72, 89);
             }
-            playerX = playerX + nextX;
-            g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            else
+            {
+                if (playerY > 50)
+                {
+                    check_in_battle = true;
+                }
+                playerY = playerY + nextY;
+                g.DrawImage(opt_image, playerX, playerY, 72, 89);
+            }
         }
         
         public bool being_attacked(main_character player)
@@ -807,7 +847,7 @@ namespace final_project
             }
             else {
                 //dwMessageBox.Show("??");
-                if (die_delay <10)
+                if (die_delay <15)
                 {
                     die_delay += 1;
                 }
