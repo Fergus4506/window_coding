@@ -293,6 +293,9 @@ namespace final_project
                 boss_life.Maximum = 20;
                 boss_life.Minimum = 0;
                 boss_life.Value = 20;
+                boss_two_life.Maximum = 20;
+                boss_two_life.Minimum = 0;
+                boss_two_life.Value = 20;
             }
         }
 
@@ -643,6 +646,7 @@ namespace final_project
         public int life = 20;
         public int nextX=1, nextY=1;
         public Point[] bulletPlace;
+        public Point beamPlace;
         public int[] way_for_bullet;
         Image opt_image = Resource1.boss_kind1_stage1;
         Image bullet = Resource1.bullet_temp;
@@ -651,6 +655,8 @@ namespace final_project
         public Image[] die_list;
         public int die_delay = 0;
         public bool check_in_battle=false;
+        int beam_delay_time = 10;
+        int beam_shoot_time = 0;
         public boss_1(Graphics g) {
             playerX = 200;
             playerY = -100;
@@ -745,7 +751,7 @@ namespace final_project
                 shoot_mode_1(g);
             }
             else {
-                shoot_mode_1(g);
+                shoot_mode_2(g);
             }
         }
         public void shoot_mode_1(Graphics g)
@@ -836,6 +842,24 @@ namespace final_project
                         way_for_bullet[5]++;
                     }                    
                 }
+            }
+        }
+        public void shoot_mode_2(Graphics g) {
+            if (beam_delay_time > 100)
+            {
+                if (beam_shoot_time < 60)
+                {
+                    beamPlace = new Point(playerX + 72 / 2 - 10, playerY + 89);
+                    g.DrawImage(bullet, beamPlace.X, beamPlace.Y, 20, 1000);
+                    beam_shoot_time += 1;
+                }
+                else { 
+                    beam_shoot_time = 0;
+                    beam_delay_time = 0;
+                }
+            }
+            else {
+                beam_delay_time += 1;
             }
         }
         public bool die(Form1 f,ProgressBar life_show) {
