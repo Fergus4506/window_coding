@@ -78,24 +78,26 @@ namespace final_project
             FontStyle fs = game_title.Font.Style;
             game_title.Font = new Font(pfc.Families[0], 28.0F, fs);
             show_life.Font = new Font(pfc.Families[0], 12.0F, show_life.Font.Style);
+            gameover.Font = new Font(pfc.Families[0], 28.0F, gameover.Font.Style);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (check_game_start) {
+            if (check_game_start)
+            {
                 g = e.Graphics;
                 repaint_image_player(g);//重畫玩家
 
                 //如果敵人未處於死亡cd的話重畫敵人
-                if (rebirth == 50 && level!=boosStep)
+                if (rebirth == 50 && level != boosStep)
                     repaint_image_std_opt(g);
 
                 //如果玩家射擊cd轉好後執行畫子彈的位置(包括重劃子彈)
-                if (shootDelay == 500)
+                if (shootDelay == 500 && main_player.life > 0)
                     main_player.shoot(g);
 
                 //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
-                if (shootDelay == 500 && std_Opt != null && level!=boosStep)
+                if (shootDelay == 500 && std_Opt != null && level != boosStep)
                     for (int i = 0; i < std_Opt.Length; i++)
                     {
                         if (std_Opt[i] != null)
@@ -103,10 +105,13 @@ namespace final_project
                     }
 
 
-                if (level == boosStep ) {
+                if (level == boosStep)
+                {
                     repaint_image_boss(g);
-                    for (int i = 0; i< boss_1s.Length; i++) {
-                        if (boss_1s[i] != null) {
+                    for (int i = 0; i < boss_1s.Length; i++)
+                    {
+                        if (boss_1s[i] != null)
+                        {
                             boss_1s[i].shoot(g, level, i);
                         }
                     }
@@ -254,6 +259,8 @@ namespace final_project
                 delifeDelay += 5;
             }
 
+            
+
             //判斷玩家是否擊中敵人和擊中哪一個敵人和敵人移動的方式
             if (std_Opt != null) {
                 for (int i = 0; i < std_Opt.Length; i++) {
@@ -282,7 +289,24 @@ namespace final_project
                     }
                 }
             }
-            if (level % 5 == 0 && upCk) {
+            if (main_player.life <= 0)
+            {
+                if (main_player.die(this))
+                {
+                    gameover.Visible = true;
+                    opt_timer.Stop();
+                    boss_timer.Stop();
+                    player_timer.Stop();
+                    main_player = null;
+                    start_button.Visible = true;
+                    start_button.Image = Resource1.restart_mode_button;
+                    dob_mode_button.Visible = true;
+                    chl_mode_button.Visible=true;
+                    std_Opt = null;
+                    level = 0;
+                }
+            }
+            if (level % 5 == 0 && upCk && main_player!=null) {
                 main_player.playerUp(pfc, main_player, player_timer, opt_timer, show_life, this);
                 upCk = false;
             }
@@ -311,6 +335,8 @@ namespace final_project
             heart_picture.Visible = true;
             dob_mode_button.Visible = false;
             chl_mode_button.Visible = false;
+            gameover.Visible = false;
+            show_life.Text = "3";
         }
 
         private void setting_button_Click(object sender, EventArgs e)
@@ -332,6 +358,27 @@ namespace final_project
                 main_player.change_state = (main_player.change_state + 1) % 2;
                 delifeDelay += 5;
             }
+
+            if (main_player.life <= 0) {
+                if (main_player.die(this))
+                {
+                    gameover.Visible = true;
+                    opt_timer.Stop();
+                    boss_timer.Stop();
+                    player_timer.Stop();
+                    main_player = null;
+                    std_Opt = null;
+                    boss_1s = null;
+                    start_button.Visible = true;
+                    start_button.Image = Resource1.restart_mode_button;
+                    dob_mode_button.Visible = true;
+                    chl_mode_button.Visible = true;
+                    level = 0;
+                    boss_life.Visible = false;
+                    boss_two_life.Visible = false;
+                }
+            }
+            
 
             if (main_player != null && boss_1s != null)
             {
@@ -432,11 +479,19 @@ namespace final_project
         public Point bulletPlace;//子彈位置
         public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
         Image bullet = Resource1.bullet_temp;//子彈的樣式
+        int die_step;
+        int die_delay; 
+        public Image[] die_list;
+
 
         //開始時重畫玩家的建構子
         public main_character(Graphics g)
         {
             g.DrawImage(plane, 200, 375, 60, 60);
+            die_list = new Image[3];
+            die_list[0] = Resource1.main_ship_die_0;
+            die_list[1] = Resource1.main_ship_die_1;
+            die_list[2] = Resource1.main_ship_die_2;
         }
 
         //重畫玩家的位置(因為會有移動的需求)
@@ -511,6 +566,29 @@ namespace final_project
         public void playerUp(PrivateFontCollection pfc, main_character player, Timer t1, Timer t2, Label life, Form1 f1) {
             Form temp = new Form3(pfc, player, t1, t2, life, f1);
             temp.Show();
+        }
+        public bool die(Form1 f)
+        {
+
+            if (die_step == 3)
+            {
+                return true;
+            }
+            else
+            {
+                //dwMessageBox.Show("??");
+                if (die_delay < 15)
+                {
+                    die_delay += 1;
+                }
+                else
+                {
+                    plane = die_list[die_step];
+                    die_step += 1;
+                    die_delay = 0;
+                }
+                return false;
+            }
         }
     }
 
@@ -752,17 +830,22 @@ namespace final_project
         
         public bool being_attacked(main_character player)
         {
-            if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY +89 && player.bulletPlace.Y > playerY && life!=0)
+            if (player!=null)
             {
-                //MessageBox.Show("重");
-                player.bulletPlace = Point.Empty;
-                this.life -= 1;
-                return true;
+                if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY + 89 && player.bulletPlace.Y > playerY && life != 0)
+                {
+                    //MessageBox.Show("重");
+                    player.bulletPlace = Point.Empty;
+                    this.life -= 1;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
+            
         }
         public void shoot(Graphics g, int level, int id_opt)
         {

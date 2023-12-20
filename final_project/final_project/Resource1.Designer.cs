@@ -213,6 +213,36 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap main_ship_die_0 {
+            get {
+                object obj = ResourceManager.GetObject("main_ship_die_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap main_ship_die_1 {
+            get {
+                object obj = ResourceManager.GetObject("main_ship_die_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap main_ship_die_2 {
+            get {
+                object obj = ResourceManager.GetObject("main_ship_die_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap opt_kind1_stage1 {
             get {
                 object obj = ResourceManager.GetObject("opt_kind1_stage1", resourceCulture);
@@ -236,6 +266,16 @@ namespace final_project {
         internal static System.Drawing.Bitmap pixel_heart {
             get {
                 object obj = ResourceManager.GetObject("pixel_heart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap restart_mode_button {
+            get {
+                object obj = ResourceManager.GetObject("restart_mode_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -168,6 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\restart_mode_button.png" />
+    <None Include="obj\main_ship_die_2.png" />
+    <None Include="obj\main_ship_die_1.png" />
+    <None Include="obj\main_ship_die_0.png" />
     <None Include="obj\boss_kind1_stage1_die6.png" />
     <None Include="obj\boss_kind1_stage1_die5.png" />
     <None Include="obj\boss_kind1_stage1_die4.png" />
