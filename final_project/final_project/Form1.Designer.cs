@@ -106,7 +106,7 @@
             this.start_button.BackColor = System.Drawing.Color.Transparent;
             this.start_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.start_button.Image = global::final_project.Resource1.start_button;
-            this.start_button.Location = new System.Drawing.Point(166, 214);
+            this.start_button.Location = new System.Drawing.Point(166, 224);
             this.start_button.Name = "start_button";
             this.start_button.Size = new System.Drawing.Size(125, 50);
             this.start_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

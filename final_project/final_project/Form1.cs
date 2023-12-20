@@ -298,12 +298,16 @@ namespace final_project
                     boss_timer.Stop();
                     player_timer.Stop();
                     main_player = null;
+                    std_Opt = null;
+                    boss_1s = null;
                     start_button.Visible = true;
                     start_button.Image = Resource1.restart_mode_button;
                     dob_mode_button.Visible = true;
-                    chl_mode_button.Visible=true;
-                    std_Opt = null;
+                    chl_mode_button.Visible = true;
                     level = 0;
+                    boss_life.Visible = false;
+                    boss_two_life.Visible = false;
+                    check_two_boss = false;
                 }
             }
             if (level % 5 == 0 && upCk && main_player!=null) {
@@ -376,6 +380,7 @@ namespace final_project
                     level = 0;
                     boss_life.Visible = false;
                     boss_two_life.Visible = false;
+                    check_two_boss = false;
                 }
             }
             
@@ -422,7 +427,7 @@ namespace final_project
                             }
                         }
 
-                        if (i == 0 && boss_1s[i].life == 10 && boss_1s[1] == null & boss_1s[0] != null)
+                        if (i == 0 && boss_1s[0].life == 10 && boss_1s[1] == null & boss_1s[0] != null)
                         {
                             check_two_boss = true;
                             boss_two_life.Visible = true;
@@ -774,12 +779,12 @@ namespace final_project
             opt_image = Resource1.boss_kind2_stage1;
             g.DrawImage(opt_image, playerX, playerY, 72, 89);
             die_list = new Image[6];
-            die_list[0] = Resource1.boss_kind1_stage1_die1;
-            die_list[1] = Resource1.boss_kind1_stage1_die2;
-            die_list[2] = Resource1.boss_kind1_stage1_die3;
-            die_list[3] = Resource1.boss_kind1_stage1_die4;
-            die_list[4] = Resource1.boss_kind1_stage1_die5;
-            die_list[5] = Resource1.boss_kind1_stage1_die6;
+            die_list[0] = Resource1.boss_kind2_stage1_die1;
+            die_list[1] = Resource1.boss_kind2_stage1_die2;
+            die_list[2] = Resource1.boss_kind2_stage1_die3;
+            die_list[3] = Resource1.boss_kind2_stage1_die4;
+            die_list[4] = Resource1.boss_kind2_stage1_die5;
+            die_list[5] = Resource1.boss_kind2_stage1_die6;
         }
         public void repaint_place(Graphics g)
         {

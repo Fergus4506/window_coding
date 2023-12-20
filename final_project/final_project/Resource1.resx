@@ -208,6 +208,24 @@
   <data name="boss_kind1_stage1_die6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\boss_kind1_stage1_die6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="boss_kind2_stage1_die1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind2_stage1_die2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind2_stage1_die3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind2_stage1_die4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind2_stage1_die5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boss_kind2_stage1_die6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>obj\boss_kind2_stage1_die6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="main_ship_die_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>obj\main_ship_die_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

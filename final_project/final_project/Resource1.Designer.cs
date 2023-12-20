@@ -153,6 +153,66 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die1 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die2 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die3 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die4 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die5 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap boss_kind2_stage1_die6 {
+            get {
+                object obj = ResourceManager.GetObject("boss_kind2_stage1_die6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap bullet_temp {
             get {
                 object obj = ResourceManager.GetObject("bullet_temp", resourceCulture);
