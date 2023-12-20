@@ -323,7 +323,7 @@ namespace final_project
         private void boss_timer_Tick(object sender, EventArgs e)
         {
 
-            if (delifeDelay < 40)
+            if (delifeDelay < 50)
             {
                 if (main_player.change_state == 0)
                     main_player.plane = Resource1.spaceship_mode1_full_hat;
@@ -339,10 +339,15 @@ namespace final_project
                 {
                     if (boss_1s[i] != null)
                     {
-                        if (main_player.being_attacked(boss_1s[i]) && delifeDelay == 40)
+                        if (main_player.being_attacked(boss_1s[i]) && delifeDelay == 50 && i == 0)
                         {
                             delifeDelay = 0;
                             main_player.life -= 1;
+                            show_life.Text = main_player.life.ToString();
+                        }
+                        else if (main_player.being_attacked(boss_1s[i],1) && delifeDelay == 50) {
+                            delifeDelay = 0;
+                            main_player.life -= 3;
                             show_life.Text = main_player.life.ToString();
                         }
                     }
@@ -355,17 +360,21 @@ namespace final_project
                 {
                     if (boss_1s[i] != null)
                     {
-                        if (boss_1s[i].being_attacked(main_player) && boss_1s[i].life > -1)
+                        if (boss_1s[i].life > -1 && i == 0)
                         {
-                            if (i == 0)
-                            {
+                            if (boss_1s[i].being_attacked(main_player)) {
                                 boss_life.Value = boss_1s[i].life;
-                            }
-                            else {
-                                boss_two_life.Value = boss_1s[i].life;
                             }
                             
                         }
+                        else if (boss_1s[i].life > -1)
+                        {
+                            if (boss_1s[i].being_attacked(main_player))
+                            {
+                                boss_two_life.Value = boss_1s[i].life;
+                            }
+                        }
+
                         if (i == 0 && boss_1s[i].life == 10 && boss_1s[1] == null & boss_1s[0] != null)
                         {
                             check_two_boss = true;
@@ -485,6 +494,17 @@ namespace final_project
                     }
                 }
                 return false;
+            }
+            return false;
+        }
+        public bool being_attacked(boss_1 Opt,int n)
+        {
+            if (Opt.beam_delay_time>100)
+            {
+                if (Opt.beamPlace.X < playerX + 40 && Opt.beamPlace.X + 40 > playerX)
+                {
+                        return true;
+                }
             }
             return false;
         }
@@ -655,7 +675,7 @@ namespace final_project
         public Image[] die_list;
         public int die_delay = 0;
         public bool check_in_battle=false;
-        int beam_delay_time = 10;
+        public int beam_delay_time = 10;
         int beam_shoot_time = 0;
         public boss_1(Graphics g) {
             playerX = 200;
