@@ -30,11 +30,14 @@ namespace final_project
         bool check_game_start = false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
         public int level;
+        public int step;
         PrivateFontCollection pfc;
         bool upCk = true;
         public boss_1[] boss_1s = null;
         int boosStep = 2;
         public bool check_two_boss = false;
+        public main_character[] two_player_mode=null;
+        public bool check_two_player_mode = false;
         public Form1()
         {
             InitializeComponent();
@@ -116,6 +119,19 @@ namespace final_project
                         }
                     }
                 }
+            }
+            else if (check_two_player_mode) {
+                g = e.Graphics;
+                if (two_player_mode == null) {
+                    two_player_mode = new main_character[2];
+                    for (int i = 0; i < 2; i++) {
+                        if (i == 0)
+                            two_player_mode[i] = new main_character(g);
+                        else
+                            two_player_mode[i] = new main_character(g);
+                    }
+                }
+
             }
         }
 
@@ -310,7 +326,7 @@ namespace final_project
                     check_two_boss = false;
                 }
             }
-            if (level % 5 == 0 && upCk && main_player!=null) {
+            if (level % 5 == 0 && upCk && main_player!=null && level!=0) {
                 main_player.playerUp(pfc, main_player, player_timer, opt_timer, show_life, this);
                 upCk = false;
             }
@@ -463,12 +479,25 @@ namespace final_project
                     rebirth = -10;
                     boss_1s = null;
                     boss_timer.Stop();
-                    opt_timer.Start();
+                    change_step.Start();
                     check_two_boss = false;
                 }
 
             }
 
+        }
+
+        private void change_step_Tick(object sender, EventArgs e)
+        {
+            if (main_player.change_step()) { 
+                
+            }
+        }
+
+        private void dob_mode_button_Click(object sender, EventArgs e)
+        {
+            two_player.Start();
+            check_two_player_mode = true;
         }
     }
 
@@ -487,6 +516,9 @@ namespace final_project
         int die_step;
         int die_delay; 
         public Image[] die_list;
+        public Image[] change_list;
+        int change_delay;
+        int change_step_state;
 
 
         //開始時重畫玩家的建構子
@@ -498,7 +530,9 @@ namespace final_project
             die_list[1] = Resource1.main_ship_die_1;
             die_list[2] = Resource1.main_ship_die_2;
         }
-
+        public main_character(Graphics g, int id) {
+            g.DrawImage(plane,200,100,60,60);
+        }
         //重畫玩家的位置(因為會有移動的需求)
         public void repaint_place(Graphics g)
         {
@@ -591,6 +625,27 @@ namespace final_project
                     plane = die_list[die_step];
                     die_step += 1;
                     die_delay = 0;
+                }
+                return false;
+            }
+        }
+        public bool change_step() {
+            if (change_step_state == 3)
+            {
+                return true;
+            }
+            else
+            {
+                //dwMessageBox.Show("??");
+                if (change_delay < 15)
+                {
+                    change_step_state += 1;
+                }
+                else
+                {
+                    plane = die_list[change_step_state];
+                    change_delay += 1;
+                    change_delay = 0;
                 }
                 return false;
             }

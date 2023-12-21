@@ -40,9 +40,10 @@
             this.chl_mode_button = new System.Windows.Forms.PictureBox();
             this.boss_life = new System.Windows.Forms.ProgressBar();
             this.boss_timer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.change_step = new System.Windows.Forms.Timer(this.components);
             this.boss_two_life = new System.Windows.Forms.ProgressBar();
             this.gameover = new System.Windows.Forms.Label();
+            this.two_player = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
@@ -136,6 +137,7 @@
             this.dob_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dob_mode_button.TabIndex = 5;
             this.dob_mode_button.TabStop = false;
+            this.dob_mode_button.Click += new System.EventHandler(this.dob_mode_button_Click);
             // 
             // chl_mode_button
             // 
@@ -161,6 +163,10 @@
             // 
             this.boss_timer.Interval = 1;
             this.boss_timer.Tick += new System.EventHandler(this.boss_timer_Tick);
+            // 
+            // change_step
+            // 
+            this.change_step.Tick += new System.EventHandler(this.change_step_Tick);
             // 
             // boss_two_life
             // 
@@ -233,9 +239,10 @@
         private System.Windows.Forms.PictureBox chl_mode_button;
         private System.Windows.Forms.ProgressBar boss_life;
         private System.Windows.Forms.Timer boss_timer;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer change_step;
         private System.Windows.Forms.ProgressBar boss_two_life;
         private System.Windows.Forms.Label gameover;
+        private System.Windows.Forms.Timer two_player;
     }
 }
 
