@@ -39,6 +39,7 @@ namespace final_project
         public bool check_two_boss = false;
         public main_character[] two_player_mode=null;
         public bool check_two_player_mode = false;
+        public int[] two_delay=new int[] {50,50};
         public Form1()
         {
             InitializeComponent();
@@ -530,7 +531,7 @@ namespace final_project
                     rebirth = -10;
                     boss_1s = null;
                     boss_timer.Stop();
-                    change_step.Start();
+                    player_timer.Start();
                     check_two_boss = false;
                 }
 
@@ -548,12 +549,18 @@ namespace final_project
         private void dob_mode_button_Click(object sender, EventArgs e)
         {
             two_player.Start();
+            two_player_hat.Start();
             check_two_player_mode = true;
             start_button.Visible = false;
             game_title.Visible = false;
             dob_mode_button.Visible = false;
             chl_mode_button.Visible = false;
             gameover.Visible = false;
+            check_game_start = false;
+            heart_picture.Visible = true;
+            hreat_picture_p2.Visible = true;
+            show_life.Visible = true;
+            show_life_p2.Visible=true;
         }
 
         private void two_player_Tick(object sender, EventArgs e)
@@ -563,6 +570,74 @@ namespace final_project
 
         private void two_player_shoot_Tick(object sender, EventArgs e)
         {
+            for (int i = 0; i < 2; i++)
+            {
+                if (two_delay[i] < 50)
+                {
+                    if (i == 0)
+                    {
+                        if (two_player_mode[i].change_state == 0)
+                            two_player_mode[i].plane = Resource1.spaceship_mode1_full_hat;
+                        else
+                            two_player_mode[i].plane = Resource1.spaceship_mode1_full_h;
+                    }
+                    else
+                    {
+                        if (two_player_mode[i].change_state == 0)
+                            two_player_mode[i].plane = Resource1.Main_Ship___Base___Full_health_hat_p2;
+                        else
+                            two_player_mode[i].plane = Resource1.Main_Ship___Base___Full_health_p2;
+                    }
+                    two_player_mode[i].change_state = (two_player_mode[i].change_state + 1) % 2;
+                    two_delay[i] += 5;
+                }
+
+            }
+            for (int i = 0; i < 2; i++) {
+                if (two_player_mode[i] != null)
+                {
+                    if (i == 0)
+                    {
+                        if (two_player_mode[i].being_attacked(two_player_mode[1]) && two_delay[i] == 50)
+                        {
+                            two_delay[i] = 0;
+                            two_player_mode[i].life -= 1;
+                            show_life_p2.Text = two_player_mode[i].life.ToString();
+                        }
+                    }
+                    else if (i == 1) {
+                        if (two_player_mode[i].being_attacked(two_player_mode[0]) && two_delay[i] == 50)
+                        {
+                            two_delay[i] = 0;
+                            two_player_mode[i].life -= 1;
+                            show_life.Text = two_player_mode[i].life.ToString();
+                        }
+                    }
+                }
+                
+            }
+            for (int i = 0; i < 2; i++) {
+                if (two_player_mode[i].life <= 0)
+                {
+                    if (two_player_mode[i].die(this))
+                    {
+                        gameover.Visible = true;
+                        two_player_hat.Stop();
+                        two_player.Stop();
+                        gameover.Text = "P"+(2 - i).ToString() + " Win the game";
+                        two_player_mode = null;
+                        start_button.Visible = true;
+                        start_button.Image = Resource1.std_button;
+                        dob_mode_button.Visible = true;
+                        dob_mode_button.Image= Resource1.restart_mode_button;
+                        chl_mode_button.Visible = true;
+                        level = 0;
+                        boss_life.Visible = false;
+                        boss_two_life.Visible = false;
+                        check_two_boss = false;
+                    }
+                }
+            }
             
         }
     }
@@ -576,8 +651,7 @@ namespace final_project
         //change_state為玩家目前的狀態(被擊中的狀態、死亡的狀態等等)
         public int playerX = 200, playerY = 375, life = 3, change_state = 0;
 
-        public Point bulletPlace;//子彈位置
-        public Point[] bulletPlace_list;
+        public Point[] bulletPlace;//子彈位置
         public bool[] bulletshootck;
         public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
         Image bullet = Resource1.bullet_temp;//子彈的樣式
@@ -604,6 +678,10 @@ namespace final_project
             playerX = 200;
             playerY = 100;
             plane = Resource1.Main_Ship___Base___Full_health_p2;
+            die_list = new Image[3];
+            die_list[0] = Resource1.main_ship_die_0_p2;
+            die_list[1] = Resource1.main_ship_die_1_p2;
+            die_list[2] = Resource1.main_ship_die_2_p2;
         }
         //重畫玩家的位置(因為會有移動的需求)
         public void repaint_place(Graphics g)
@@ -620,27 +698,29 @@ namespace final_project
 
         public void shoot_mode_1(Graphics g) {
             //如果目前沒有子彈存在的畫則重畫
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY - 10);
+            if (bulletPlace == null) {
+                bulletPlace = new Point[1];
+                bulletPlace[0] = new Point(playerX + 30 - bulletSize / 2, playerY - 10);
+            }
             else
             {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
-                bulletPlace.Y -= 1 * shootSpeed;
-                if (bulletPlace.Y <= 0)
-                    bulletPlace = Point.Empty;
+                bulletPlace[0].Y -= 1 * shootSpeed;
+                if (bulletPlace[0].Y <= 0)
+                    bulletPlace = null;
                 else
-                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+                    g.DrawImage(bullet, bulletPlace[0].X, bulletPlace[0].Y, bulletSize, 20);
             }
         }
         public void shoot_mode_2(Graphics g)
         {
-            if (bulletPlace_list == null)
+            if (bulletPlace == null)
             {
-                bulletPlace_list = new Point[3];
+                bulletPlace = new Point[3];
                 bulletshootck = new bool[3];
                 for (int i = 0; i < 3; i++)
                 {
-                    bulletPlace_list[i] = new Point(playerX, playerY + 30);
+                    bulletPlace[i] = new Point(playerX, playerY + 30);
                     bulletshootck[i] = false;
                 }
             }
@@ -651,34 +731,34 @@ namespace final_project
 
 
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
-                if (bulletPlace_list[0].Y > 600 || bulletshootck[0])
+                if (bulletPlace[0].Y > 600 || bulletshootck[0])
                 {
                     bulletshootck[0] = true;
                     count_how_bullet_out++;
                 }
                 else
                 {
-                    bulletPlace_list[0].Y = bulletPlace_list[0].Y + 2 * shootSpeed;
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[0].X + bulletSize, bulletPlace_list[0].Y, 10, 20);
+                    bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + bulletSize, bulletPlace[0].Y, 10, 20);
                 }
 
 
 
-                if (bulletPlace_list[1].Y > 600 || bulletPlace_list[1].X > 450 || bulletshootck[1])
+                if (bulletPlace[1].Y > 600 || bulletPlace[1].X > 450 || bulletshootck[1])
                 {
                     bulletshootck[1] = true;
                     count_how_bullet_out++;
                 }
                 else
                 {
-                    bulletPlace_list[1].Y = bulletPlace_list[1].Y + 1 * shootSpeed;
-                    bulletPlace_list[1].X = bulletPlace_list[1].X + 1 * shootSpeed;
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[1].X + bulletSize, bulletPlace_list[1].Y, 10, 20);
+                    bulletPlace[1].Y = bulletPlace[1].Y + 1 * shootSpeed;
+                    bulletPlace[1].X = bulletPlace[1].X + 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X + bulletSize, bulletPlace[1].Y, 10, 20);
                 }
 
 
 
-                if (bulletPlace_list[2].Y > 600 || bulletPlace_list[2].X < 0 || bulletshootck[2])
+                if (bulletPlace[2].Y > 600 || bulletPlace[2].X < 0 || bulletshootck[2])
                 {
 
                     bulletshootck[2] = true;
@@ -686,16 +766,16 @@ namespace final_project
                 }
                 else
                 {
-                    bulletPlace_list[2].Y = bulletPlace_list[2].Y + 1 * shootSpeed;
-                    bulletPlace_list[2].X = bulletPlace_list[2].X - 1 * shootSpeed;
-                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[2].X + bulletSize, bulletPlace_list[2].Y, 10, 20);
+                    bulletPlace[2].Y = bulletPlace[2].Y + 1 * shootSpeed;
+                    bulletPlace[2].X = bulletPlace[2].X - 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X + bulletSize, bulletPlace[2].Y, 10, 20);
                 }
 
 
                 //如果三點都超界了就去重劃射擊
                 if (count_how_bullet_out == 3)
                 {
-                    bulletPlace_list = null;
+                    bulletPlace = null;
                     bulletshootck = null;
                 }
             }
@@ -705,16 +785,18 @@ namespace final_project
         {
 
             //如果目前沒有子彈存在的畫則重畫
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY + 60);
+            if (bulletPlace == null) {
+                bulletPlace = new Point[1];
+                bulletPlace[0] = new Point(playerX + 30 - bulletSize / 2, playerY + 60);
+            }
             else
             {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
-                bulletPlace.Y += 1 * shootSpeed;
-                if (bulletPlace.Y > 600)
-                    bulletPlace = Point.Empty;
+                bulletPlace[0].Y += 1 * shootSpeed;
+                if (bulletPlace[0].Y > 600)
+                    bulletPlace = null;
                 else {
-                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+                    g.DrawImage(bullet, bulletPlace[0].X, bulletPlace[0].Y, bulletSize, 20);
                     //MessageBox.Show("??");
                 }
                     
@@ -730,6 +812,25 @@ namespace final_project
                 {
                     if (Opt.bulletPlace[i] != Point.Empty) {
                         if (Opt.bulletPlace[i].X < playerX+40 && Opt.bulletPlace[i].X+Opt.bulletsize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY-20)
+                        {
+                            //MessageBox.Show("重");
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            return false;
+        }
+        public bool being_attacked(main_character Opt)
+        {
+            if (Opt.bulletPlace != null)
+            {
+                for (int i = 0; i < Opt.bulletPlace.Length; i++)
+                {
+                    if (Opt.bulletPlace[i] != Point.Empty)
+                    {
+                        if (Opt.bulletPlace[i].X < playerX + 40 && Opt.bulletPlace[i].X + Opt.bulletSize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY - 20)
                         {
                             //MessageBox.Show("重");
                             return true;
@@ -760,7 +861,7 @@ namespace final_project
         {
             if (Opt.beam_delay_time>100)
             {
-                if (Opt.beamPlace.X < playerX + 40 && Opt.beamPlace.X + 40 > playerX)
+                if (Opt.beamPlace.X < playerX + 20 && Opt.beamPlace.X + 20 > playerX)
                 {
                         return true;
                 }
@@ -870,15 +971,20 @@ namespace final_project
 
         //敵人判定是否被擊中的函式
         public bool being_attacked(main_character player) {
-            if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 40 && player.bulletPlace.Y < playerY+30 && player.bulletPlace.Y > playerY)
-            {
-                //MessageBox.Show("重");
+            if (player.bulletPlace != null) {
+                if (player.bulletPlace[0].X > playerX - player.bulletSize && player.bulletPlace[0].X < playerX + 40 && player.bulletPlace[0].Y < playerY + 30 && player.bulletPlace[0].Y > playerY)
+                {
+                    //MessageBox.Show("重");
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else {
-                return false;
-            }
+            return false;
+            
         }
         //只會射擊一發子彈的基本射擊模式
         public void shoot_mode_1(Graphics g) {
@@ -1057,17 +1163,21 @@ namespace final_project
         {
             if (player!=null)
             {
-                if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY + 89 && player.bulletPlace.Y > playerY && life != 0)
+                if (player.bulletPlace!=null)
                 {
-                    //MessageBox.Show("重");
-                    player.bulletPlace = Point.Empty;
-                    this.life -= 1;
-                    return true;
+                    if (player.bulletPlace[0].X > playerX - player.bulletSize && player.bulletPlace[0].X < playerX + 100 && player.bulletPlace[0].Y < playerY + 89 && player.bulletPlace[0].Y > playerY && life != 0)
+                    {
+                        //MessageBox.Show("重");
+                        player.bulletPlace = null;
+                        this.life -= 1;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+                
             }
             return false;
             
@@ -1076,7 +1186,14 @@ namespace final_project
         {
             if (id_opt == 0)
             {
-                shoot_mode_1(g);
+                if (life <= 10)
+                {
+                    shoot_mode_3(g);
+                }
+                else {
+                    shoot_mode_1(g);
+                }
+                
             }
             else {
                 shoot_mode_2(g);
@@ -1190,6 +1307,98 @@ namespace final_project
                 beam_delay_time += 1;
             }
         }
+        public void shoot_mode_3(Graphics g)
+        {
+            if (bulletPlace == null)
+            {
+                bulletPlace = new Point[6];
+                way_for_bullet = new int[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    bulletPlace[i] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[i] = 1;
+                }
+            }
+            else
+            {
+                //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
+                if (bulletPlace[0].Y > 600)
+                {
+                    bulletPlace[0] = new Point(playerX + 35, playerY + 89);
+                }
+                else
+                {
+                    bulletPlace[0].Y = bulletPlace[0].Y + 3 * shootSpeed * way_for_bullet[0];
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + bulletsize, bulletPlace[0].Y, 10, 20);
+                }
+
+                if (bulletPlace[1].Y > 750 || bulletPlace[1].X > 600 || bulletPlace[1].X < 0)
+                {
+                    bulletPlace[1] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[1] = -way_for_bullet[1];
+                }
+                else
+                {
+                    bulletPlace[1].Y = bulletPlace[1].Y + 2 * shootSpeed;
+                    bulletPlace[1].X = bulletPlace[1].X + 2 * shootSpeed * way_for_bullet[1];
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X + bulletsize, bulletPlace[1].Y, 10, 20);
+                }
+
+                if (bulletPlace[2].Y > 750 || bulletPlace[2].X < 0 || bulletPlace[2].X > 600)
+                {
+
+                    bulletPlace[2] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[2] = -way_for_bullet[2];
+                }
+                else
+                {
+                    bulletPlace[2].Y = bulletPlace[2].Y + 2 * shootSpeed;
+                    bulletPlace[2].X = bulletPlace[2].X - 2 * shootSpeed * way_for_bullet[2];
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X + bulletsize, bulletPlace[2].Y, 10, 20);
+                }
+
+                if (bulletPlace[3].Y > 750 || bulletPlace[3].X > 600 || bulletPlace[3].X < 0)
+                {
+                    bulletPlace[3] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[3] = -way_for_bullet[3];
+                }
+                else
+                {
+                    bulletPlace[3].Y = bulletPlace[3].Y + 2 * shootSpeed;
+                    bulletPlace[3].X = bulletPlace[3].X + 3 * shootSpeed * way_for_bullet[3];
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[3].X + bulletsize, bulletPlace[3].Y, 10, 20);
+                }
+
+                if (bulletPlace[4].Y > 750 || bulletPlace[4].X > 600 || bulletPlace[4].X < 0)
+                {
+                    bulletPlace[4] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[4] = -way_for_bullet[4];
+                }
+                else
+                {
+                    bulletPlace[4].Y = bulletPlace[4].Y + 3 * shootSpeed;
+                    bulletPlace[4].X = bulletPlace[4].X - 2 * shootSpeed * way_for_bullet[4];
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[4].X + bulletsize, bulletPlace[4].Y, 10, 20);
+                }
+                if (bulletPlace[5].Y > 600)
+                {
+                    bulletPlace[5] = new Point(playerX + 26, playerY + 89);
+                    way_for_bullet[5] = -way_for_bullet[5];
+                }
+                else
+                {
+                    if (way_for_bullet[5] == 5)
+                    {
+                        bulletPlace[5].Y = bulletPlace[5].Y + 4 * shootSpeed;
+                        g.DrawImage(Resource1.bullet_temp, bulletPlace[5].X + bulletsize, bulletPlace[5].Y, 10, 20);
+                    }
+                    else
+                    {
+                        way_for_bullet[5]++;
+                    }
+                }
+            }
+        }
         public bool die(Form1 f,ProgressBar life_show) {
             
             if (die_step == 6)
@@ -1217,9 +1426,25 @@ namespace final_project
         int kind;
         Image[] props_image = new Image[3];
         Image nowProps;
+        int x = 5, y = 5;
+        Random r = new Random();
+        public Point place=new Point();
         public Props()
         {
-            Random r=new Random();
+            kind=r.Next(1,3);
+            nowProps = props_image[kind];
+            place.X=r.Next(100,400);
+            place.Y = r.Next(100, 500);
+        }
+        public void replace_props(Graphics g) {
+            if (place.X > 560 || place.X < 0)
+                x = -x;
+            if(place.Y>660|| place.Y<0)
+                y = -y;
+            place.X = place.X + x;
+            place.Y = place.Y + y;
+            g.DrawImage(nowProps,place.X,place.Y,40,40);
+        
         }
 
         
