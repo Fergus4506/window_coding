@@ -554,6 +554,7 @@ namespace final_project
             dob_mode_button.Visible = false;
             chl_mode_button.Visible = false;
             gameover.Visible = false;
+            two_player = null;
         }
 
         private void two_player_Tick(object sender, EventArgs e)
@@ -576,7 +577,7 @@ namespace final_project
         //change_state為玩家目前的狀態(被擊中的狀態、死亡的狀態等等)
         public int playerX = 200, playerY = 375, life = 3, change_state = 0;
 
-        public Point bulletPlace;//子彈位置
+        public Point[] bulletPlace;//子彈位置
         public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
         Image bullet = Resource1.bullet_temp;//子彈的樣式
         int die_step;
@@ -613,15 +614,18 @@ namespace final_project
         {
 
             //如果目前沒有子彈存在的畫則重畫
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY - 10);
+            if (bulletPlace == null) {
+                bulletPlace = new Point[1];
+                bulletPlace[0] = new Point(playerX + 30 - bulletSize / 2, playerY - 10);
+            }
+                
             else {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
-                bulletPlace.Y -= 1 * shootSpeed;
-                if (bulletPlace.Y <= 0)
-                    bulletPlace = Point.Empty;
+                bulletPlace[0].Y -= 1 * shootSpeed;
+                if (bulletPlace[0].Y <= 0)
+                    bulletPlace=null;
                 else
-                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+                    g.DrawImage(bullet, bulletPlace[0].X, bulletPlace[0].Y, bulletSize, 20);
             }
 
         }
@@ -630,16 +634,19 @@ namespace final_project
         {
 
             //如果目前沒有子彈存在的畫則重畫
-            if (bulletPlace.IsEmpty)
-                bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY + 60);
+            if (bulletPlace == null) {
+                bulletPlace = new Point[1];
+                bulletPlace[0] = new Point(playerX + 30 - bulletSize / 2, playerY + 60);
+            }
+                
             else
             {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
-                bulletPlace.Y += 1 * shootSpeed;
-                if (bulletPlace.Y > 600)
-                    bulletPlace = Point.Empty;
+                bulletPlace[0].Y += 1 * shootSpeed;
+                if (bulletPlace[0].Y > 600)
+                    bulletPlace = null;
                 else {
-                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+                    g.DrawImage(bullet, bulletPlace[0].X, bulletPlace[0].Y, bulletSize, 20);
                     //MessageBox.Show("??");
                 }
                     
@@ -655,6 +662,25 @@ namespace final_project
                 {
                     if (Opt.bulletPlace[i] != Point.Empty) {
                         if (Opt.bulletPlace[i].X < playerX+40 && Opt.bulletPlace[i].X+Opt.bulletsize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY-20)
+                        {
+                            //MessageBox.Show("重");
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            return false;
+        }
+        public bool being_attacked(main_character Opt)
+        {
+            if (Opt.bulletPlace != null)
+            {
+                for (int i = 0; i < Opt.bulletPlace.Length; i++)
+                {
+                    if (Opt.bulletPlace[i] != Point.Empty)
+                    {
+                        if (Opt.bulletPlace[i].X < playerX + 40 && Opt.bulletPlace[i].X + Opt.bulletSize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY - 20)
                         {
                             //MessageBox.Show("重");
                             return true;
@@ -795,15 +821,20 @@ namespace final_project
 
         //敵人判定是否被擊中的函式
         public bool being_attacked(main_character player) {
-            if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 40 && player.bulletPlace.Y < playerY+30 && player.bulletPlace.Y > playerY)
-            {
-                //MessageBox.Show("重");
+            if (player.bulletPlace != null) {
+                if (player.bulletPlace[0].X > playerX - player.bulletSize && player.bulletPlace[0].X < playerX + 40 && player.bulletPlace[0].Y < playerY + 30 && player.bulletPlace[0].Y > playerY)
+                {
+                    //MessageBox.Show("重");
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else {
-                return false;
-            }
+            return false;
+            
         }
         //只會射擊一發子彈的基本射擊模式
         public void shoot_mode_1(Graphics g) {
@@ -982,17 +1013,20 @@ namespace final_project
         {
             if (player!=null)
             {
-                if (player.bulletPlace.X > playerX - player.bulletSize && player.bulletPlace.X < playerX + 100 && player.bulletPlace.Y < playerY + 89 && player.bulletPlace.Y > playerY && life != 0)
-                {
-                    //MessageBox.Show("重");
-                    player.bulletPlace = Point.Empty;
-                    this.life -= 1;
-                    return true;
+                if (player.bulletPlace != null) {
+                    if (player.bulletPlace[0].X > playerX - player.bulletSize && player.bulletPlace[0].X < playerX + 100 && player.bulletPlace[0].Y < playerY + 89 && player.bulletPlace[0].Y > playerY && life != 0)
+                    {
+                        //MessageBox.Show("重");
+                        player.bulletPlace = null;
+                        this.life -= 1;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+                
             }
             return false;
             
