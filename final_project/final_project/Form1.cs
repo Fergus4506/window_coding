@@ -577,6 +577,8 @@ namespace final_project
         public int playerX = 200, playerY = 375, life = 3, change_state = 0;
 
         public Point bulletPlace;//子彈位置
+        public Point[] bulletPlace_list;
+        public bool[] bulletshootck;
         public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
         Image bullet = Resource1.bullet_temp;//子彈的樣式
         int die_step;
@@ -585,6 +587,7 @@ namespace final_project
         public Image[] change_list;
         int change_delay;
         int change_step_state;
+        int shoot_mode = 0;
 
 
         //開始時重畫玩家的建構子
@@ -611,11 +614,16 @@ namespace final_project
         //玩家子彈射擊的函式
         public void shoot(Graphics g)
         {
+            if (shoot_mode == 0)
+                shoot_mode_1(g);
+        }
 
+        public void shoot_mode_1(Graphics g) {
             //如果目前沒有子彈存在的畫則重畫
             if (bulletPlace.IsEmpty)
                 bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY - 10);
-            else {
+            else
+            {
                 //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
                 bulletPlace.Y -= 1 * shootSpeed;
                 if (bulletPlace.Y <= 0)
@@ -623,7 +631,74 @@ namespace final_project
                 else
                     g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
             }
+        }
+        public void shoot_mode_2(Graphics g)
+        {
+            if (bulletPlace_list == null)
+            {
+                bulletPlace_list = new Point[3];
+                bulletshootck = new bool[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    bulletPlace_list[i] = new Point(playerX, playerY + 30);
+                    bulletshootck[i] = false;
+                }
+            }
+            else
+            {
+                //這裡是三個不同方向的子彈所需要做的位移(分別是中、左、右)
+                int count_how_bullet_out = 0;
 
+
+                //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
+                if (bulletPlace_list[0].Y > 600 || bulletshootck[0])
+                {
+                    bulletshootck[0] = true;
+                    count_how_bullet_out++;
+                }
+                else
+                {
+                    bulletPlace_list[0].Y = bulletPlace_list[0].Y + 2 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[0].X + bulletSize, bulletPlace_list[0].Y, 10, 20);
+                }
+
+
+
+                if (bulletPlace_list[1].Y > 600 || bulletPlace_list[1].X > 450 || bulletshootck[1])
+                {
+                    bulletshootck[1] = true;
+                    count_how_bullet_out++;
+                }
+                else
+                {
+                    bulletPlace_list[1].Y = bulletPlace_list[1].Y + 1 * shootSpeed;
+                    bulletPlace_list[1].X = bulletPlace_list[1].X + 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[1].X + bulletSize, bulletPlace_list[1].Y, 10, 20);
+                }
+
+
+
+                if (bulletPlace_list[2].Y > 600 || bulletPlace_list[2].X < 0 || bulletshootck[2])
+                {
+
+                    bulletshootck[2] = true;
+                    count_how_bullet_out++;
+                }
+                else
+                {
+                    bulletPlace_list[2].Y = bulletPlace_list[2].Y + 1 * shootSpeed;
+                    bulletPlace_list[2].X = bulletPlace_list[2].X - 1 * shootSpeed;
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace_list[2].X + bulletSize, bulletPlace_list[2].Y, 10, 20);
+                }
+
+
+                //如果三點都超界了就去重劃射擊
+                if (count_how_bullet_out == 3)
+                {
+                    bulletPlace_list = null;
+                    bulletshootck = null;
+                }
+            }
         }
 
         public void shoot(Graphics g,int id)
@@ -1136,5 +1211,17 @@ namespace final_project
                 return false;
             }
         }
+    }
+
+    public class Props {
+        int kind;
+        Image[] props_image = new Image[3];
+        Image nowProps;
+        public Props()
+        {
+            Random r=new Random();
+        }
+
+        
     }
 }
