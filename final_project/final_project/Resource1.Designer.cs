@@ -273,6 +273,26 @@ namespace final_project {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap Main_Ship___Base___Full_health_hat_p2 {
+            get {
+                object obj = ResourceManager.GetObject("Main_Ship___Base___Full_health_hat_p2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Main_Ship___Base___Full_health_p2 {
+            get {
+                object obj = ResourceManager.GetObject("Main_Ship___Base___Full_health_p2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap main_ship_die_0 {
             get {
                 object obj = ResourceManager.GetObject("main_ship_die_0", resourceCulture);

@@ -22,6 +22,7 @@ namespace final_project
         main_character main_player = null;//目前玩家的物件
         std_opt[] std_Opt = null;//敵人的陣列(儲存敵人實作物件的陣列)
         public int[] keyPressStore = new int[] { 0, 0, 0, 0 };//判斷目前有哪些按鈕被按下的陣列
+        public int[] keyPressStore_p2 = new int[] { 0, 0, 0, 0 };//判斷目前有哪些按鈕被按下的陣列
         int shootDelay = 500;
         int rebirth = 50;//敵人復活的CD
         int delifeDelay = 40;//玩家受傷時的無敵時間
@@ -122,15 +123,28 @@ namespace final_project
             }
             else if (check_two_player_mode) {
                 g = e.Graphics;
-                if (two_player_mode == null) {
+                if (two_player_mode == null)
+                {
                     two_player_mode = new main_character[2];
-                    for (int i = 0; i < 2; i++) {
+                    for (int i = 0; i < 2; i++)
+                    {
                         if (i == 0)
                             two_player_mode[i] = new main_character(g);
                         else
-                            two_player_mode[i] = new main_character(g);
+                            two_player_mode[i] = new main_character(g,i);
                     }
                 }
+                else {
+                    for (int i = 0; i < 2; i++) {
+                        two_player_mode[i].repaint_place(g);
+                        if (i == 0)
+                            two_player_mode[i].shoot(g);
+                        else
+                            two_player_mode[i].shoot(g, i);
+                    }
+                }
+
+                
 
             }
         }
@@ -143,7 +157,6 @@ namespace final_project
             else
                 main_player.repaint_place(g);
         }
-
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
         {
@@ -215,14 +228,36 @@ namespace final_project
         //簡單來說就是玩家的操作控制器
         private void main_move()
         {
-            if (keyPressStore[0] == 1)
-                main_player.playerY -= 10;
-            if (keyPressStore[1] == 1)
-                main_player.playerY += 10;
-            if (keyPressStore[2] == 1)
-                main_player.playerX -= 10;
-            if (keyPressStore[3] == 1)
-                main_player.playerX += 10;
+            if (check_game_start)
+            {
+                if (keyPressStore[0] == 1)
+                    main_player.playerY -= 10;
+                if (keyPressStore[1] == 1)
+                    main_player.playerY += 10;
+                if (keyPressStore[2] == 1)
+                    main_player.playerX -= 10;
+                if (keyPressStore[3] == 1)
+                    main_player.playerX += 10;
+            }
+            else if (check_two_player_mode) {
+                if (keyPressStore[0] == 1)
+                    two_player_mode[0].playerY -= 10;
+                if (keyPressStore[1] == 1)
+                    two_player_mode[0].playerY += 10;
+                if (keyPressStore[2] == 1)
+                    two_player_mode[0].playerX -= 10;
+                if (keyPressStore[3] == 1)
+                    two_player_mode[0].playerX += 10;
+
+                if (keyPressStore_p2[0] == 1)
+                    two_player_mode[1].playerY -= 10;
+                if (keyPressStore_p2[1] == 1)
+                    two_player_mode[1].playerY += 10;
+                if (keyPressStore_p2[2] == 1)
+                    two_player_mode[1].playerX -= 10;
+                if (keyPressStore_p2[3] == 1)
+                    two_player_mode[1].playerX += 10;
+            }
             //else if(e.)
             Invalidate();
         }
@@ -238,6 +273,14 @@ namespace final_project
                 keyPressStore[2] = 1;
             else if (e.KeyValue == (int)Keys.D)
                 keyPressStore[3] = 1;
+            if (e.KeyValue == (int)Keys.Up)
+                keyPressStore_p2[0]=1;
+            else if (e.KeyValue == (int)Keys.Down)
+                keyPressStore_p2[1] = 1;
+            if (e.KeyValue == (int)Keys.Left)
+                keyPressStore_p2[2] = 1;
+            else if (e.KeyValue == (int)Keys.Right)
+                keyPressStore_p2[3] = 1;
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -249,6 +292,14 @@ namespace final_project
                 keyPressStore[2] = 0;
             else if (e.KeyValue == (int)Keys.D)
                 keyPressStore[3] = 0;
+            if (e.KeyValue == (int)Keys.Up)
+                keyPressStore_p2[0] = 0;
+            else if (e.KeyValue == (int)Keys.Down)
+                keyPressStore_p2[1] = 0;
+            if (e.KeyValue == (int)Keys.Left)
+                keyPressStore_p2[2] = 0;
+            else if (e.KeyValue == (int)Keys.Right)
+                keyPressStore_p2[3] = 0;
         }
 
         //觸發玩家控制器的地方(用timer去判斷多久要觸發判斷，類似遊戲的FPS)
@@ -498,6 +549,21 @@ namespace final_project
         {
             two_player.Start();
             check_two_player_mode = true;
+            start_button.Visible = false;
+            game_title.Visible = false;
+            dob_mode_button.Visible = false;
+            chl_mode_button.Visible = false;
+            gameover.Visible = false;
+        }
+
+        private void two_player_Tick(object sender, EventArgs e)
+        {
+            main_move();
+        }
+
+        private void two_player_shoot_Tick(object sender, EventArgs e)
+        {
+            
         }
     }
 
@@ -532,6 +598,9 @@ namespace final_project
         }
         public main_character(Graphics g, int id) {
             g.DrawImage(plane,200,100,60,60);
+            playerX = 200;
+            playerY = 100;
+            plane = Resource1.Main_Ship___Base___Full_health_p2;
         }
         //重畫玩家的位置(因為會有移動的需求)
         public void repaint_place(Graphics g)
@@ -553,6 +622,27 @@ namespace final_project
                     bulletPlace = Point.Empty;
                 else
                     g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+            }
+
+        }
+
+        public void shoot(Graphics g,int id)
+        {
+
+            //如果目前沒有子彈存在的畫則重畫
+            if (bulletPlace.IsEmpty)
+                bulletPlace = new Point(playerX + 30 - bulletSize / 2, playerY + 60);
+            else
+            {
+                //如果子彈超過了視窗Y軸的上限話則把子彈消失，不然就讓子彈繼續往Y軸走
+                bulletPlace.Y += 1 * shootSpeed;
+                if (bulletPlace.Y > 600)
+                    bulletPlace = Point.Empty;
+                else {
+                    g.DrawImage(bullet, bulletPlace.X, bulletPlace.Y, bulletSize, 20);
+                    //MessageBox.Show("??");
+                }
+                    
             }
 
         }

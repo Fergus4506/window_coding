@@ -44,6 +44,7 @@
             this.boss_two_life = new System.Windows.Forms.ProgressBar();
             this.gameover = new System.Windows.Forms.Label();
             this.two_player = new System.Windows.Forms.Timer(this.components);
+            this.two_player_hat = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
@@ -80,6 +81,7 @@
             // 
             this.game_title.AutoSize = true;
             this.game_title.BackColor = System.Drawing.Color.Transparent;
+            this.game_title.Cursor = System.Windows.Forms.Cursors.Hand;
             this.game_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.game_title.ForeColor = System.Drawing.Color.Transparent;
             this.game_title.Location = new System.Drawing.Point(137, 121);
@@ -130,6 +132,7 @@
             // dob_mode_button
             // 
             this.dob_mode_button.BackColor = System.Drawing.Color.Transparent;
+            this.dob_mode_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dob_mode_button.Image = global::final_project.Resource1.dub_mode_button;
             this.dob_mode_button.Location = new System.Drawing.Point(166, 311);
             this.dob_mode_button.Name = "dob_mode_button";
@@ -142,6 +145,7 @@
             // chl_mode_button
             // 
             this.chl_mode_button.BackColor = System.Drawing.Color.Transparent;
+            this.chl_mode_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chl_mode_button.Image = global::final_project.Resource1.challenge_mode_button;
             this.chl_mode_button.Location = new System.Drawing.Point(166, 404);
             this.chl_mode_button.Name = "chl_mode_button";
@@ -190,6 +194,16 @@
             this.gameover.Text = "GAME OVER";
             this.gameover.UseCompatibleTextRendering = true;
             this.gameover.Visible = false;
+            // 
+            // two_player
+            // 
+            this.two_player.Interval = 50;
+            this.two_player.Tick += new System.EventHandler(this.two_player_Tick);
+            // 
+            // two_player_hat
+            // 
+            this.two_player_hat.Interval = 50;
+            this.two_player_hat.Tick += new System.EventHandler(this.two_player_shoot_Tick);
             // 
             // Form1
             // 
@@ -243,6 +257,7 @@
         private System.Windows.Forms.ProgressBar boss_two_life;
         private System.Windows.Forms.Label gameover;
         private System.Windows.Forms.Timer two_player;
+        private System.Windows.Forms.Timer two_player_hat;
     }
 }
 
