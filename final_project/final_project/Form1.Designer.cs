@@ -45,11 +45,14 @@
             this.gameover = new System.Windows.Forms.Label();
             this.two_player = new System.Windows.Forms.Timer(this.components);
             this.two_player_hat = new System.Windows.Forms.Timer(this.components);
+            this.hreat_picture_p2 = new System.Windows.Forms.PictureBox();
+            this.show_life_p2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dob_mode_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chl_mode_button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hreat_picture_p2)).BeginInit();
             this.SuspendLayout();
             // 
             // player_timer
@@ -70,9 +73,10 @@
             this.show_life.BackColor = System.Drawing.Color.Transparent;
             this.show_life.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.show_life.ForeColor = System.Drawing.Color.White;
-            this.show_life.Location = new System.Drawing.Point(46, 19);
+            this.show_life.Location = new System.Drawing.Point(61, 24);
+            this.show_life.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.show_life.Name = "show_life";
-            this.show_life.Size = new System.Drawing.Size(18, 20);
+            this.show_life.Size = new System.Drawing.Size(23, 25);
             this.show_life.TabIndex = 0;
             this.show_life.Text = "3";
             this.show_life.Visible = false;
@@ -84,9 +88,10 @@
             this.game_title.Cursor = System.Windows.Forms.Cursors.Hand;
             this.game_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.game_title.ForeColor = System.Drawing.Color.Transparent;
-            this.game_title.Location = new System.Drawing.Point(137, 121);
+            this.game_title.Location = new System.Drawing.Point(183, 151);
+            this.game_title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.game_title.Name = "game_title";
-            this.game_title.Size = new System.Drawing.Size(181, 50);
+            this.game_title.Size = new System.Drawing.Size(227, 62);
             this.game_title.TabIndex = 1;
             this.game_title.Text = "太空大戰";
             this.game_title.UseCompatibleTextRendering = true;
@@ -96,9 +101,10 @@
             this.setting_button.BackColor = System.Drawing.Color.Transparent;
             this.setting_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.setting_button.Image = global::final_project.Resource1.setting;
-            this.setting_button.Location = new System.Drawing.Point(392, 13);
+            this.setting_button.Location = new System.Drawing.Point(523, 16);
+            this.setting_button.Margin = new System.Windows.Forms.Padding(4);
             this.setting_button.Name = "setting_button";
-            this.setting_button.Size = new System.Drawing.Size(30, 30);
+            this.setting_button.Size = new System.Drawing.Size(40, 38);
             this.setting_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.setting_button.TabIndex = 2;
             this.setting_button.TabStop = false;
@@ -109,9 +115,10 @@
             this.start_button.BackColor = System.Drawing.Color.Transparent;
             this.start_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.start_button.Image = global::final_project.Resource1.start_button;
-            this.start_button.Location = new System.Drawing.Point(166, 224);
+            this.start_button.Location = new System.Drawing.Point(221, 280);
+            this.start_button.Margin = new System.Windows.Forms.Padding(4);
             this.start_button.Name = "start_button";
-            this.start_button.Size = new System.Drawing.Size(125, 50);
+            this.start_button.Size = new System.Drawing.Size(167, 62);
             this.start_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.start_button.TabIndex = 3;
             this.start_button.TabStop = false;
@@ -121,9 +128,10 @@
             // 
             this.heart_picture.BackColor = System.Drawing.Color.Transparent;
             this.heart_picture.Image = global::final_project.Resource1.pixel_heart;
-            this.heart_picture.Location = new System.Drawing.Point(9, 12);
+            this.heart_picture.Location = new System.Drawing.Point(12, 15);
+            this.heart_picture.Margin = new System.Windows.Forms.Padding(4);
             this.heart_picture.Name = "heart_picture";
-            this.heart_picture.Size = new System.Drawing.Size(30, 30);
+            this.heart_picture.Size = new System.Drawing.Size(40, 38);
             this.heart_picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.heart_picture.TabIndex = 4;
             this.heart_picture.TabStop = false;
@@ -134,9 +142,10 @@
             this.dob_mode_button.BackColor = System.Drawing.Color.Transparent;
             this.dob_mode_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dob_mode_button.Image = global::final_project.Resource1.dub_mode_button;
-            this.dob_mode_button.Location = new System.Drawing.Point(166, 311);
+            this.dob_mode_button.Location = new System.Drawing.Point(221, 389);
+            this.dob_mode_button.Margin = new System.Windows.Forms.Padding(4);
             this.dob_mode_button.Name = "dob_mode_button";
-            this.dob_mode_button.Size = new System.Drawing.Size(125, 50);
+            this.dob_mode_button.Size = new System.Drawing.Size(167, 62);
             this.dob_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dob_mode_button.TabIndex = 5;
             this.dob_mode_button.TabStop = false;
@@ -147,19 +156,20 @@
             this.chl_mode_button.BackColor = System.Drawing.Color.Transparent;
             this.chl_mode_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chl_mode_button.Image = global::final_project.Resource1.challenge_mode_button;
-            this.chl_mode_button.Location = new System.Drawing.Point(166, 404);
+            this.chl_mode_button.Location = new System.Drawing.Point(221, 505);
+            this.chl_mode_button.Margin = new System.Windows.Forms.Padding(4);
             this.chl_mode_button.Name = "chl_mode_button";
-            this.chl_mode_button.Size = new System.Drawing.Size(125, 50);
+            this.chl_mode_button.Size = new System.Drawing.Size(167, 62);
             this.chl_mode_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.chl_mode_button.TabIndex = 6;
             this.chl_mode_button.TabStop = false;
             // 
             // boss_life
             // 
-            this.boss_life.Location = new System.Drawing.Point(68, 10);
-            this.boss_life.Margin = new System.Windows.Forms.Padding(2);
+            this.boss_life.Location = new System.Drawing.Point(91, 12);
+            this.boss_life.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.boss_life.Name = "boss_life";
-            this.boss_life.Size = new System.Drawing.Size(319, 11);
+            this.boss_life.Size = new System.Drawing.Size(425, 14);
             this.boss_life.TabIndex = 7;
             this.boss_life.Visible = false;
             // 
@@ -174,10 +184,10 @@
             // 
             // boss_two_life
             // 
-            this.boss_two_life.Location = new System.Drawing.Point(68, 31);
-            this.boss_two_life.Margin = new System.Windows.Forms.Padding(2);
+            this.boss_two_life.Location = new System.Drawing.Point(91, 39);
+            this.boss_two_life.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.boss_two_life.Name = "boss_two_life";
-            this.boss_two_life.Size = new System.Drawing.Size(319, 11);
+            this.boss_two_life.Size = new System.Drawing.Size(425, 14);
             this.boss_two_life.TabIndex = 8;
             this.boss_two_life.Visible = false;
             // 
@@ -187,9 +197,10 @@
             this.gameover.BackColor = System.Drawing.Color.Transparent;
             this.gameover.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameover.ForeColor = System.Drawing.Color.Transparent;
-            this.gameover.Location = new System.Drawing.Point(111, 171);
+            this.gameover.Location = new System.Drawing.Point(148, 214);
+            this.gameover.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameover.Name = "gameover";
-            this.gameover.Size = new System.Drawing.Size(249, 50);
+            this.gameover.Size = new System.Drawing.Size(311, 62);
             this.gameover.TabIndex = 9;
             this.gameover.Text = "GAME OVER";
             this.gameover.UseCompatibleTextRendering = true;
@@ -205,14 +216,43 @@
             this.two_player_hat.Interval = 50;
             this.two_player_hat.Tick += new System.EventHandler(this.two_player_shoot_Tick);
             // 
+            // hreat_picture_p2
+            // 
+            this.hreat_picture_p2.BackColor = System.Drawing.Color.Transparent;
+            this.hreat_picture_p2.Image = global::final_project.Resource1.pixel_heart;
+            this.hreat_picture_p2.Location = new System.Drawing.Point(13, 651);
+            this.hreat_picture_p2.Margin = new System.Windows.Forms.Padding(4);
+            this.hreat_picture_p2.Name = "hreat_picture_p2";
+            this.hreat_picture_p2.Size = new System.Drawing.Size(40, 38);
+            this.hreat_picture_p2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.hreat_picture_p2.TabIndex = 11;
+            this.hreat_picture_p2.TabStop = false;
+            this.hreat_picture_p2.Visible = false;
+            // 
+            // show_life_p2
+            // 
+            this.show_life_p2.AutoSize = true;
+            this.show_life_p2.BackColor = System.Drawing.Color.Transparent;
+            this.show_life_p2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.show_life_p2.ForeColor = System.Drawing.Color.White;
+            this.show_life_p2.Location = new System.Drawing.Point(62, 660);
+            this.show_life_p2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.show_life_p2.Name = "show_life_p2";
+            this.show_life_p2.Size = new System.Drawing.Size(23, 25);
+            this.show_life_p2.TabIndex = 10;
+            this.show_life_p2.Text = "3";
+            this.show_life_p2.Visible = false;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::final_project.Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(436, 562);
+            this.ClientSize = new System.Drawing.Size(581, 702);
+            this.Controls.Add(this.hreat_picture_p2);
+            this.Controls.Add(this.show_life_p2);
             this.Controls.Add(this.gameover);
             this.Controls.Add(this.boss_two_life);
             this.Controls.Add(this.boss_life);
@@ -224,6 +264,7 @@
             this.Controls.Add(this.game_title);
             this.Controls.Add(this.show_life);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -235,6 +276,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dob_mode_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chl_mode_button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hreat_picture_p2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +300,8 @@
         private System.Windows.Forms.Label gameover;
         private System.Windows.Forms.Timer two_player;
         private System.Windows.Forms.Timer two_player_hat;
+        private System.Windows.Forms.PictureBox hreat_picture_p2;
+        private System.Windows.Forms.Label show_life_p2;
     }
 }
 
