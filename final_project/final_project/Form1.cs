@@ -40,6 +40,9 @@ namespace final_project
         public main_character[] two_player_mode=null;
         public bool check_two_player_mode = false;
         public int[] two_delay=new int[] {50,50};
+        public bool check_two_player_chl=false;
+        public int[] shoot_delay_to_two =new int[] { 0 ,0};
+        public bool change_step_anim=false;
         public Form1()
         {
             InitializeComponent();
@@ -83,7 +86,10 @@ namespace final_project
             FontStyle fs = game_title.Font.Style;
             game_title.Font = new Font(pfc.Families[0], 28.0F, fs);
             show_life.Font = new Font(pfc.Families[0], 12.0F, show_life.Font.Style);
+            show_life_p2.Font = new Font(pfc.Families[0], 12.0F, show_life_p2.Font.Style);
+            show_life_p2_chl.Font = new Font(pfc.Families[0], 12.0F, show_life_p2_chl.Font.Style);
             gameover.Font = new Font(pfc.Families[0], 28.0F, gameover.Font.Style);
+            teach_lab.Font = new Font(pfc.Families[0], 14.0F, teach_lab.Font.Style);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -113,30 +119,23 @@ namespace final_project
                 if (level == boosStep)
                 {
                     repaint_image_boss(g);
-                    for (int i = 0; i < boss_1s.Length; i++)
-                    {
-                        if (boss_1s[i] != null)
-                        {
-                            boss_1s[i].shoot(g, level, i);
-                        }
-                    }
                 }
             }
-            else if (check_two_player_mode) {
+            else if (check_two_player_mode)
+            {
                 g = e.Graphics;
                 if (two_player_mode == null)
                 {
                     two_player_mode = new main_character[2];
                     for (int i = 0; i < 2; i++)
                     {
-                        if (i == 0)
-                            two_player_mode[i] = new main_character(g);
-                        else
-                            two_player_mode[i] = new main_character(g,i);
+                        two_player_mode[i] = new main_character(g, i);
                     }
                 }
-                else {
-                    for (int i = 0; i < 2; i++) {
+                else
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
                         two_player_mode[i].repaint_place(g);
                         if (i == 0)
                             two_player_mode[i].shoot(g);
@@ -145,8 +144,52 @@ namespace final_project
                     }
                 }
 
-                
+            }
+            else if (check_two_player_chl)
+            {
+                g = e.Graphics;
+                if (two_player_mode == null)
+                {
+                    two_player_mode = new main_character[2];
+                    for (int i = 0; i < 2; i++)
+                    {
+                        two_player_mode[i] = new main_character(g);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (two_player_mode[i] != null)
+                        {
+                            two_player_mode[i].repaint_place(g);
+                            if (shootDelay == 500 && two_player_mode[i].life > 0)
+                            {
+                                two_player_mode[i].shoot(g);
+                            }
+                        }
 
+
+                    }
+                }
+                //如果敵人未處於死亡cd的話重畫敵人
+                if (rebirth == 50 && level != boosStep)
+                    repaint_image_std_opt(g, 0);
+
+                //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
+                if (shootDelay == 500 && std_Opt != null && level != boosStep)
+                    for (int i = 0; i < std_Opt.Length; i++)
+                    {
+                        if (std_Opt[i] != null)
+                            std_Opt[i].shoot(g, level, i);
+                    }
+                if (level == boosStep)
+                {
+                    repaint_image_boss(g, 0);
+                }
+            }
+            else if (change_step_anim) {
+                repaint_image_player(g);
             }
         }
 
@@ -157,6 +200,7 @@ namespace final_project
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
+            main_player.life = 100;
         }
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
@@ -201,24 +245,130 @@ namespace final_project
             }
         }
 
-        void repaint_image_boss(Graphics g) {
+        void repaint_image_std_opt(Graphics g,int id)
+        {
+            //如果敵人全部陣亡(std_Opt的陣列為null)則重新新增敵人的數量和實作敵人物件
+            if (std_Opt == null)
+            {
+                level++;
+                upCk = true;
+                std_Opt = new std_opt[howManyOpt.Next((2 + Math.Min(level % 10, 3))*2,( Math.Max(5, Math.Min(level, 10)))*3)];
+
+                for (int i = 0; i < std_Opt.Length; i++)
+                {
+                    std_Opt[i] = new std_opt(g, Opt_place, level, i);
+                    std_Opt[i].shootSpeed = 1;
+                }
+                //show_life.Text=level.ToString();
+            }
+            else
+            {
+                //如果敵人還有沒陣亡的就重畫他的位置，並且計算有幾個敵人陣亡了
+                int checkHowManyOptExist = 0;
+                for (int i = 0; i < std_Opt.Length; i++)
+                {
+                    if (std_Opt[i] == null)
+                    {
+                        checkHowManyOptExist += 1;
+                    }
+                    else if (std_Opt[i].playerY >= 600)
+                    {
+                        std_Opt[i] = null;
+                        checkHowManyOptExist += 1;
+                    }
+                    else
+                    {
+                        std_Opt[i].repaint_place(g);
+                    }
+                }
+                //show_life.Text=std_Opt.Length.ToString();
+                //如果判定到所有敵人都陣亡了則把std_Opt陣列改為null
+                if (checkHowManyOptExist == std_Opt.Length)
+                {
+                    std_Opt = null;
+                    rebirth = 0;
+                }
+            }
+        }
+
+        void repaint_image_boss(Graphics g)
+        {
+            if (boss_1s == null)
+            {
+                boss_1s = new boss_1[2];
+                boss_1s[0] = new boss_1(g);
+                boss_1s[1] = null;
+            }
+            else
+            {
+                if (check_two_boss && boss_1s[1] == null)
+                {
+                    boss_1s[1] = new boss_1(g, 1);
+                }
+                for (int i = 0; i < boss_1s.Length; i++)
+                {
+                    if (boss_1s[i] != null)
+                    {
+                        if (i == 0)
+                        {
+                            boss_1s[i].repaint_place(g);
+                            boss_1s[i].shoot(g, level, i);
+                        }
+                        else
+                        {
+                            boss_1s[i].repaint_place(g,i);
+                            boss_1s[i].shoot(g, level, i);
+                        }
+
+
+                    }
+                }
+
+            }
+        }
+
+        void repaint_image_boss(Graphics g,int d) {
             if (boss_1s== null)
             {
                 boss_1s = new boss_1[2];
                 boss_1s[0] = new boss_1(g);
+                if (check_two_player_chl) {
+                    boss_1s[0].life = 40;
+                }
                 boss_1s[1] = null;
             }
             else {
                 if (check_two_boss && boss_1s[1] == null)
                 {
                     boss_1s[1]= new boss_1(g,1);
+                    if (check_two_player_chl)
+                    {
+                        boss_1s[1].life = 40;
+                        boss_1s[1].shootSpeed = 1;
+                    }
                 }
                 for (int i = 0; i < boss_1s.Length; i++) { 
                     if (boss_1s[i] != null) {
                         if (i == 0)
+                        {
                             boss_1s[i].repaint_place(g);
-                        else
-                            boss_1s[i].repaint_place(g,1);
+                            if (shoot_delay_to_two[i] == 1)
+                            {
+                                boss_1s[i].shoot(g, level, i);
+                                shoot_delay_to_two[i] = 0;
+                            }
+                            else {
+                                boss_1s[i].shoot_in_time_delay(g);
+                                shoot_delay_to_two[i]++;
+                            }
+                                
+                        }
+                        else {
+                            boss_1s[i].repaint_place(g, 1);
+                            boss_1s[i].shoot(g, level, i);
+                        }
+                            
+                        
                     }
                 }
                 
@@ -231,35 +381,59 @@ namespace final_project
         {
             if (check_game_start)
             {
-                if (keyPressStore[0] == 1)
+                if (keyPressStore[0] == 1 && main_player.playerY>0)
                     main_player.playerY -= 10;
-                if (keyPressStore[1] == 1)
+                if (keyPressStore[1] == 1 && main_player.playerY < 500)
                     main_player.playerY += 10;
-                if (keyPressStore[2] == 1)
+                if (keyPressStore[2] == 1 && main_player.playerX>-20)
                     main_player.playerX -= 10;
-                if (keyPressStore[3] == 1)
+                if (keyPressStore[3] == 1 && main_player.playerX < 400)
                     main_player.playerX += 10;
             }
-            else if (check_two_player_mode) {
-                if (keyPressStore[0] == 1)
+            else if (check_two_player_mode)
+            {
+                if (keyPressStore[0] == 1 && two_player_mode[0].playerY > 0)
                     two_player_mode[0].playerY -= 10;
-                if (keyPressStore[1] == 1)
+                if (keyPressStore[1] == 1 && two_player_mode[0].playerY < 500)
                     two_player_mode[0].playerY += 10;
-                if (keyPressStore[2] == 1)
+                if (keyPressStore[2] == 1 && two_player_mode[0].playerX > -20)
                     two_player_mode[0].playerX -= 10;
-                if (keyPressStore[3] == 1)
+                if (keyPressStore[3] == 1 && two_player_mode[0].playerX < 400)
                     two_player_mode[0].playerX += 10;
 
-                if (keyPressStore_p2[0] == 1)
+                if (keyPressStore_p2[0] == 1 && two_player_mode[1].playerY > 0)
                     two_player_mode[1].playerY -= 10;
-                if (keyPressStore_p2[1] == 1)
+                if (keyPressStore_p2[1] == 1 && two_player_mode[1].playerY < 500)
                     two_player_mode[1].playerY += 10;
-                if (keyPressStore_p2[2] == 1)
+                if (keyPressStore_p2[2] == 1 && two_player_mode[1].playerX > -20)
                     two_player_mode[1].playerX -= 10;
-                if (keyPressStore_p2[3] == 1)
+                if (keyPressStore_p2[3] == 1 && two_player_mode[1].playerX < 400)
                     two_player_mode[1].playerX += 10;
             }
-            //else if(e.)
+            else if (check_two_player_chl) {
+                if (two_player_mode[0] != null) {
+                    if (keyPressStore[0] == 1 && two_player_mode[0].playerY > 0)
+                        two_player_mode[0].playerY -= 10;
+                    if (keyPressStore[1] == 1 && two_player_mode[0].playerY < 500)
+                        two_player_mode[0].playerY += 10;
+                    if (keyPressStore[2] == 1 && two_player_mode[0].playerX > -20)
+                        two_player_mode[0].playerX -= 10;
+                    if (keyPressStore[3] == 1 && two_player_mode[0].playerX < 400)
+                        two_player_mode[0].playerX += 10;
+                }
+
+                if (two_player_mode[1] != null) {
+                    if (keyPressStore_p2[0] == 1 && two_player_mode[1].playerY > 0)
+                        two_player_mode[1].playerY -= 10;
+                    if (keyPressStore_p2[1] == 1 && two_player_mode[1].playerY < 500)
+                        two_player_mode[1].playerY += 10;
+                    if (keyPressStore_p2[2] == 1 && two_player_mode[1].playerX > -20)
+                        two_player_mode[1].playerX -= 10;
+                    if (keyPressStore_p2[3] == 1 && two_player_mode[1].playerX < 400)
+                        two_player_mode[1].playerX += 10;
+                }
+                
+            }
             Invalidate();
         }
 
@@ -362,6 +536,8 @@ namespace final_project
                 if (main_player.die(this))
                 {
                     gameover.Visible = true;
+                    gameover.Text = "GAME OVER";
+                    gameover.Location = new Point(120, 150);
                     opt_timer.Stop();
                     boss_timer.Stop();
                     player_timer.Stop();
@@ -371,6 +547,7 @@ namespace final_project
                     start_button.Visible = true;
                     start_button.Image = Resource1.restart_mode_button;
                     dob_mode_button.Visible = true;
+                    dob_mode_button.Image = Resource1.dub_mode_button;
                     chl_mode_button.Visible = true;
                     level = 0;
                     boss_life.Visible = false;
@@ -409,6 +586,10 @@ namespace final_project
             chl_mode_button.Visible = false;
             gameover.Visible = false;
             show_life.Text = "3";
+            show_life_p2.Visible = false;
+            hreat_picture_p2.Visible = false;
+            two_player_mode = null;
+            check_two_player_chl = false;
         }
 
         private void setting_button_Click(object sender, EventArgs e)
@@ -435,6 +616,8 @@ namespace final_project
                 if (main_player.die(this))
                 {
                     gameover.Visible = true;
+                    gameover.Text = "GAME OVER";
+                    gameover.Location = new Point(120,150);
                     opt_timer.Stop();
                     boss_timer.Stop();
                     player_timer.Stop();
@@ -444,6 +627,7 @@ namespace final_project
                     start_button.Visible = true;
                     start_button.Image = Resource1.restart_mode_button;
                     dob_mode_button.Visible = true;
+                    dob_mode_button.Image = Resource1.dub_mode_button;
                     chl_mode_button.Visible = true;
                     level = 0;
                     boss_life.Visible = false;
@@ -459,13 +643,13 @@ namespace final_project
                 {
                     if (boss_1s[i] != null)
                     {
-                        if (main_player.being_attacked(boss_1s[i]) && delifeDelay == 50 && i == 0)
+                        if (main_player.being_attacked(boss_1s[i]) && delifeDelay == 50 && i == 0 && main_player.life!=0)
                         {
                             delifeDelay = 0;
                             main_player.life -= 1;
                             show_life.Text = main_player.life.ToString();
                         }
-                        else if (main_player.being_attacked(boss_1s[i],1) && delifeDelay == 50) {
+                        else if (main_player.being_attacked(boss_1s[i],1) && delifeDelay == 50 && main_player.life != 0) {
                             delifeDelay = 0;
                             main_player.life -= 3;
                             show_life.Text = main_player.life.ToString();
@@ -531,7 +715,8 @@ namespace final_project
                     rebirth = -10;
                     boss_1s = null;
                     boss_timer.Stop();
-                    player_timer.Start();
+                    player_timer.Stop();
+                    change_step.Start();
                     check_two_boss = false;
                 }
 
@@ -541,8 +726,13 @@ namespace final_project
 
         private void change_step_Tick(object sender, EventArgs e)
         {
-            if (main_player.change_step()) { 
-                
+            if (main_player.change_step())
+            {
+                change_step_anim = true;
+                Invalidate();
+            }
+            else {
+                player_timer.Stop();
             }
         }
 
@@ -550,6 +740,7 @@ namespace final_project
         {
             two_player.Start();
             two_player_hat.Start();
+            two_player_mode = null;
             check_two_player_mode = true;
             start_button.Visible = false;
             game_title.Visible = false;
@@ -561,6 +752,8 @@ namespace final_project
             hreat_picture_p2.Visible = true;
             show_life.Visible = true;
             show_life_p2.Visible=true;
+            show_life.Text = "3";
+            show_life_p2.Text = "3";
         }
 
         private void two_player_Tick(object sender, EventArgs e)
@@ -572,7 +765,7 @@ namespace final_project
         {
             for (int i = 0; i < 2; i++)
             {
-                if (two_delay[i] < 50)
+                if (two_delay[i] < 50 && two_player_mode[i] != null)
                 {
                     if (i == 0)
                     {
@@ -624,21 +817,359 @@ namespace final_project
                         gameover.Visible = true;
                         two_player_hat.Stop();
                         two_player.Stop();
-                        gameover.Text = "P"+(2 - i).ToString() + " Win the game";
+                        if (two_player_mode[1 - i].life == two_player_mode[i].life) 
+                        {
+                            gameover.Text = "平局";
+                            gameover.Location = new Point(150,215);
+                        }
+                        else {
+                            gameover.Location = new Point(80, 150);
+                            gameover.Text = "P" + (2 - i).ToString() + " Win the game";
+                        }
+                        
                         two_player_mode = null;
                         start_button.Visible = true;
                         start_button.Image = Resource1.std_button;
                         dob_mode_button.Visible = true;
                         dob_mode_button.Image= Resource1.restart_mode_button;
                         chl_mode_button.Visible = true;
+                        chl_mode_button.Image = Resource1.challenge_mode_button;
                         level = 0;
                         boss_life.Visible = false;
                         boss_two_life.Visible = false;
                         check_two_boss = false;
+                        close_all();
+                        break;
                     }
                 }
             }
             
+        }
+
+        private void chl_mode_button_Click(object sender, EventArgs e)
+        {
+            check_two_player_chl = true;
+            check_two_player_mode = false;
+            check_game_start = false;
+
+            start_button.Visible = false;
+            dob_mode_button.Visible = false;
+            chl_mode_button.Visible = false;
+
+            game_title.Visible = false;
+            gameover.Visible = false;
+            show_life.Visible = true;
+            show_life.Text = "3";
+            heart_picture.Visible = true;
+            show_life_p2.Visible = false;
+            hreat_picture_p2.Visible = false;
+            show_life_p2_chl.Visible = true;
+            show_life_p2_chl.Text = "3";
+            heart_picture_chl_p2.Visible = true;
+
+            player_timer.Enabled = true;
+            two_opt_timer.Enabled = true;
+            two_player.Enabled = false;
+            boss_timer.Enabled = false;
+            two_boss_timer.Enabled = false;
+
+            main_player = null;
+            two_player_mode = null;
+
+
+
+
+
+
+
+        }
+
+        private void two_opt_timer_Tick(object sender, EventArgs e)
+        {
+            //敵人復活的CD時間
+            if (rebirth < 50)
+                rebirth += 5;
+
+            int count_player_die = 0;
+            for (int x = 0; x < 2; x++) {
+                if (two_player_mode[x] == null) { 
+                    count_player_die++;
+                    continue;
+                }
+                //玩家被敵人擊中時的動畫
+                if (two_delay[x] < 50 && two_player_mode[x]!=null)
+                {
+                    if (two_player_mode[x].change_state == 0)
+                        two_player_mode[x].plane = Resource1.spaceship_mode1_full_hat;
+                    else
+                        two_player_mode[x].plane = Resource1.spaceship_mode1_full_h;
+                    two_player_mode[x].change_state = (two_player_mode[x].change_state + 1) % 2;
+                    two_delay[x] += 5;
+                }
+
+                //判斷玩家是否擊中敵人和擊中哪一個敵人和敵人移動的方式
+                if (std_Opt != null)
+                {
+                    for (int i = 0; i < std_Opt.Length; i++)
+                    {
+                        if (std_Opt[i] != null)
+                        {
+                            std_Opt[i].playerY += 1;
+                            if (std_Opt[i].being_attacked(two_player_mode[x]))
+                            {
+                                std_Opt[i] = null;
+                            }
+                        }
+                    }
+                }
+
+                //判斷玩家是否被敵人擊中
+                if (two_player_mode[x] != null && std_Opt != null)
+                {
+                    for (int i = 0; i < std_Opt.Length; i++)
+                    {
+                        if (std_Opt[i] != null)
+                        {
+                            if (two_player_mode[x].being_attacked(std_Opt[i]) && two_delay[x] == 50)
+                            {
+                                two_delay[x] = 0;
+                                two_player_mode[x].life -= 1;
+                                if (x == 0)
+                                {
+                                    show_life.Text = two_player_mode[x].life.ToString();
+                                }
+                                else { 
+                                    show_life_p2_chl.Text = two_player_mode[x].life.ToString();
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                if (two_player_mode[x] != null) {
+                    if (two_player_mode[x].life <= 0)
+                    {
+                        if (two_player_mode[x].die(this))
+                        {
+                            count_player_die++;
+                            two_player_mode[x]= null;
+
+                        }
+                    }
+                }
+                
+                if (level % 5 == 0 && upCk && two_player_mode[x] != null && level != 0)
+                {
+                    two_player_mode[x].playerUp(pfc, two_player_mode[x], player_timer, two_opt_timer, show_life, this);
+                    if (x == 1) {
+                        upCk = false;
+                    }
+                    
+                }
+            }
+            if (count_player_die == 2) {
+                gameover.Visible = true;
+                gameover.Text = "GAME OVER";
+                gameover.Location = new Point(120, 150);
+
+                start_button.Visible = true;
+                start_button.Image = Resource1.std_button;
+                dob_mode_button.Visible = true;
+                dob_mode_button.Image = Resource1.dub_mode_button;
+                chl_mode_button.Visible = true;
+                chl_mode_button.Image = Resource1.restart_mode_button;
+                close_all();
+            }
+            
+            if (level == boosStep)
+            {
+                two_opt_timer.Stop();
+                two_boss_timer.Start();
+                boss_life.Visible = true;
+                boss_life.Maximum = 40;
+                boss_life.Minimum = 0;
+                boss_life.Value = 40;
+                boss_two_life.Maximum = 40;
+                boss_two_life.Minimum = 0;
+                boss_two_life.Value = 40;
+            }
+        }
+
+        private void two_boss_timer_Tick(object sender, EventArgs e)
+        {
+            int die_player_count = 0;
+            for (int x = 0; x < 2; x++) {
+                if (two_player_mode[x] == null) { 
+                    die_player_count++;
+                    continue;
+                }
+                if (two_delay[x] < 50)
+                {
+                    if (two_player_mode[x].change_state == 0)
+                        two_player_mode[x].plane = Resource1.spaceship_mode1_full_hat;
+                    else
+                        two_player_mode[x].plane = Resource1.spaceship_mode1_full_h;
+                    two_player_mode[x].change_state = (two_player_mode[x].change_state + 1) % 2;
+                    two_delay[x] += 5;
+                }
+
+                if (two_player_mode[x].life <= 0)
+                {
+                    if (two_player_mode[x].die(this))
+                    {
+                        two_player_mode[x] = null;
+                    }
+                }
+
+
+                if (two_player_mode[x] != null && boss_1s != null)
+                {
+                    for (int i = 0; i < boss_1s.Length; i++)
+                    {
+                        if (boss_1s[i] != null)
+                        {
+                            if (two_player_mode[x].being_attacked(boss_1s[i]) && two_delay[x] == 50 && i == 0 && two_player_mode[x].life >= 0)
+                            {
+                                
+                                two_delay[x] = 0;
+                                two_player_mode[x].life -= 1;
+                                if (x==0)
+                                    show_life.Text = two_player_mode[x].life.ToString();
+                                else
+                                    show_life_p2_chl.Text = two_player_mode[x].life.ToString();
+
+                            }
+                            else if (two_player_mode[x].being_attacked(boss_1s[i], 1) && two_delay[x] == 50 && two_player_mode[x].life >= 0)
+                            {
+                                two_delay[x] = 0;
+                                two_player_mode[x].life -= 3;
+                                if (x == 0)
+                                    show_life.Text = two_player_mode[x].life.ToString();
+                                else
+                                    show_life_p2_chl.Text = two_player_mode[x].life.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            if (die_player_count == 2) {
+                gameover.Visible = true;
+                gameover.Text = "GAME OVER";
+                gameover.Location = new Point(120, 150);
+                
+                start_button.Visible = true;
+                start_button.Image = Resource1.std_button;
+                dob_mode_button.Visible = true;
+                dob_mode_button.Image = Resource1.dub_mode_button;
+                chl_mode_button.Visible = true;
+                chl_mode_button.Image = Resource1.restart_mode_button;
+                close_all();
+            }
+            int count_all_boss_die = 0;
+            if (boss_1s != null)
+            {
+                for (int i = 0; i < boss_1s.Length; i++)
+                {
+                    if (boss_1s[i] != null)
+                    {
+                        if (boss_1s[i].life > -1 && i == 0)
+                        {
+                            for (int x = 0; x < 2; x++) {
+                                if (boss_1s[i].being_attacked(two_player_mode[x]))
+                                {
+                                    boss_life.Value = boss_1s[i].life;
+                                }
+                            }
+                            
+
+                        }
+                        else if (boss_1s[i].life > -1)
+                        {
+                            for (int x = 0; x < 2; x++)
+                            {
+                                if (boss_1s[i].being_attacked(two_player_mode[x]))
+                                {
+                                    boss_two_life.Value = boss_1s[i].life;
+                                }
+                            }
+                        }
+
+                        if (i == 0 && boss_1s[0].life == 20 && boss_1s[1] == null & boss_1s[0] != null)
+                        {
+                            check_two_boss = true;
+                            boss_two_life.Visible = true;
+
+                        }
+                        if (boss_1s[i].life == 0)
+                        {
+                            if (i == 0)
+                            {
+                                if (boss_1s[i].die(this, boss_life))
+                                {
+                                    boss_1s[i] = null;
+                                }
+                            }
+                            else
+                            {
+                                if (boss_1s[i].die(this, boss_two_life))
+                                {
+                                    boss_1s[i] = null;
+                                    check_two_boss = false;
+                                }
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        count_all_boss_die++;
+                    }
+                }
+                if (count_all_boss_die == boss_1s.Length)
+                {
+                    //MessageBox.Show("boss end");
+                    level = 0;
+                    rebirth = -10;
+                    boss_1s = null;
+                    boss_timer.Stop();
+                    player_timer.Start();
+                    check_two_boss = false;
+                }
+
+            }
+        }
+        void close_all() {
+            level = 0;
+            boss_life.Visible = false;
+            boss_two_life.Visible = false;
+            check_two_boss = false;
+            show_life.Visible = false;
+            show_life_p2.Visible = false;
+            show_life_p2_chl.Visible = false;
+            heart_picture.Visible = false;
+            heart_picture_chl_p2.Visible = false;
+            hreat_picture_p2.Visible = false;
+            opt_timer.Stop();
+            boss_timer.Stop();
+            player_timer.Stop();
+            two_player.Stop();
+            two_player_hat.Stop();
+            two_opt_timer.Stop();
+            two_boss_timer.Stop();
+            std_Opt = null;
+            boss_1s = null;
+            two_player_mode = null;
+            main_player = null;
+
+
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Form4 f4=new Form4(pfc);
+            f4.Show();
         }
     }
 
@@ -650,7 +1181,6 @@ namespace final_project
         //playerX、Y為玩家操縱的腳色所在的位置
         //change_state為玩家目前的狀態(被擊中的狀態、死亡的狀態等等)
         public int playerX = 200, playerY = 375, life = 3, change_state = 0;
-
         public Point[] bulletPlace;//子彈位置
         public bool[] bulletshootck;
         public Image plane = Resource1.spaceship_mode1_full_h;//玩家的飛船圖式
@@ -658,8 +1188,7 @@ namespace final_project
         int die_step;
         int die_delay; 
         public Image[] die_list;
-        public Image[] change_list;
-        int change_delay;
+        int shshsh=-1;
         int change_step_state;
         int shoot_mode = 0;
 
@@ -674,19 +1203,37 @@ namespace final_project
             die_list[2] = Resource1.main_ship_die_2;
         }
         public main_character(Graphics g, int id) {
-            g.DrawImage(plane,200,100,60,60);
-            playerX = 200;
-            playerY = 100;
-            plane = Resource1.Main_Ship___Base___Full_health_p2;
-            die_list = new Image[3];
-            die_list[0] = Resource1.main_ship_die_0_p2;
-            die_list[1] = Resource1.main_ship_die_1_p2;
-            die_list[2] = Resource1.main_ship_die_2_p2;
+            shootSpeed = 3;
+            if (id == 1)
+            {
+                //life = 100;
+                playerX = 100;
+                playerY = 100;
+                g.DrawImage(plane, playerX, playerY, 60, 60);
+                plane = Resource1.Main_Ship___Base___Full_health_p2;
+                die_list = new Image[3];
+                die_list[0] = Resource1.main_ship_die_0_p2;
+                die_list[1] = Resource1.main_ship_die_1_p2;
+                die_list[2] = Resource1.main_ship_die_2_p2;
+            }
+            else {
+                
+                playerX = 300;
+                playerY = 375;
+                //life = 100;
+                g.DrawImage(plane,playerX,playerY, 60, 60);
+                die_list = new Image[3];
+                die_list[0] = Resource1.main_ship_die_0;
+                die_list[1] = Resource1.main_ship_die_1;
+                die_list[2] = Resource1.main_ship_die_2;
+            }
+            
         }
         //重畫玩家的位置(因為會有移動的需求)
         public void repaint_place(Graphics g)
         {
             g.DrawImage(plane, playerX, playerY, 60, 60);
+            
         }
 
         //玩家子彈射擊的函式
@@ -811,7 +1358,7 @@ namespace final_project
                 for (int i = 0; i < Opt.bulletPlace.Length; i++)
                 {
                     if (Opt.bulletPlace[i] != Point.Empty) {
-                        if (Opt.bulletPlace[i].X < playerX+40 && Opt.bulletPlace[i].X+Opt.bulletsize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY-20)
+                        if (Opt.bulletPlace[i].X < playerX+50 && Opt.bulletPlace[i].X+Opt.bulletsize-5 > playerX && Opt.bulletPlace[i].Y <= playerY+40 && Opt.bulletPlace[i].Y >= playerY)
                         {
                             //MessageBox.Show("重");
                             return true;
@@ -830,7 +1377,7 @@ namespace final_project
                 {
                     if (Opt.bulletPlace[i] != Point.Empty)
                     {
-                        if (Opt.bulletPlace[i].X < playerX + 40 && Opt.bulletPlace[i].X + Opt.bulletSize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY - 20)
+                        if (Opt.bulletPlace[i].X < playerX + 50 && Opt.bulletPlace[i].X + Opt.bulletSize - 5 > playerX && Opt.bulletPlace[i].Y <= playerY + 40 && Opt.bulletPlace[i].Y >= playerY)
                         {
                             //MessageBox.Show("重");
                             return true;
@@ -848,7 +1395,7 @@ namespace final_project
             {
                 for (int i = 0; i < Opt.bulletPlace.Length; i++)
                 {
-                    if (Opt.bulletPlace[i].X < playerX + 40 && Opt.bulletPlace[i].X + Opt.bulletsize > playerX && Opt.bulletPlace[i].Y <= playerY + 20 && Opt.bulletPlace[i].Y >= playerY)
+                    if (Opt.bulletPlace[i].X < playerX + 50 && Opt.bulletPlace[i].X + Opt.bulletsize - 5 > playerX && Opt.bulletPlace[i].Y <= playerY + 40 && Opt.bulletPlace[i].Y >= playerY)
                     {
                         return true;
                     }
@@ -896,23 +1443,15 @@ namespace final_project
             }
         }
         public bool change_step() {
-            if (change_step_state == 3)
+            if (change_step_state ==1)
             {
+                shshsh *= 2;
+                playerY += shshsh;
                 return true;
             }
             else
             {
-                //dwMessageBox.Show("??");
-                if (change_delay < 15)
-                {
-                    change_step_state += 1;
-                }
-                else
-                {
-                    plane = die_list[change_step_state];
-                    change_delay += 1;
-                    change_delay = 0;
-                }
+                change_step_state = 1;
                 return false;
             }
         }
@@ -920,13 +1459,15 @@ namespace final_project
 
     //一般敵人的物件
     public class std_opt {
-        int shootSpeed = 1;
+        public int shootSpeed = 2;
         public int playerX, playerY = 0;
         public Point[] bulletPlace;
         public int bulletsize = 10;
         bool[] bulletshootck;
         Image opt_image;
         Image bullet = Resource1.bullet_temp;
+        public int move_state = 0;
+        public int inx=1,iny=1;
 
         //新建敵人時的建構子(在敵人被全部擊敗時會被呼叫)
         public std_opt(Graphics g, Random R,int level,int id_opt)
@@ -936,6 +1477,7 @@ namespace final_project
             if (level > 5 && id_opt % 2 == 0)
             {
                 opt_image = Resource1.opt_kind2_stage1;
+                move_state = 1;
             }
             else
             {
@@ -948,6 +1490,12 @@ namespace final_project
         //重畫敵人的位置(敵人行為模式的函示)
         public void repaint_place(Graphics g)
         {
+            if (move_state == 1) {
+                if (playerX + 60 > 450 || playerX < 0) { 
+                    inx = -inx;
+                }
+                playerX += inx;
+            }
             g.DrawImage(opt_image, playerX, playerY, 40, 40);
             //g.FillEllipse(new SolidBrush(Color.Black), playerX , playerY,5,5);
         }
@@ -995,7 +1543,7 @@ namespace final_project
             }
             else
             {
-                bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
+                bulletPlace[0].Y = bulletPlace[0].Y + 1 * shootSpeed;
                 if (bulletPlace[0].Y >= 600)
                     bulletPlace = null;
                 else
@@ -1027,7 +1575,7 @@ namespace final_project
                     count_how_bullet_out++;
                 }
                 else {
-                    bulletPlace[0].Y = bulletPlace[0].Y + 2 * shootSpeed;
+                    bulletPlace[0].Y = bulletPlace[0].Y + 1 * shootSpeed;
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + bulletsize, bulletPlace[0].Y, 10, 20);
                 }
 
@@ -1070,12 +1618,13 @@ namespace final_project
     }
 
     public class boss_1{
-        int shootSpeed = 1;
+        public int shootSpeed = 1;
         public int playerX, playerY = 0;
         public int life = 20;
         public int nextX=1, nextY=1;
         public Point[] bulletPlace;
         public Point beamPlace;
+        public Point beam_Prepare;
         public int[] way_for_bullet;
         Image opt_image = Resource1.boss_kind1_stage1;
         Image bullet = Resource1.bullet_temp;
@@ -1087,7 +1636,7 @@ namespace final_project
         public int beam_delay_time = 10;
         int beam_shoot_time = 0;
         public boss_1(Graphics g) {
-            playerX = 200;
+            playerX = new Random().Next(100,300);
             playerY = -100;
             g.DrawImage(opt_image, playerX, playerY, 72, 89);
             die_list = new Image[6];
@@ -1216,7 +1765,7 @@ namespace final_project
                 //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
                 if (bulletPlace[0].Y > 600)
                 {
-                    bulletPlace[0] = new Point(playerX + 35, playerY + 89);
+                    bulletPlace[0] = new Point(playerX + 31, playerY + 89);
                 }
                 else
                 {
@@ -1256,8 +1805,8 @@ namespace final_project
                 }
                 else
                 {
-                    bulletPlace[3].Y = bulletPlace[3].Y + 2 * shootSpeed;
-                    bulletPlace[3].X = bulletPlace[3].X + 3 * shootSpeed * way_for_bullet[3];
+                    bulletPlace[3].Y = bulletPlace[3].Y + 3 * shootSpeed;
+                    bulletPlace[3].X = bulletPlace[3].X + 1 * shootSpeed * way_for_bullet[3];
                     g.DrawImage(Resource1.bullet_temp, bulletPlace[3].X + bulletsize, bulletPlace[3].Y, 10, 20);
                 }
 
@@ -1280,7 +1829,7 @@ namespace final_project
                 else
                 {
                     if (way_for_bullet[5] == 5) {
-                        bulletPlace[5].Y = bulletPlace[5].Y + 4 * shootSpeed;
+                        bulletPlace[5].Y = bulletPlace[5].Y + 2 * shootSpeed;
                         g.DrawImage(Resource1.bullet_temp, bulletPlace[5].X + bulletsize, bulletPlace[5].Y, 10, 20);
                     }
                     else {
@@ -1290,11 +1839,11 @@ namespace final_project
             }
         }
         public void shoot_mode_2(Graphics g) {
+            beamPlace = new Point(playerX + 72 / 2 - 10, playerY + 89);
             if (beam_delay_time > 100)
             {
                 if (beam_shoot_time < 60)
                 {
-                    beamPlace = new Point(playerX + 72 / 2 - 10, playerY + 89);
                     g.DrawImage(bullet, beamPlace.X, beamPlace.Y, 20, 1000);
                     beam_shoot_time += 1;
                 }
@@ -1305,6 +1854,7 @@ namespace final_project
             }
             else {
                 beam_delay_time += 1;
+                g.FillRectangle(new SolidBrush(Color.FromArgb(beam_delay_time+50, 255, 0, 0)), beamPlace.X, beamPlace.Y, 20, 1000);
             }
         }
         public void shoot_mode_3(Graphics g)
@@ -1389,7 +1939,7 @@ namespace final_project
                 {
                     if (way_for_bullet[5] == 5)
                     {
-                        bulletPlace[5].Y = bulletPlace[5].Y + 4 * shootSpeed;
+                        bulletPlace[5].Y = bulletPlace[5].Y + 2 * shootSpeed;
                         g.DrawImage(Resource1.bullet_temp, bulletPlace[5].X + bulletsize, bulletPlace[5].Y, 10, 20);
                     }
                     else
@@ -1408,7 +1958,7 @@ namespace final_project
             }
             else {
                 //dwMessageBox.Show("??");
-                if (die_delay <15)
+                if (die_delay <5)
                 {
                     die_delay += 1;
                 }
@@ -1418,6 +1968,80 @@ namespace final_project
                     die_delay = 0;
                 }
                 return false;
+            }
+        }
+        public void shoot_in_time_delay(Graphics g) {
+            if (bulletPlace == null)
+            {
+                bulletPlace = new Point[6];
+                way_for_bullet = new int[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    bulletPlace[i] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[i] = 1;
+                }
+            }
+            else
+            {
+                //因為每一點在生成時都會在Y軸+30所以可以用把點設回原點的方式來確定點是否超界了
+                if (bulletPlace[0].Y > 600)
+                {
+                    bulletPlace[0] = new Point(playerX + 31, playerY + 89);
+                }
+                else
+                {
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[0].X + bulletsize, bulletPlace[0].Y, 10, 20);
+                }
+
+                if (bulletPlace[1].Y > 750 || bulletPlace[1].X > 600 || bulletPlace[1].X < 0)
+                {
+                    bulletPlace[1] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[1] = -way_for_bullet[1];
+                }
+                else
+                { 
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[1].X + bulletsize, bulletPlace[1].Y, 10, 20);
+                }
+
+                if (bulletPlace[2].Y > 750 || bulletPlace[2].X < 0 || bulletPlace[2].X > 600)
+                {
+
+                    bulletPlace[2] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[2] = -way_for_bullet[2];
+                }
+                else
+                {
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[2].X + bulletsize, bulletPlace[2].Y, 10, 20);
+                }
+
+                if (bulletPlace[3].Y > 750 || bulletPlace[3].X > 600 || bulletPlace[3].X < 0)
+                {
+                    bulletPlace[3] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[3] = -way_for_bullet[3];
+                }
+                else
+                {
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[3].X + bulletsize, bulletPlace[3].Y, 10, 20);
+                }
+
+                if (bulletPlace[4].Y > 750 || bulletPlace[4].X > 600 || bulletPlace[4].X < 0)
+                {
+                    bulletPlace[4] = new Point(playerX + 31, playerY + 89);
+                    way_for_bullet[4] = -way_for_bullet[4];
+                }
+                else
+                {
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[4].X + bulletsize, bulletPlace[4].Y, 10, 20);
+                }
+                if (bulletPlace[5].Y > 600)
+                {
+                    bulletPlace[5] = new Point(playerX + 26, playerY + 89);
+                    way_for_bullet[5] = -way_for_bullet[5];
+                }
+                else
+                {
+                    g.DrawImage(Resource1.bullet_temp, bulletPlace[5].X + bulletsize, bulletPlace[5].Y, 10, 20);
+                }
             }
         }
     }

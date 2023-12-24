@@ -65,6 +65,12 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
@@ -80,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -168,6 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\up_arr.png" />
+    <None Include="obj\right_arr.png" />
+    <None Include="obj\left_arr.png" />
+    <None Include="obj\down_arr.png" />
+    <None Include="obj\help_background.png" />
+    <None Include="obj\help_icon.png" />
     <None Include="obj\main_ship_die_2_p2.png" />
     <None Include="obj\main_ship_die_1_p2.png" />
     <None Include="obj\main_ship_die_0_p2.png" />
