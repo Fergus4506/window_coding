@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\help_icon.png" />
     <None Include="obj\main_ship_die_2_p2.png" />
     <None Include="obj\main_ship_die_1_p2.png" />
     <None Include="obj\main_ship_die_0_p2.png" />
