@@ -43,6 +43,10 @@ namespace final_project
         public bool check_two_player_chl=false;
         public int[] shoot_delay_to_two =new int[] { 0 ,0};
         public bool change_step_anim=false;
+        public int trsp_back_value = 0;
+        public bool show_back_in_change=false;
+        public bool player_out_of_form = false;
+        public Image[] trsp_step1_back= null;
         public Form1()
         {
             InitializeComponent();
@@ -52,6 +56,18 @@ namespace final_project
         {
             opt_timer.Enabled = false;
             player_timer.Enabled = false;
+            trsp_step1_back=new Image[10] { 
+                Resource1.background_step1_90,
+                Resource1.background_step1_85,
+                Resource1.background_step1_80,
+                Resource1.background_step1_70,
+                Resource1.background_step1_60,
+                Resource1.background_step1_50,
+                Resource1.background_step1_40,
+                Resource1.background_step1_30,
+                Resource1.background_step1_20,
+                Resource1.background_step1_10
+            };
 
             //建立背景音樂的程式
             player = new WindowsMediaPlayer();
@@ -104,8 +120,12 @@ namespace final_project
                     repaint_image_std_opt(g);
 
                 //如果玩家射擊cd轉好後執行畫子彈的位置(包括重劃子彈)
-                if (shootDelay == 500 && main_player.life > 0)
-                    main_player.shoot(g);
+                if (main_player != null)
+                {
+                    if (shootDelay == 500 && main_player.life > 0)
+                        main_player.shoot(g);
+                }
+
 
                 //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
                 if (shootDelay == 500 && std_Opt != null && level != boosStep)
@@ -188,7 +208,9 @@ namespace final_project
                     repaint_image_boss(g, 0);
                 }
             }
-            else if (change_step_anim) {
+            else if (change_step_anim)
+            {
+                g = e.Graphics;
                 repaint_image_player(g);
             }
         }
@@ -718,6 +740,8 @@ namespace final_project
                     player_timer.Stop();
                     change_step.Start();
                     check_two_boss = false;
+                    check_game_start = false;
+                    change_step_anim = true;
                 }
 
             }
@@ -725,15 +749,36 @@ namespace final_project
         }
 
         private void change_step_Tick(object sender, EventArgs e)
-        {
-            if (main_player.change_step())
+        {   
+            if (player_out_of_form)
             {
-                change_step_anim = true;
-                Invalidate();
+                main_player = null;
+                if (show_back_in_change)
+                {
+                    if (trsp_back_value < 10) {
+                        this.BackgroundImage = trsp_step1_back[trsp_back_value];
+                        trsp_back_value += 1;
+                    }
+                        
+                    
+                }
+               
             }
             else {
-                player_timer.Stop();
+                show_back_in_change = true;
+                if (main_player.playerY>=-100)
+                {
+                    main_player.change_step();
+                    Invalidate();
+                }
+                else
+                {
+                    //MessageBox.Show("??");
+                    player_out_of_form = true;
+                    change_step_anim=false;
+                }
             }
+            
         }
 
         private void dob_mode_button_Click(object sender, EventArgs e)
@@ -1189,7 +1234,7 @@ namespace final_project
         int die_delay; 
         public Image[] die_list;
         int shshsh=-1;
-        int change_step_state;
+        public int change_step_state;
         int shoot_mode = 0;
 
 
@@ -1233,7 +1278,7 @@ namespace final_project
         public void repaint_place(Graphics g)
         {
             g.DrawImage(plane, playerX, playerY, 60, 60);
-            
+           
         }
 
         //玩家子彈射擊的函式
@@ -1443,7 +1488,7 @@ namespace final_project
             }
         }
         public bool change_step() {
-            if (change_step_state ==1)
+            if (playerY>-150)
             {
                 shshsh *= 2;
                 playerY += shshsh;

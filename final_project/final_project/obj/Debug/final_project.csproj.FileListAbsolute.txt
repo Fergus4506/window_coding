@@ -51,3 +51,4 @@ C:\Users\fergu\OneDrive\文件\window_coding\final_project\final_project\obj\Deb
 C:\Users\fergu\OneDrive\文件\window_coding\final_project\final_project\obj\Debug\final_project.exe
 C:\Users\fergu\OneDrive\文件\window_coding\final_project\final_project\obj\Debug\final_project.pdb
 C:\Users\fergu\OneDrive\文件\window_coding\final_project\final_project\obj\Debug\final_project.Form4.resources
+D:\window_coding\Final_project\final_project\obj\Debug\final_project.Form4.resources

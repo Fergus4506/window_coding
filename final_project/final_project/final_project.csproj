@@ -177,6 +177,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\defult_backmicus.mp3" />
+    <None Include="obj\background_step1_85.png" />
+    <None Include="obj\background_step1_80.png" />
+    <None Include="obj\background_step1_70.png" />
+    <None Include="obj\background_step1_60.png" />
+    <None Include="obj\background_step1_50.png" />
+    <None Include="obj\background_step1_40.png" />
+    <None Include="obj\background_step1_30.png" />
+    <None Include="obj\background_step1_20.png" />
+    <None Include="obj\background_step1_10.png" />
+    <None Include="obj\background_step1_90.png" />
     <None Include="obj\up_arr.png" />
     <None Include="obj\right_arr.png" />
     <None Include="obj\left_arr.png" />
