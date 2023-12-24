@@ -35,13 +35,14 @@ namespace final_project
         PrivateFontCollection pfc;
         bool upCk = true;
         public boss_1[] boss_1s = null;
-        int boosStep = 10;
+        int boosStep = 2;
         public bool check_two_boss = false;
         public main_character[] two_player_mode=null;
         public bool check_two_player_mode = false;
         public int[] two_delay=new int[] {50,50};
         public bool check_two_player_chl=false;
         public int[] shoot_delay_to_two =new int[] { 0 ,0};
+        public bool change_step_anim=false;
         public Form1()
         {
             InitializeComponent();
@@ -88,6 +89,7 @@ namespace final_project
             show_life_p2.Font = new Font(pfc.Families[0], 12.0F, show_life_p2.Font.Style);
             show_life_p2_chl.Font = new Font(pfc.Families[0], 12.0F, show_life_p2_chl.Font.Style);
             gameover.Font = new Font(pfc.Families[0], 28.0F, gameover.Font.Style);
+            teach_lab.Font = new Font(pfc.Families[0], 14.0F, teach_lab.Font.Style);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -143,7 +145,8 @@ namespace final_project
                 }
 
             }
-            else if (check_two_player_chl) {
+            else if (check_two_player_chl)
+            {
                 g = e.Graphics;
                 if (two_player_mode == null)
                 {
@@ -157,20 +160,21 @@ namespace final_project
                 {
                     for (int i = 0; i < 2; i++)
                     {
-                        if (two_player_mode[i] != null) {
+                        if (two_player_mode[i] != null)
+                        {
                             two_player_mode[i].repaint_place(g);
                             if (shootDelay == 500 && two_player_mode[i].life > 0)
                             {
                                 two_player_mode[i].shoot(g);
                             }
-                        }   
-                        
-                            
+                        }
+
+
                     }
                 }
                 //如果敵人未處於死亡cd的話重畫敵人
                 if (rebirth == 50 && level != boosStep)
-                    repaint_image_std_opt(g,0);
+                    repaint_image_std_opt(g, 0);
 
                 //如果敵人射擊cd轉好後且敵人沒有全部被擊敗時畫敵人的子彈位置(包括重畫子彈)
                 if (shootDelay == 500 && std_Opt != null && level != boosStep)
@@ -181,8 +185,11 @@ namespace final_project
                     }
                 if (level == boosStep)
                 {
-                    repaint_image_boss(g,0);
+                    repaint_image_boss(g, 0);
                 }
+            }
+            else if (change_step_anim) {
+                repaint_image_player(g);
             }
         }
 
@@ -193,6 +200,7 @@ namespace final_project
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
+            main_player.life = 100;
         }
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
@@ -707,7 +715,8 @@ namespace final_project
                     rebirth = -10;
                     boss_1s = null;
                     boss_timer.Stop();
-                    player_timer.Start();
+                    player_timer.Stop();
+                    change_step.Start();
                     check_two_boss = false;
                 }
 
@@ -717,8 +726,13 @@ namespace final_project
 
         private void change_step_Tick(object sender, EventArgs e)
         {
-            if (main_player.change_step()) { 
-                
+            if (main_player.change_step())
+            {
+                change_step_anim = true;
+                Invalidate();
+            }
+            else {
+                player_timer.Stop();
             }
         }
 
@@ -1151,6 +1165,12 @@ namespace final_project
 
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Form4 f4=new Form4(pfc);
+            f4.Show();
+        }
     }
 
     //玩家物件
@@ -1168,8 +1188,7 @@ namespace final_project
         int die_step;
         int die_delay; 
         public Image[] die_list;
-        public Image[] change_list;
-        int change_delay;
+        int shshsh=-1;
         int change_step_state;
         int shoot_mode = 0;
 
@@ -1424,23 +1443,15 @@ namespace final_project
             }
         }
         public bool change_step() {
-            if (change_step_state == 3)
+            if (change_step_state ==1)
             {
+                shshsh *= 2;
+                playerY += shshsh;
                 return true;
             }
             else
             {
-                //dwMessageBox.Show("??");
-                if (change_delay < 15)
-                {
-                    change_step_state += 1;
-                }
-                else
-                {
-                    plane = die_list[change_step_state];
-                    change_delay += 1;
-                    change_delay = 0;
-                }
+                change_step_state = 1;
                 return false;
             }
         }

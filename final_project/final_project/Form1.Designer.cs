@@ -52,6 +52,7 @@
             this.heart_picture_chl_p2 = new System.Windows.Forms.PictureBox();
             this.show_life_p2_chl = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.teach_lab = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.setting_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.start_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heart_picture)).BeginInit();
@@ -298,6 +299,19 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // teach_lab
+            // 
+            this.teach_lab.AutoSize = true;
+            this.teach_lab.BackColor = System.Drawing.Color.Transparent;
+            this.teach_lab.Font = new System.Drawing.Font("新細明體", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.teach_lab.ForeColor = System.Drawing.Color.White;
+            this.teach_lab.Location = new System.Drawing.Point(502, 600);
+            this.teach_lab.Name = "teach_lab";
+            this.teach_lab.Size = new System.Drawing.Size(58, 23);
+            this.teach_lab.TabIndex = 15;
+            this.teach_lab.Text = "教學";
             // 
             // Form1
             // 
@@ -307,6 +321,7 @@
             this.BackgroundImage = global::final_project.Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(581, 702);
+            this.Controls.Add(this.teach_lab);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.heart_picture_chl_p2);
             this.Controls.Add(this.show_life_p2_chl);
@@ -368,6 +383,7 @@
         private System.Windows.Forms.PictureBox heart_picture_chl_p2;
         private System.Windows.Forms.Label show_life_p2_chl;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label teach_lab;
     }
 }
 
