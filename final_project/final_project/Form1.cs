@@ -44,6 +44,7 @@ namespace final_project
         public int[] shoot_delay_to_two =new int[] { 0 ,0};
         public bool change_step_anim=false;
         public int trsp_back_value = 0;
+        public int trup_back_value = 0;
         public bool show_back_in_change=false;
         public bool player_out_of_form = false;
         public Image[] trsp_step1_back= null;
@@ -755,9 +756,23 @@ namespace final_project
                 main_player = null;
                 if (show_back_in_change)
                 {
-                    if (trsp_back_value < 10) {
+                    if (trsp_back_value < 10)
+                    {
                         this.BackgroundImage = trsp_step1_back[trsp_back_value];
                         trsp_back_value += 1;
+                    }
+                    else {
+                        gameover.Visible=true;
+                        gameover.Text = "施工中";
+                        gameover.Location = new Point(150,gameover.Location.Y);
+                        start_button.Visible=true;
+                        start_button.Image = Resource1.std_button;
+                        dob_mode_button.Visible = true;
+                        dob_mode_button.Image = Resource1.dub_mode_button;
+                        chl_mode_button.Visible = true;
+                        chl_mode_button.Image = Resource1.challenge_mode_button;
+                        change_step.Stop();
+
                     }
                         
                     
