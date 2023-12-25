@@ -34,7 +34,7 @@ namespace final_project
         public int level;//目前第幾關
         bool upCk = true;//可不可以升級的判斷(在連續的timer中不讓她一直重複去跑)
         public boss_1[] boss_1s = null;//存boss物件的變數
-        int boosStep = 2;//level到這個數字時進入boss關
+        int boosStep = new Random().Next(11,13);//level到這個數字時進入boss關
         public bool check_two_boss = false;//確定第二隻boss是否需要被生成
         public main_character[] two_player_mode=null;//有出現兩個玩家時玩家存玩家物件的變數
         public bool check_two_player_mode = false;//確定現在是否執行雙人模式
@@ -48,6 +48,7 @@ namespace final_project
         public bool show_back_in_change=false;
         public bool player_out_of_form = false;
         public Image[] trsp_step1_back= null;
+        int cht_life = 3;
         public Form1()
         {
             InitializeComponent();
@@ -223,7 +224,8 @@ namespace final_project
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
-            main_player.life = 100;
+            if (cht_life == 100) 
+                main_player.life = 100;
         }
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
@@ -1238,6 +1240,11 @@ namespace final_project
         {
             Form4 f4=new Form4(pfc);
             f4.Show();
+        }
+
+        private void game_title_Click(object sender, EventArgs e)
+        {
+            cht_life = 100;
         }
     }
 

@@ -101,6 +101,7 @@
             this.game_title.TabIndex = 1;
             this.game_title.Text = "太空大戰";
             this.game_title.UseCompatibleTextRendering = true;
+            this.game_title.Click += new System.EventHandler(this.game_title_Click);
             // 
             // setting_button
             // 
