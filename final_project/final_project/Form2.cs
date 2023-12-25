@@ -58,6 +58,11 @@ namespace final_project
             player.settings.volume = trackBar1.Value;
         }
 
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             t1.Enabled = lastck;

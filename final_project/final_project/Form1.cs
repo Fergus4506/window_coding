@@ -34,7 +34,7 @@ namespace final_project
         public int level;//目前第幾關
         bool upCk = true;//可不可以升級的判斷(在連續的timer中不讓她一直重複去跑)
         public boss_1[] boss_1s = null;//存boss物件的變數
-        int boosStep = 10;//level到這個數字時進入boss關
+        int boosStep = 2;//level到這個數字時進入boss關
         public bool check_two_boss = false;//確定第二隻boss是否需要被生成
         public main_character[] two_player_mode=null;//有出現兩個玩家時玩家存玩家物件的變數
         public bool check_two_player_mode = false;//確定現在是否執行雙人模式
@@ -223,6 +223,7 @@ namespace final_project
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
+            main_player.life = 100;
         }
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
@@ -775,8 +776,6 @@ namespace final_project
                         change_step.Stop();
 
                     }
-                        
-                    
                 }
                
             }
@@ -1025,7 +1024,11 @@ namespace final_project
                 if (level % 5 == 0 && upCk && two_player_mode[x] != null && level != 0)
                 {
                     two_player_mode[x].playerUp(pfc, two_player_mode[x], player_timer, two_opt_timer, show_life, this);
-                    if (x == 1) {
+                    if (x == 0 && two_player_mode[1] == null)
+                    {
+                        upCk = false;
+                    }
+                    else if (x == 1) {
                         upCk = false;
                     }
                     
@@ -1298,7 +1301,6 @@ namespace final_project
         public void repaint_place(Graphics g)
         {
             g.DrawImage(plane, playerX, playerY, 60, 60);
-           
         }
 
         //玩家子彈射擊的函式
@@ -2111,34 +2113,5 @@ namespace final_project
                 }
             }
         }
-    }
-
-    //被放棄的道具
-    public class Props {
-        int kind;
-        Image[] props_image = new Image[3];
-        Image nowProps;
-        int x = 5, y = 5;
-        Random r = new Random();
-        public Point place=new Point();
-        public Props()
-        {
-            kind=r.Next(1,3);
-            nowProps = props_image[kind];
-            place.X=r.Next(100,400);
-            place.Y = r.Next(100, 500);
-        }
-        public void replace_props(Graphics g) {
-            if (place.X > 560 || place.X < 0)
-                x = -x;
-            if(place.Y>660|| place.Y<0)
-                y = -y;
-            place.X = place.X + x;
-            place.Y = place.Y + y;
-            g.DrawImage(nowProps,place.X,place.Y,40,40);
-        
-        }
-
-        
     }
 }
