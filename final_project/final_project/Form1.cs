@@ -26,25 +26,25 @@ namespace final_project
         int shootDelay = 500;
         int rebirth = 50;//敵人復活的CD
         int delifeDelay = 40;//玩家受傷時的無敵時間
-        Random howManyOpt = new Random();
-        Random Opt_place = new Random();
+        Random howManyOpt = new Random();//敵人數量生成的隨機
+        Random Opt_place = new Random();//敵人位置生成的隨機
         bool check_game_start = false;//確定有沒有開始遊戲(沒有不做timer)
         WindowsMediaPlayer player;//背景音樂播放器
-        public int level;
-        public int step;
-        PrivateFontCollection pfc;
-        bool upCk = true;
-        public boss_1[] boss_1s = null;
-        int boosStep = 2;
-        public bool check_two_boss = false;
-        public main_character[] two_player_mode=null;
-        public bool check_two_player_mode = false;
-        public int[] two_delay=new int[] {50,50};
-        public bool check_two_player_chl=false;
-        public int[] shoot_delay_to_two =new int[] { 0 ,0};
+        PrivateFontCollection pfc;//字體有關的收集器，可以收集字體的ttf檔再匯入專案中
+        public int level;//目前第幾關
+        bool upCk = true;//可不可以升級的判斷(在連續的timer中不讓她一直重複去跑)
+        public boss_1[] boss_1s = null;//存boss物件的變數
+        int boosStep = 10;//level到這個數字時進入boss關
+        public bool check_two_boss = false;//確定第二隻boss是否需要被生成
+        public main_character[] two_player_mode=null;//有出現兩個玩家時玩家存玩家物件的變數
+        public bool check_two_player_mode = false;//確定現在是否執行雙人模式
+        public int[] two_delay=new int[] {50,50};//雙人模式玩家的被傷害後的無敵時間
+        public bool check_two_player_chl=false;//確定現在是否執行挑戰模式
+        public int[] shoot_delay_to_two =new int[] { 0 ,0};//兩隻boss的射擊間隔
+
+        //以下變數都是轉場用
         public bool change_step_anim=false;
         public int trsp_back_value = 0;
-        public int trup_back_value = 0;
         public bool show_back_in_change=false;
         public bool player_out_of_form = false;
         public Image[] trsp_step1_back= null;
@@ -108,7 +108,7 @@ namespace final_project
             gameover.Font = new Font(pfc.Families[0], 28.0F, gameover.Font.Style);
             teach_lab.Font = new Font(pfc.Families[0], 14.0F, teach_lab.Font.Style);
         }
-
+        //畫布重畫的函式
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             if (check_game_start)
@@ -223,7 +223,6 @@ namespace final_project
                 main_player = new main_character(g);
             else
                 main_player.repaint_place(g);
-            main_player.life = 100;
         }
         //重畫敵人的位置
         void repaint_image_std_opt(Graphics g)
@@ -267,7 +266,7 @@ namespace final_project
                 }
             }
         }
-
+        //重畫敵人的位置(挑戰模式的，敵人生成數量較多)
         void repaint_image_std_opt(Graphics g,int id)
         {
             //如果敵人全部陣亡(std_Opt的陣列為null)則重新新增敵人的數量和實作敵人物件
@@ -314,6 +313,7 @@ namespace final_project
             }
         }
 
+        //重畫boss的位置
         void repaint_image_boss(Graphics g)
         {
             if (boss_1s == null)
@@ -515,7 +515,7 @@ namespace final_project
                 rebirth += 5;
 
             //玩家被敵人擊中時的動畫
-            if (delifeDelay < 40) {
+            if (delifeDelay < 40 && main_player.life>0) {
                 if (main_player.change_state == 0)
                     main_player.plane = Resource1.spaceship_mode1_full_hat;
                 else
@@ -594,7 +594,7 @@ namespace final_project
                 boss_two_life.Value = 20;
             }
         }
-
+        //一般模式開始的按鈕
         private void start_button_Click(object sender, EventArgs e)
         {
             //開始遊戲的設定
@@ -613,19 +613,20 @@ namespace final_project
             hreat_picture_p2.Visible = false;
             two_player_mode = null;
             check_two_player_chl = false;
+            this.BackgroundImage = Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
         }
-
+        //按下設定按鈕跳轉出音量設定的form
         private void setting_button_Click(object sender, EventArgs e)
         {
             //呼叫Form2去改變聲音大小
             Form2 f = new Form2(player, player_timer, opt_timer);
             f.Show();
         }
-
+        //一般模式的boss出現時的傷害判定和射擊時機
         private void boss_timer_Tick(object sender, EventArgs e)
         {
 
-            if (delifeDelay < 50)
+            if (delifeDelay < 50 && main_player.life>0)
             {
                 if (main_player.change_state == 0)
                     main_player.plane = Resource1.spaceship_mode1_full_hat;
@@ -748,7 +749,7 @@ namespace final_project
             }
 
         }
-
+        //轉廠的timer
         private void change_step_Tick(object sender, EventArgs e)
         {   
             if (player_out_of_form)
@@ -795,7 +796,7 @@ namespace final_project
             }
             
         }
-
+        //雙人模式按鈕的判斷
         private void dob_mode_button_Click(object sender, EventArgs e)
         {
             two_player.Start();
@@ -814,18 +815,19 @@ namespace final_project
             show_life_p2.Visible=true;
             show_life.Text = "3";
             show_life_p2.Text = "3";
+            this.BackgroundImage = Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
         }
-
+        //雙人模式的移動判斷
         private void two_player_Tick(object sender, EventArgs e)
         {
             main_move();
         }
-
+        //雙人模式傷害判定的timer tick
         private void two_player_shoot_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < 2; i++)
             {
-                if (two_delay[i] < 50 && two_player_mode[i] != null)
+                if (two_delay[i] < 50 && two_player_mode[i] != null && two_player_mode[i].life>0)
                 {
                     if (i == 0)
                     {
@@ -905,7 +907,7 @@ namespace final_project
             }
             
         }
-
+        //挑戰模式按鈕觸發
         private void chl_mode_button_Click(object sender, EventArgs e)
         {
             check_two_player_chl = true;
@@ -936,6 +938,8 @@ namespace final_project
             main_player = null;
             two_player_mode = null;
 
+            this.BackgroundImage = Resource1._8bitspacebackgroundbirds_eye_viewdont_have_anything_in_upper_middle_area;
+
 
 
 
@@ -943,7 +947,7 @@ namespace final_project
 
 
         }
-
+        //挑戰模式一般敵人的判定
         private void two_opt_timer_Tick(object sender, EventArgs e)
         {
             //敵人復活的CD時間
@@ -1054,7 +1058,7 @@ namespace final_project
                 boss_two_life.Value = 40;
             }
         }
-
+        //挑戰模式boss的判定
         private void two_boss_timer_Tick(object sender, EventArgs e)
         {
             int die_player_count = 0;
@@ -1063,7 +1067,7 @@ namespace final_project
                     die_player_count++;
                     continue;
                 }
-                if (two_delay[x] < 50)
+                if (two_delay[x] < 50 && two_player_mode[x].life>0)
                 {
                     if (two_player_mode[x].change_state == 0)
                         two_player_mode[x].plane = Resource1.spaceship_mode1_full_hat;
@@ -1199,6 +1203,7 @@ namespace final_project
 
             }
         }
+        //清除所有設定
         void close_all() {
             level = 0;
             boss_life.Visible = false;
@@ -1225,7 +1230,7 @@ namespace final_project
 
 
         }
-
+        //跳出form4(教學)
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Form4 f4=new Form4(pfc);
@@ -1236,7 +1241,7 @@ namespace final_project
     //玩家物件
     public class main_character
     {
-        public int shootSpeed = 5;//玩家的射擊速度
+        public int shootSpeed =2;//玩家的射擊速度
         public int bulletSize = 5;//玩家子彈大小
         //playerX、Y為玩家操縱的腳色所在的位置
         //change_state為玩家目前的狀態(被擊中的狀態、死亡的狀態等等)
@@ -1319,6 +1324,7 @@ namespace final_project
                     g.DrawImage(bullet, bulletPlace[0].X, bulletPlace[0].Y, bulletSize, 20);
             }
         }
+        //被放棄的射擊模式QQ
         public void shoot_mode_2(Graphics g)
         {
             if (bulletPlace == null)
@@ -1520,7 +1526,7 @@ namespace final_project
     //一般敵人的物件
     public class std_opt {
         public int shootSpeed = 2;
-        public int playerX, playerY = 0;
+        public int playerX, playerY;
         public Point[] bulletPlace;
         public int bulletsize = 10;
         bool[] bulletshootck;
@@ -1676,7 +1682,8 @@ namespace final_project
         }
 
     }
-
+    
+    //boss物件
     public class boss_1{
         public int shootSpeed = 1;
         public int playerX, playerY = 0;
@@ -2106,6 +2113,7 @@ namespace final_project
         }
     }
 
+    //被放棄的道具
     public class Props {
         int kind;
         Image[] props_image = new Image[3];
